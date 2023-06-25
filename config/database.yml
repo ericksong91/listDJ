@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: listDJ_production
-  username: listDJ
-  password: <%= ENV["LISTDJ_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
