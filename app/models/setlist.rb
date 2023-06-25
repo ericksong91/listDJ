@@ -4,6 +4,6 @@ class Setlist < ApplicationRecord
     has_many :setlist_tracks
     has_many :tracks, through: :setlist_tracks
 
-    has_many :tags_setlist 
-    has_many :tags, through: :tags_setlist
+    has_many :tag_setlists 
+    has_many :tags, through: :tag_setlists
 end

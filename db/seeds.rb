@@ -5,3 +5,16 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+pp "Destroying old data..."
+
+#Destroying Data
+User.destroy_all
+Track.destroy_all
+Setlist.destroy_all
+SetlistTrack.destroy_all
+Tags.destroy_all
+TagsSetlist.destroy_all
+
+#Requirements
+require 'faker'
