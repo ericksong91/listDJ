@@ -63,7 +63,7 @@ pp "Building Setlists..."
     avg_bpm: rand(100..200), length: rand(120..600))
 end
 
-i = 1
+i = Setlist.first.id
 
 while i <= Setlist.all.length do
     h = 1
@@ -78,12 +78,12 @@ pp "Generating Tags for Setlists..."
 
 i = 0
 
-while i <= tags.length do
+while i < tags.length do
     Tag.create!(name: tags[i])
     i+=1
 end
 
-i = 1
+i = Setlist.first.id
 
 while i <= Setlist.all.length do
     h = 1
