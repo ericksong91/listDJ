@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-    get '/setlists', to: 'setlists#index'
+    resources :setlists, only: [:index, :show]
 
 
 

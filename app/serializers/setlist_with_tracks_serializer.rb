@@ -1,3 +1,5 @@
 class SetlistWithTracksSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :name, :length, :genre
+
+  has_many :tracks
 end

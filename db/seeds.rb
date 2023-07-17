@@ -63,8 +63,6 @@ pp "Building Setlists..."
     avg_bpm: rand(100..200), length: rand(120..600))
 end
 
-# Go through all the genres in tracks and compile them for Setlists
-
 i = Setlist.first.id
 
 while i <= Setlist.last.id do
@@ -96,9 +94,10 @@ end
 #     i+=1
 # end
 
-#MVP remove Tags for now
+# MVP remove Tags for now
 # Global State management choice: useContext
 # ActiveStorage, 
+# Go through all the genres in tracks and compile them for Setlists
 
 pp "Done!"
 

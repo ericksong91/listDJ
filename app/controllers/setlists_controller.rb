@@ -5,5 +5,7 @@ class SetlistsController < ApplicationController
     end
 
     def show
+        setlist = Setlist.find(params[:id])
+        render json: setlist, serializer: SetlistWithTracksSerializer
     end
 end
