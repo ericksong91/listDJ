@@ -5,8 +5,8 @@ User.destroy_all
 Track.destroy_all
 Setlist.destroy_all
 SetlistTrack.destroy_all
-Tag.destroy_all
-TagSetlist.destroy_all
+# Tag.destroy_all
+# TagSetlist.destroy_all
 
 #Requirements
 require 'faker'
@@ -27,14 +27,14 @@ camelot_keys = [
     "8A", "8B", "9A", "9B", "10A", "10B", "11A", "11B", "12A", "12B"
 ]
 
-tags = [
-    "#highenergy",
-    "#long",
-    "#dreamy",
-    "#souful",
-    "#multigenre",
-    "#hype"
-]
+# tags = [
+#     "#highenergy",
+#     "#long",
+#     "#dreamy",
+#     "#souful",
+#     "#multigenre",
+#     "#hype"
+# ]
 
 pp "Now Seeding Users..."
 
@@ -63,36 +63,42 @@ pp "Building Setlists..."
     avg_bpm: rand(100..200), length: rand(120..600))
 end
 
+# Go through all the genres in tracks and compile them for Setlists
+
 i = Setlist.first.id
 
-while i <= Setlist.all.length do
+while i <= Setlist.last.id do
     h = 1
     while h <= 20 do
-        Setlist.find_by(id: i).setlist_tracks.create!(setlist_id: i, track_id: rand(Track.first.id..Track.last.id), track_order: h)
+        Setlist.find_by(id: i).setlist_tracks.create!(track_id: rand(Track.first.id..Track.last.id), track_order: h)
         h+=1
     end
     i+=1
 end
 
-pp "Generating Tags for Setlists..."
+# pp "Generating Tags for Setlists..."
 
-i = 0
+# i = 0
 
-while i < tags.length do
-    Tag.create!(name: tags[i])
-    i+=1
-end
+# while i < tags.length do
+#     Tag.create!(name: tags[i])
+#     i+=1
+# end
 
-i = Setlist.first.id
+# i = Setlist.first.id
 
-while i <= Setlist.all.length do
-    h = 1
-    while h <= 5 do
-        Setlist.find_by(id: i).tag_setlists.create!(setlist_id: i, tag_id: rand(Tag.first.id..Tag.last.id) )
-        h+=1
-    end
-    i+=1
-end
+# while i <= Setlist.last.id do
+#     h = 1
+#     while h <= 5 do
+#         Setlist.find_by(id: i).tag_setlists.create!(tag_id: rand(Tag.first.id..Tag.last.id) )
+#         h+=1
+#     end
+#     i+=1
+# end
+
+#MVP remove Tags for now
+# Global State management choice: useContext
+# ActiveStorage, 
 
 pp "Done!"
 
