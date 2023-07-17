@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
     resources :setlists, only: [:index, :show]
-
-
-
+    resources :users, only: [:index]
+    resources :tracks, only: [:index]
 
     ## 
     get '*path',
