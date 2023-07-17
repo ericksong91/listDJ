@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
     resources :setlists, only: [:index, :show]
-    resources :users, only: [:index]
+    resources :users, only: [:index, :create]
     resources :tracks, only: [:index]
 
     ## 
