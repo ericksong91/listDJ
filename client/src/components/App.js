@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { UserContext } from "./context/user";
 
 function App() {
+  const { user } = useContext(UserContext);
   // const [count, setCount] = useState(0);
 
   // useEffect(() => {
@@ -11,7 +13,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Hello</h1>
+      <h1>Hello {user}</h1>
     </div>
   );
 }

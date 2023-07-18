@@ -5,14 +5,17 @@ import {
 } from "react-router-dom";
 import './index.css';
 import App from './components/App';
+import { UserProvider } from './components/context/user'
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
+    <UserProvider>
+      <Router>
+        <App />
+      </Router>
+    </UserProvider>
   </React.StrictMode>
 );
 
