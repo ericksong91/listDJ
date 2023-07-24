@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
     resources :setlists, only: [:index, :show]
     resources :users, only: [:index, :destroy]
-    resources :tracks, only: [:index]
+    resources :tracks, only: [:index, :show]
 
     #User Routing, signups, profile, login, logout
     post "/signup", to: "users#create"
