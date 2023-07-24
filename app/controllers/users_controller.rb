@@ -5,12 +5,34 @@ class UsersController < ApplicationController
     end
 
     def create
-        user = User.create!(user_params)
-        session[:user_id] = user.id
-        render json: user, status: :created
+        @user = User.create!(user_params)
+        login_user
+        render json: @user, status: :created
+    end
+
+    def show
+        if current_user
+            render json: current_user, status: :created
+        else
+            render_not_authorized_response
+        end
+    end
+
+    def destroy
+        if current_user
+            current_user.destroy
+            session.delete :user_id
+            head :no_content
+        else
+            render_not_authorized_response
+        end
     end
 
     private
+
+    def render_not_authorized_response
+        render json:  { "errors": "Not authorized" }, status: :unauthorized
+    end
 
     def user_params
         params.permit(:username, :password, :password_confirmation, :bio)
