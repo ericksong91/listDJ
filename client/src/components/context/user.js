@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const UserContext = React.createContext();
 
 function UserProvider({ children }) {
+    const [user, setUser] = useState(null);
 
-    const user = "Hello";
+    useEffect(() => {
+        fetch('/me').then(r => {
+            if (r.ok) {
+                r.json().then((data) => setUser(data))
+            }
+        });
+    }, []);
 
     return (
         <UserContext.Provider value={{ user }}>
