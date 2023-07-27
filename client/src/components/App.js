@@ -5,15 +5,13 @@ import Login from "./Login";
 function App() {
   const { user } = useContext(UserContext);
 
-  console.log(user)
-
   if (!user) {
     return <Login />
   };
 
   return (
     <div className="App">
-      <h1>Hello {user}</h1>
+      <h1>Hello {user.username}</h1>
     </div>
   );
 }

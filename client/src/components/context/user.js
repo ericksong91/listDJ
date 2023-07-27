@@ -13,8 +13,28 @@ function UserProvider({ children }) {
         });
     }, []);
 
+
+    function login(username, password, setIsLoading, setErrors) {
+        setErrors([]);
+        fetch('/login', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ username, password })
+        }).then(r => {
+            setIsLoading(false);
+            if (r.ok) {
+                r.json().then((data) => setUser(data));
+            } else {
+                r.json().then((error) => setErrors(error.errors))
+            }
+        });
+
+    };
+
     return (
-        <UserContext.Provider value={{ user }}>
+        <UserContext.Provider value={{ user, login }}>
             {children}
         </UserContext.Provider>
     )
