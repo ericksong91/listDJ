@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from "./context/user";
 import Login from "./Login";
+import SetlistCard from "./cards/SetlistCard";
 
 function App() {
   const [setlists, setSetlists] = useState([]);
@@ -23,9 +24,15 @@ function App() {
 
   console.log(setlists)
 
+  const setlistCards = setlists.map((set) =>
+    <SetlistCard key={set.id} set={set} />
+  );
+
   return (
     <div className="App">
       <h1>Hello {user.username}</h1>
+
+      {setlistCards}
     </div>
   );
 }
