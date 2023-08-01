@@ -70,7 +70,7 @@ function Login() {
                     {errors}
                 </Box>
             </Box>
-            <Link to="/">
+            <Link to="/signup">
                 <Button
                     type="submit"
                     variant="contained"
