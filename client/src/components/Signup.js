@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { UserContext } from "../context/user";
+import { UserContext } from "./context/user";
 import { Navigate, Link } from "react-router-dom";
 import { Button, Container, Box, TextField } from '@mui/material';
 
@@ -12,8 +12,15 @@ function Signup() {
     const [isLoading, setIsLoading] = useState(false);
     const { user, signup } = useContext(UserContext);
 
+    function handleSubmit (e) {
+        e.preventDefault();
+        setIsLoading(true);
+
+        signup(username, password, passwordConfirmation, bio, setIsLoading, setErrors);
+    }
+
     if (user) {
-        return <Navigate replace to="/profile" />
+        return <Navigate replace to="/" />
     };
 
     return (
