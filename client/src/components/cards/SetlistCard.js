@@ -3,9 +3,6 @@ import { Button, Card, CardContent, CardHeader } from '@mui/material';
 
 
 function SetlistCard({ set }) {
-
-
-
     return (
         <Card sx={{ maxWidth: 700, maxHeight: 300 }}>
             <CardHeader

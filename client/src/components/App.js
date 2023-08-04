@@ -1,12 +1,11 @@
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from "./context/user";
-// import { Container } from '@mui/material';
 import Login from "./top/Login";
 import SetlistCard from "./cards/SetlistCard";
 
 function App() {
   const [setlists, setSetlists] = useState([]);
-  const { user } = useContext(UserContext);
+  const { user, tracks } = useContext(UserContext);
 
   useEffect(() => {
     fetch('/setlists')
@@ -23,17 +22,15 @@ function App() {
     return <Login />
   };
 
-  console.log(setlists)
+  console.log(tracks)
 
   const setlistCards = setlists.map((set) =>
     <SetlistCard key={set.id} set={set} />
   );
 
-  // Need to add setlists by date created, show latest 5
-
   return (
     <div className="App">
-      <h1>Hello {user.username}</h1>
+      {/* <h1>Hello {user.username}</h1> */}
       {setlistCards}
     </div>
   );
