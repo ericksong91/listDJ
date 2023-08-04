@@ -7,13 +7,14 @@ function SetlistCard({ set }) {
 
 
     return (
-        <Card sx={{ maxWidth: 345, maxHeight: 100 }}>
+        <Card sx={{ maxWidth: 700, maxHeight: 300 }}>
             <CardHeader
                 title={`${set.name}`}
                 subheader={`${set.genre}`}
             />
             <CardContent>
-                {`Average BPM: ${set.avg_bpm}`}
+                <ul>{`Average BPM: ${set.avg_bpm}`}</ul>
+                <ul>{`Est. Length: ${set.length} mins`}</ul>
             </CardContent>
             <CardContent>
                 <Link to={`/`}><Button variant="contained">More</Button></Link>

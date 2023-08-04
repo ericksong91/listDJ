@@ -23,6 +23,8 @@ function App() {
     return <Login />
   };
 
+  console.log(setlists)
+
   const setlistCards = setlists.map((set) =>
     <SetlistCard key={set.id} set={set} />
   );

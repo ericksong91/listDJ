@@ -58,7 +58,7 @@ pp "Building Setlists..."
 
 # Length in Minutes for Setlists
 
-5.times do
+20.times do
     Setlist.create!(name: "#{Faker::Name.first_name} Mix", user_id: rand(User.first.id..User.last.id),  genre: genres[rand(0..7)],
     avg_bpm: rand(100..200), length: rand(120..600))
 end
