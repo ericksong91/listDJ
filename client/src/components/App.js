@@ -1,11 +1,13 @@
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from "./context/user";
+import Homepage from "./Homepage";
 import Login from "./top/Login";
-import SetlistCard from "./cards/SetlistCard";
+import Signup from "./top/Signup";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 function App() {
   const [setlists, setSetlists] = useState([]);
-  const { user, tracks } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     fetch('/setlists')
@@ -19,21 +21,19 @@ function App() {
   }, []);
 
   if (!user) {
-    return <Login />
+    return <Navigate to path="/login" />
   };
-
-  console.log(tracks)
-
-  const setlistCards = setlists.map((set) =>
-    <SetlistCard key={set.id} set={set} />
-  );
 
   return (
     <div className="App">
-      {/* <h1>Hello {user.username}</h1> */}
-      {setlistCards}
+      <Routes>
+        <Route path='/' element={<Homepage setlists={setlists} user={user} />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<Signup />} />
+      </Routes>
     </div>
-  );
+
+  )
 }
 
 export default App;

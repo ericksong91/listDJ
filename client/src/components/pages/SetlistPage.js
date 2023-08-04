@@ -1,20 +1,18 @@
 import { useState, useEffect, useContext } from "react";
-import { UserContext } from "./context/user";
-import Login from "./top/Login";
-import SetlistCard from "./cards/SetlistCard";
+import { UserContext } from "../context/user";
 
 function SetlistPage() {
+    const { user, tracks } = useContext(UserContext);
 
-  if (!user) {
-    return <Login />
-  };
 
-  return (
-    <div className="SetlistPage">
-      <h1>Hello {user.username}</h1>
-      {setlistCards}
-    </div>
-  );
+    console.log(user)
+
+    console.log(tracks)
+
+    return (
+        <div className="SetlistPage">
+        </div>
+    );
 }
 
 export default SetlistPage;

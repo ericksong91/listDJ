@@ -16,10 +16,7 @@ root.render(
   <React.StrictMode>
     <UserProvider>
       <Router>
-        <Routes>
-          <Route path='/' element={<App />} />
-          <Route path='/signup' element={<Signup />} />
-        </Routes>
+        <App />
       </Router>
     </UserProvider>
   </React.StrictMode>
