@@ -5,9 +5,9 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import './index.css';
+import './css/index.css';
 import App from './components/App';
-import Signup from './components/Signup';
+import Signup from './components/top/Signup';
 import { UserProvider } from './components/context/user'
 import reportWebVitals from './reportWebVitals';
 

@@ -1,30 +1,30 @@
 import { useState, useContext } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { UserContext } from '../context/user';
+import { Navigate, Link } from "react-router-dom";
 import { Button, Container, Box, TextField } from '@mui/material';
-import { UserContext } from "./context/user";
 
-function Login() {
+function Signup() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
+    const [passwordConfirmation, setPasswordConfirmation] = useState("");
     const [errors, setErrors] = useState([]);
-    const { user, login } = useContext(UserContext);
+    const [bio, setBio] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+    const { user, signup } = useContext(UserContext);
 
-
-    function handleSubmit(e) {
+    function handleSubmit (e) {
         e.preventDefault();
         setIsLoading(true);
 
-        login(username, password, setIsLoading, setErrors);
-        setPassword("");
-    };
+        signup(username, password, passwordConfirmation, bio, setIsLoading, setErrors);
+    }
 
     if (user) {
-        return <Navigate replace to="/" />;
+        return <Navigate replace to="/" />
     };
 
     return (
-        <Container className='LoginPage' component="main" maxWidth="xs">
+        <Container className='SignupPage' component="main" maxWidth="xs">
             <Box
                 sx={{
                     marginTop: 8,
@@ -33,7 +33,7 @@ function Login() {
                     alignItems: "center",
                 }}
             >
-                <h1>Log In</h1>
+                <h1>Sign Up</h1>
                 <Box component="form" onSubmit={handleSubmit}>
                     <TextField
                         margin="normal"
@@ -53,10 +53,35 @@ function Login() {
                         fullWidth
                         id="password"
                         name="password"
-                        label="Password"
+                        label="Password (9 - 17 characters)"
+                        inputProps={{ maxLength: 17, minLength: 9 }}
                         type="password"
                         value={password}
                         onChange={(e) => { setPassword(e.target.value) }}
+                    />
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="password_confirmation"
+                        name="password_confirmation"
+                        label="Password Confirmation"
+                        inputProps={{ maxLength: 17, minLength: 9 }}
+                        type="password"
+                        value={passwordConfirmation}
+                        onChange={(e) => { setPasswordConfirmation(e.target.value) }}
+                    />
+                    <TextField
+                        margin="normal"
+                        required
+                        multiline
+                        fullWidth
+                        id="biography"
+                        name="biography"
+                        label={`Biography (${300 - bio.length} chars left)`}
+                        inputProps={{ maxLength: 300 }}
+                        value={bio}
+                        onChange={(e) => { setBio(e.target.value) }}
                     />
                     {isLoading ?
                         <Button
@@ -70,21 +95,21 @@ function Login() {
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
-                        >Login</Button>}
+                        >Signup</Button>}
                     {errors}
                 </Box>
             </Box>
-            <Link to="/signup">
+            <Link to="/login">
                 <Button
                     type="submit"
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                 >
-                    Don't have an account? Signup!
+                    Already have an account? Login!
                 </Button>
             </Link>
         </Container>
-    );
+    )
 }
 
-export default Login;
+export default Signup;
