@@ -1,6 +1,6 @@
 class SetlistsController < ApplicationController
     def index
-        setlists = Setlist.all
+        setlists = Setlist.order(created_at: :desc)
         render json: setlists
     end
 

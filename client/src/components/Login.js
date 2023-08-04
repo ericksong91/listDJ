@@ -1,5 +1,5 @@
-import { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { useState, useContext } from "react";
+import { Link, Navigate } from "react-router-dom";
 import { Button, Container, Box, TextField } from '@mui/material';
 import { UserContext } from "./context/user";
 
@@ -17,6 +17,10 @@ function Login() {
 
         login(username, password, setIsLoading, setErrors);
         setPassword("");
+    };
+
+    if (user) {
+        return <Navigate replace to="/" />;
     };
 
     return (
