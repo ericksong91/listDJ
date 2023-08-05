@@ -3,6 +3,7 @@ import { UserContext } from "./context/user";
 import Homepage from "./Homepage";
 import Login from "./top/Login";
 import Signup from "./top/Signup";
+import SetlistPage from "./pages/SetlistPage";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 function App() {
@@ -27,7 +28,8 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path='/' element={<Homepage setlists={setlists} user={user} />} />
+        <Route path='/*' element={<Homepage setlists={setlists} user={user} />} />
+        <Route path='/sets/:id' element={<SetlistPage />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
       </Routes>

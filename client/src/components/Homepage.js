@@ -1,10 +1,7 @@
 import SetlistCard from "./cards/SetlistCard";
+import { Outlet } from "react-router-dom";
 
 function Homepage({ setlists, user }) {
-    if (!setlists) {
-        return
-    }
-
     const setlistCards = setlists.map((set) =>
         <SetlistCard key={set.id} set={set} />
     );
@@ -13,6 +10,7 @@ function Homepage({ setlists, user }) {
         <div className="Home">
             <h1>Hello {user.username}</h1>
             {setlistCards}
+            <Outlet />
         </div>
     );
 }
