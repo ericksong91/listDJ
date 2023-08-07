@@ -9,9 +9,7 @@ function Login() {
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState([]);
     const { login } = useContext(UserContext);
-
-    console.log("trying to load")
-
+    
     function handleSubmit(e) {
         e.preventDefault();
         setIsLoading(true);

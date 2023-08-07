@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from "./context/user";
+import Navbar from "./top/Navbar";
 import Homepage from "./Homepage";
 import Login from "./top/Login";
 import Signup from "./top/Signup";
@@ -28,6 +29,7 @@ function App() {
 
   return (
     <div className="App">
+      <Navbar />
       <Routes>
         <Route element={<AuthLayout authenticated={!!user} />}>
           <Route path='/' element={<Homepage setlists={setlists} user={user} />} />

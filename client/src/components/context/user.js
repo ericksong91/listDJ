@@ -69,11 +69,16 @@ function UserProvider({ children }) {
                 }
             })
 
-    }
+    };
 
-    function logout(){
-        console.log("pending")
-    }
+    function logout() {
+        fetch("/logout", { method: "DELETE" })
+            .then((r) => {
+                if (r.ok) {
+                    setUser(null)
+                }
+            });
+    };
 
     return (
         <UserContext.Provider value={{ user, tracks, login, logout, signup }}>
