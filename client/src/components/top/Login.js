@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button, Container, Box, TextField } from '@mui/material';
 import { UserContext } from '../context/user';
 
@@ -8,8 +8,9 @@ function Login() {
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState([]);
-    const { user, login } = useContext(UserContext);
+    const { login } = useContext(UserContext);
 
+    console.log("trying to load")
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -17,10 +18,6 @@ function Login() {
 
         login(username, password, setIsLoading, setErrors);
         setPassword("");
-    };
-
-    if (user) {
-        return <Navigate replace to="/" />;
     };
 
     return (

@@ -71,8 +71,12 @@ function UserProvider({ children }) {
 
     }
 
+    function logout(){
+        console.log("pending")
+    }
+
     return (
-        <UserContext.Provider value={{ user, tracks, login, signup }}>
+        <UserContext.Provider value={{ user, tracks, login, logout, signup }}>
             {children}
         </UserContext.Provider>
     )

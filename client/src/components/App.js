@@ -21,16 +21,21 @@ function App() {
       });
   }, []);
 
-  if (!user) {
-    return <Navigate to path="/login" />
-  };
+  const AuthLayout = ({ authenticated }) =>
+    authenticated
+      ? <Homepage setlists={setlists} user={user} />
+      : <Navigate to="/login" replace />;
 
   return (
     <div className="App">
       <Routes>
-        <Route path='/*' element={<Homepage setlists={setlists} user={user} />} />
-        <Route path='/sets/:id' element={<SetlistPage />} />
-        <Route path='/login' element={<Login />} />
+        <Route element={<AuthLayout authenticated={!!user} />}>
+          <Route path='/' element={<Homepage setlists={setlists} user={user} />} />
+          <Route path='/sets/:id' element={<SetlistPage />} />
+        </Route>
+        <Route path='/login'
+          element={!user ? <Login /> : <Navigate replace to="/" />}
+        />
         <Route path='/signup' element={<Signup />} />
       </Routes>
     </div>
