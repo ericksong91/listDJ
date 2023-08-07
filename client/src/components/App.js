@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { UserContext } from "./context/user";
 import Navbar from "./top/Navbar";
 import Homepage from "./Homepage";
+import Profile from "./pages/Profile"
 import Login from "./top/Login";
 import Signup from "./top/Signup";
 import SetlistPage from "./pages/SetlistPage";
@@ -33,6 +34,7 @@ function App() {
       <Routes>
         <Route element={<AuthLayout authenticated={!!user} />}>
           <Route path='/' element={<Homepage setlists={setlists} user={user} />} />
+          <Route path='/profile' element={<Profile user={user} />} />
           <Route path='/sets/:id' element={<SetlistPage />} />
         </Route>
         <Route path='/login'

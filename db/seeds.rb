@@ -43,7 +43,7 @@ pp "Now Seeding Users..."
         password_confirmation: "asdf", bio: "#{Faker::Lorem.paragraphs(number:1)[0]}")
 end
 
-User.create!(username: "DJ eric", password:"asdf", password_confirmation: "asdf", bio: "bedroom DJ")
+User.create!(username: "eric", password:"asdf", password_confirmation: "asdf", bio: "bedroom DJ")
 
 pp "Building Tracks..."
 
