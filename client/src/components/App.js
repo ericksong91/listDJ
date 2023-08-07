@@ -6,7 +6,7 @@ import Profile from "./pages/Profile"
 import Login from "./top/Login";
 import Signup from "./top/Signup";
 import SetlistPage from "./pages/SetlistPage";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 
 function App() {
   const [setlists, setSetlists] = useState([]);
@@ -25,7 +25,7 @@ function App() {
 
   const AuthLayout = ({ authenticated }) =>
     authenticated
-      ? <Homepage setlists={setlists} user={user} />
+      ? <Outlet />
       : <Navigate to="/login" replace />;
 
   return (
@@ -33,7 +33,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route element={<AuthLayout authenticated={!!user} />}>
-          <Route path='/' element={<Homepage setlists={setlists} user={user} />} />
+          <Route path='/' element={<Homepage setlists={setlists} />} />
           <Route path='/profile' element={<Profile user={user} />} />
           <Route path='/sets/:id' element={<SetlistPage />} />
         </Route>

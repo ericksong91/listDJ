@@ -27,7 +27,7 @@ function UserProvider({ children }) {
 
 
     function login(username, password, setIsLoading, setErrors) {
-        username = username.toLowerCase()
+        username = username.toLowerCase();
         setErrors([]);
         fetch('/login', {
             method: "POST",
@@ -46,7 +46,7 @@ function UserProvider({ children }) {
     };
 
     function signup(username, password, passwordConfirmation, bio, setIsLoading, setErrors) {
-        username = username.toLowerCase()
+        username = username.toLowerCase();
         setErrors([]);
         fetch("/signup", {
             method: "POST",

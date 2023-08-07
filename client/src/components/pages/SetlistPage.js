@@ -6,15 +6,9 @@ function SetlistPage() {
     const index = parseInt(useParams().id);
     const { user, tracks } = useContext(UserContext);
 
-    console.log(index)
-
-    console.log(user)
-
-    console.log(tracks)
-
     return (
         <div className="SetlistPage">
-            <h1>Headsfjoiaj</h1>
+            <h1>Setlist Page</h1>
         </div>
     );
 }
