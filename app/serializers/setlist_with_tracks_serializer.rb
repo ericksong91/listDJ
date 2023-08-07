@@ -5,5 +5,5 @@ class SetlistWithTracksSerializer < ActiveModel::Serializer
     object.setlist_tracks.sort_by {|s| s.track_order}
   end
 
-  # has_many :tracks
+  has_many :tracks
 end

@@ -2,20 +2,20 @@ import { Link } from 'react-router-dom';
 import { Button, Card, CardContent, CardHeader } from '@mui/material';
 
 
-function TrackCard( ) {
+function TrackCard({ track }) {
     return (
-        <Card sx={{ maxWidth: 700, maxHeight: 300 }}>
+        <Card sx={{ maxWidth: 700, maxHeight: 100 }}>
             <CardHeader
-                title={`${set.name}`}
-                subheader={`${set.genre}`}
+                title={`${track.name}`}
+                subheader={`${track.genre}`}
             />
             <CardContent>
-                <ul>{`Average BPM: ${set.avg_bpm}`}</ul>
-                <ul>{`Est. Length: ${set.length} mins`}</ul>
+                <ul>{`Average BPM: ${track.bpm}`}</ul>
+                <ul>{`Key: ${track.key}`}</ul>
             </CardContent>
-            <CardContent>
+            {/* <CardContent>
                 <Link to={`/`}><Button variant="contained">More</Button></Link>
-            </CardContent>
+            </CardContent> */}
         </Card>
     );
 }

@@ -1,12 +1,9 @@
-import { useContext } from "react";
-import { UserContext } from "../context/user";
 
 function Profile({ user }) {
 
-    console.log(user)
-
     return (
         <div className="Profile">
+            <h1>Profile Page</h1>
         </div>
     );
 };

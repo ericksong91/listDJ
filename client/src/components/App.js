@@ -35,7 +35,7 @@ function App() {
         <Route element={<AuthLayout authenticated={!!user} />}>
           <Route path='/' element={<Homepage setlists={setlists} />} />
           <Route path='/profile' element={<Profile user={user} />} />
-          <Route path='/sets/:id' element={<SetlistPage />} />
+          <Route path='/sets/:id' element={<SetlistPage setlists={setlists} />} />
         </Route>
         <Route path='/login'
           element={!user ? <Login /> : <Navigate replace to="/" />}

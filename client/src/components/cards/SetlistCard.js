@@ -14,7 +14,7 @@ function SetlistCard({ set }) {
                 <ul>{`Est. Length: ${set.length} mins`}</ul>
             </CardContent>
             <CardContent>
-                <Link to={`/`}><Button variant="contained">More</Button></Link>
+                <Link to={`/sets/${set.id}`}><Button variant="contained">More</Button></Link>
             </CardContent>
         </Card>
     );
