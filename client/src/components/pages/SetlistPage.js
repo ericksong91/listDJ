@@ -12,23 +12,20 @@ function SetlistPage( { setlists } ) {
     };
 
     const setFiltered = setlists.find(set => set.id === index);
+    const tracks = setFiltered.tracks
+    const setlistTracks = setFiltered.setlist_track_org
+    const filteredList = [];
 
     // When updating by adding or removing songs, I should ONLY be updating the local cache of the set before "Save" 
     // is hit by the user. To first organize the list, I should grab the array that represents the track order (setlist_tracks)
     // After getting setlist_tracks with track order, I compare that to the array with all the tracks currently used.
     // How to deal with tracks that are the same ID?
 
-    const tracks = setFiltered.tracks
-
-    const setlistTracks = setFiltered.setlist_track_org
-
-    const filteredList = [];
-
     setlistTracks.forEach((slTrack) => {
         filteredList.push(tracks.find((track) => track.id === slTrack.track_id))
     });
 
-    const tracksList = filteredList.map((track) => <TrackCard key={track.id} track={track} />)
+    const tracksList = filteredList.map((track, ind) => <TrackCard key={ind} track={track} />);
 
     // const testSort = setlistTracks.sort((a, b) => setlistTracks.indexOf(a.track_order) - setlistTracks.indexOf(b.track_order))
 
