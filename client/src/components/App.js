@@ -34,7 +34,7 @@ function App() {
       <Routes>
         <Route element={<AuthLayout authenticated={!!user} />}>
           <Route path='/' element={<Homepage setlists={setlists} />} />
-          <Route path='/profile' element={<Profile user={user} />} />
+          <Route path='/profile' element={<Profile user={user} setlists={setlists} />} />
           <Route path='/sets/:id' element={<SetlistPage setlists={setlists} />} />
         </Route>
         <Route path='/login'
@@ -43,8 +43,7 @@ function App() {
         <Route path='/signup' element={<Signup />} />
       </Routes>
     </div>
-
   )
-}
+};
 
 export default App;

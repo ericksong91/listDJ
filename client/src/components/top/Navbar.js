@@ -1,20 +1,26 @@
 import { useContext } from "react";
 import { UserContext } from "../context/user";
 import { Button, Container, Grid } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
   const { user, logout } = useContext(UserContext);
+  const navigate = useNavigate();
 
   return (
     <div className="Navbar">
       <Container maxWidth="lg">
         {!user ? <h2>Welcome, Guest!</h2> : <h2>Welcome, {user.username}!</h2>}
         <Grid container spacing={2} justifyContent="center">
-        <Grid item>
+          <Grid item>
             {!user ? null
               :
-              <Link to="/"><Button variant="contained">Return Home</Button></Link>}
+              <Button variant="contained" onClick={() => navigate(-1)}>Back</Button>}
+          </Grid>
+          <Grid item>
+            {!user ? null
+              :
+              <Link to="/"><Button variant="contained">Home</Button></Link>}
           </Grid>
           <Grid item>
             {!user ? null
