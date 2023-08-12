@@ -7,6 +7,7 @@ class User < ApplicationRecord
     validates :password_confirmation, presence: true
     validates :bio, presence: true
     has_secure_password
+    has_one_attached :image
 
     # add validation for preventing users to do only numbers
 

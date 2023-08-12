@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
     def index
-        users = User.all
+        users = User.all.with_attached_image
         render json: users
     end
 
@@ -35,6 +35,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-        params.permit(:username, :password, :password_confirmation, :bio)
+        params.permit(:username, :password, :password_confirmation, :bio, :image)
     end
 end
