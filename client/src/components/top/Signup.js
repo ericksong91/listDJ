@@ -12,12 +12,12 @@ function Signup() {
     const [isLoading, setIsLoading] = useState(false);
     const { user, signup } = useContext(UserContext);
 
-    function handleSubmit (e) {
+    function handleSubmit(e) {
         e.preventDefault();
         setIsLoading(true);
 
         signup(username, password, passwordConfirmation, bio, setIsLoading, setErrors);
-    }
+    };
 
     if (user) {
         return <Navigate replace to="/" />
