@@ -4,12 +4,12 @@ import { Button, Card, CardContent, CardHeader } from '@mui/material';
 
 
 function AvatarCard() {
-    const [image, setImage] = useState(null);
+    const [avatar, setAvatar] = useState(null);
     const [isSelected, setIsSelected] = useState(false);
     const { user } = useContext(UserContext);
 
     function onChange(e) {
-        setImage(e.target.files[0]);
+        setAvatar(e.target.files[0]);
         setIsSelected(true);
 
         console.log(e.target.files[0]);
@@ -17,7 +17,7 @@ function AvatarCard() {
 
     function onSubmit() {
         const formData = new FormData();
-        formData.append('image', image);
+        formData.append('avatar', avatar);
 
         fetch(`/users/${user.id}`, {
             method: 'PATCH',
@@ -47,12 +47,12 @@ function AvatarCard() {
             </Button>
             {isSelected ? (
                 <div>
-                    <p>Filename: {image.name}</p>
-                    <p>Filetype: {image.type}</p>
-                    <p>Size in bytes: {image.size}</p>
+                    <p>Filename: {avatar.name}</p>
+                    <p>Filetype: {avatar.type}</p>
+                    <p>Size in bytes: {avatar.size}</p>
                     <p>
                         lastModifiedDate:{' '}
-                        {image.lastModifiedDate.toLocaleDateString()}
+                        {avatar.lastModifiedDate.toLocaleDateString()}
                     </p>
                 </div>
             ) : (

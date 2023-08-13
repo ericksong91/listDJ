@@ -9,7 +9,5 @@ class User < ApplicationRecord
     has_secure_password
     has_one_attached :image
 
-    # add validation for preventing users to do only numbers
-
     has_many :setlists
 end
