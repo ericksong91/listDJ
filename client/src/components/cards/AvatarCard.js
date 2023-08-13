@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { UserContext } from '../context/user';
 import { Button, Card, CardContent, CardHeader } from '@mui/material';
 
 
 function AvatarCard() {
     const [image, setImage] = useState(null);
     const [isSelected, setIsSelected] = useState(false);
+    const { user } = useContext(UserContext);
 
     function onChange(e) {
         setImage(e.target.files[0]);
@@ -14,13 +16,20 @@ function AvatarCard() {
     };
 
     function onSubmit() {
-
         const formData = new FormData();
+        formData.append('image', image);
 
-        formData.append('File', image);
-
-        console.log(formData);
-
+        fetch(`/users/${user.id}`, {
+            method: 'PATCH',
+            body: formData
+        })
+            .then(r => {
+                if (r.ok) {
+                    r.json().then((data) => console.log(data))
+                } else {
+                    r.json().then((error) => console.log(error))
+                }
+            })
     };
 
     return (

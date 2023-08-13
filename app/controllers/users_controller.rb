@@ -12,8 +12,12 @@ class UsersController < ApplicationController
 
     def update
         if current_user
-            @user = current_user.update!(user_params)
-            render json: @user, status: :accepted
+            # Update with more secure params later
+            user = User.find_by(id: session[:user_id])
+            user.image.attach(params[:image])
+            user.save(validate: false)
+
+            render json: user, status: :accepted
         else
             render_not_authorized_response
         end
@@ -44,6 +48,10 @@ class UsersController < ApplicationController
     end
 
     def user_params
-        params.permit(:username, :password, :password_confirmation, :bio, :image)
+        params.permit(:username, :password, :password_confirmation, :bio)
+    end
+
+    def user_image
+        params.permit(:image)
     end
 end
