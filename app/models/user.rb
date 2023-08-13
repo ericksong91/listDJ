@@ -7,7 +7,7 @@ class User < ApplicationRecord
     validates :password_confirmation, presence: true
     validates :bio, presence: true
     has_secure_password
-    has_one_attached :image
+    has_one_attached :avatar
 
     has_many :setlists
 end

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
     def index
-        users = User.all.with_attached_image
+        users = User.all.with_attached_avatar
         render json: users
     end
 
@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
     def update
         if current_user
-            current_user.image.attach(params[:image])
+            current_user.avatar.attach(params[:avatar])
             current_user.save(validate: false)
             render json: current_user, status: :accepted
         else
