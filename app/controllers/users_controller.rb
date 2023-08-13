@@ -10,6 +10,15 @@ class UsersController < ApplicationController
         render json: @user, status: :created
     end
 
+    def update
+        if current_user
+            @user = current_user.update!(user_params)
+            render json: @user, status: :accepted
+        else
+            render_not_authorized_response
+        end
+    end
+
     def show
         if current_user
             render json: current_user, status: :created
