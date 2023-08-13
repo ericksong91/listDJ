@@ -51,4 +51,7 @@ gem "active_model_serializers", "~> 0.10.13"
 
 gem "faker", "~> 3.2"
 
-gem 'aws-sdk-s3', require: false
+gem 'aws-sdk-s3', "~> 1.119"
+
+gem 'dotenv-rails', "~> 2.8"
+
