@@ -1,21 +1,20 @@
 import { useState, useContext } from 'react';
-import { UserContext } from '../context/user';
 import { Button, Card, CardContent, CardHeader } from '@mui/material';
 
 
-function AvatarCard() {
+function AvatarCard({ user }) {
     const [avatar, setAvatar] = useState(null);
     const [isSelected, setIsSelected] = useState(false);
-    const { user } = useContext(UserContext);
 
     function onChange(e) {
         setAvatar(e.target.files[0]);
         setIsSelected(true);
 
-        console.log(e.target.files[0]);
-    };
+        // Show alert if avatar.size is greater than the maximum file size
 
-    console.log(user.avatar);
+        console.log(e.target.files[0]);
+        console.log(e.target.file[0])
+    };
 
     function onSubmit() {
         const formData = new FormData();
@@ -44,6 +43,7 @@ function AvatarCard() {
                 Upload Avatar
                 <input
                     type="file"
+                    accept="image/*"
                     onChange={onChange}
                     hidden
                 />

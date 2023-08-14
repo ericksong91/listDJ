@@ -10,7 +10,7 @@ function Profile({ user, setlists }) {
     return (
         <div className="Profile">
             <h1>Profile Page</h1>
-            <AvatarCard />
+            <AvatarCard user={user}/>
             {filteredSets}  
         </div>
     );
