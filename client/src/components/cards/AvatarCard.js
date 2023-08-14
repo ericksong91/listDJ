@@ -15,6 +15,8 @@ function AvatarCard() {
         console.log(e.target.files[0]);
     };
 
+    console.log(user.avatar);
+
     function onSubmit() {
         const formData = new FormData();
         formData.append('avatar', avatar);
@@ -33,7 +35,8 @@ function AvatarCard() {
     };
 
     return (
-        <div>
+        <div className='AvatarCard'>
+            {!!user ? <img src={user.avatar} /> : <h1>Loading...</h1>}
             <Button
                 variant="contained"
                 component="label"
