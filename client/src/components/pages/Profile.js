@@ -1,3 +1,5 @@
+
+import { useEffect } from "react";
 import SetlistCard from "../cards/SetlistCard";
 import AvatarCard from "../cards/AvatarCard";
 import BiographyCard from "../cards/BiographyCard";

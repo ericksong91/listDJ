@@ -32,10 +32,10 @@ function App() {
     <div className="App">
       <Navbar />
       <Routes>
+        <Route path='/' element={<Homepage setlists={setlists} />} />
+        <Route path='/sets/:id' element={<SetlistPage setlists={setlists} />} />
         <Route element={<AuthLayout authenticated={!!user} />}>
-          <Route path='/' element={<Homepage setlists={setlists} />} />
           <Route path='/profile' element={<Profile user={user} setlists={setlists} />} />
-          <Route path='/sets/:id' element={<SetlistPage setlists={setlists} />} />
         </Route>
         <Route path='/login'
           element={!user ? <Login /> : <Navigate replace to="/" />}
@@ -47,3 +47,21 @@ function App() {
 };
 
 export default App;
+
+//   return (
+//     <div className="App">
+//       <Navbar />
+//       <Routes>
+//         <Route element={<AuthLayout authenticated={!!user} />}>
+//           <Route path='/' element={<Homepage setlists={setlists} />} />
+//           <Route path='/profile' element={<Profile user={user} setlists={setlists} />} />
+//           <Route path='/sets/:id' element={<SetlistPage setlists={setlists} />} />
+//         </Route>
+//         <Route path='/login'
+//           element={!user ? <Login /> : <Navigate replace to="/" />}
+//         />
+//         <Route path='/signup' element={<Signup />} />
+//       </Routes>
+//     </div>
+//   )
+// };

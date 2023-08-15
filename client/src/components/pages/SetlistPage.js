@@ -6,12 +6,12 @@ import TrackCard from "../cards/TrackCard";
 
 function SetlistPage( { setlists } ) {
     const index = parseInt(useParams().id);
+    const setFiltered = setlists.find(set => set.id === index);
 
-    if (!setlists) {
+    if (!setlists || !setFiltered) {
         return <div></div>
     };
 
-    const setFiltered = setlists.find(set => set.id === index);
     const tracks = setFiltered.tracks
     const setlistTracks = setFiltered.setlist_track_org
     const filteredList = [];

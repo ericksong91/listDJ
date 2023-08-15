@@ -1,23 +1,20 @@
-import { useState } from 'react';
 // import { UserContext } from '../context/user';
 // import { Button, Card, CardContent, CardHeader } from '@mui/material';
-import { TextField } from "@mui/material";
-    
-function Search() {
-    const [search, setSearch] = useState("");
+import { TextField, Select, MenuItem } from "@mui/material";
 
-    function handleChange(e) {
-        console.log(e.target.value);
-        setSearch(e.target.value);
-    };
+function Search({ search, onSearch }) {
+    const list = [
+        "DJ Name",
+        "Mix Title",
+        "Genre"
+    ];
 
-    function handleSubmit(e){
-        e.preventDefault();
-    };
+    // const selectionList = list.map((li) => <MenuItem value={li}>{li}</MenuItem>);
 
     return (
         <div className='search'>
-            <TextField onChange={handleChange}>{search}</TextField>
+            <TextField onChange={(e) => onSearch(e.target.value)}>{search}</TextField>
+            {/* <Select onChange={}>{selectionList}</Select> */}
         </div>
     );
 }
