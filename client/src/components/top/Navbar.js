@@ -12,9 +12,9 @@ function Navbar() {
       <Container maxWidth="lg">
         {!user ? <h2>Welcome, Guest!</h2> : <h2>Welcome, {user.username}!</h2>}
         <Grid container spacing={2} justifyContent="center">
-          {/* <Grid item>
+          <Grid item>
               <Button variant="contained" onClick={() => navigate(-1)}>Back</Button>
-          </Grid> */}
+          </Grid>
           <Grid item>
               <Link to="/"><Button variant="contained">Home</Button></Link>
           </Grid>

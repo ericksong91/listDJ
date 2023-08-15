@@ -10,7 +10,7 @@ import { Routes, Route, Navigate, Outlet, useLocation } from "react-router-dom";
 
 function App() {
   const [setlists, setSetlists] = useState([]);
-  const { user } = useContext(UserContext);
+  const { user, users } = useContext(UserContext);
 
   useEffect(() => {
     fetch('/setlists')
@@ -33,7 +33,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route element={<AuthLayout authenticated={!!user} />}>
-          <Route path='/' element={<Homepage setlists={setlists} />} />
+          <Route path='/' element={<Homepage setlists={setlists} users={users} />} />
           <Route path='/sets/:id' element={<SetlistPage setlists={setlists} />} />
           <Route path='/profile' element={<Profile user={user} setlists={setlists} />} />
         </Route>
@@ -45,21 +45,3 @@ function App() {
 };
 
 export default App;
-
-//   return (
-//     <div className="App">
-//       <Navbar />
-//       <Routes>
-//         <Route element={<AuthLayout authenticated={!!user} />}>
-//           <Route path='/' element={<Homepage setlists={setlists} />} />
-//           <Route path='/profile' element={<Profile user={user} setlists={setlists} />} />
-//           <Route path='/sets/:id' element={<SetlistPage setlists={setlists} />} />
-//         </Route>
-//         <Route path='/login'
-//           element={!user ? <Login /> : <Navigate replace to="/" />}
-//         />
-//         <Route path='/signup' element={<Signup />} />
-//       </Routes>
-//     </div>
-//   )
-// };
