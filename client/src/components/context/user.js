@@ -4,13 +4,13 @@ const UserContext = React.createContext();
 
 function UserProvider({ children }) {
     const [user, setUser] = useState(null);
-    const [tracks, setTracks] = useState([]);
+    const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        fetch('/tracks')
+        fetch('/users')
             .then(r => {
                 if (r.ok) {
-                    r.json().then(data => setTracks(data))
+                    r.json().then(data => setUsers(data))
                 } else {
                     r.json().then(error => alert(error.errors))
                 };
@@ -83,7 +83,7 @@ function UserProvider({ children }) {
     };
 
     return (
-        <UserContext.Provider value={{ user, tracks, setUser, login, logout, signup }}>
+        <UserContext.Provider value={{ user, users, setUser, login, logout, signup }}>
             {children}
         </UserContext.Provider>
     )

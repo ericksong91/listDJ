@@ -10,7 +10,7 @@ import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 
 function App() {
   const [setlists, setSetlists] = useState([]);
-  const { user } = useContext(UserContext);
+  const { user, users } = useContext(UserContext);
 
   useEffect(() => {
     fetch('/setlists')
@@ -22,6 +22,8 @@ function App() {
         };
       });
   }, []);
+
+  console.log(users)
 
   const AuthLayout = ({ authenticated }) =>
     authenticated
