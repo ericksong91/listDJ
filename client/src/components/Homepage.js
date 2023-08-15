@@ -7,6 +7,7 @@ function Homepage({ setlists }) {
     const [filter, setFilter] = useState("");
 
     const filteredSetList = setlists.filter((set) => {
+        
         const lowercase = set.name.toLowerCase();
         return lowercase.includes(search.toLowerCase());
     });
@@ -15,7 +16,7 @@ function Homepage({ setlists }) {
 
     return (
         <div className="Home">
-            <Search onSearch={setSearch} search={search} />
+            <Search onSearch={setSearch} onFilter={setFilter} filter={filter} search={search} />
             {setlistList}
         </div>
     );
