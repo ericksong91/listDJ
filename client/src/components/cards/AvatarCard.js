@@ -6,7 +6,7 @@ function AvatarCard({ user }) {
     const [avatar, setAvatar] = useState(null);
     const [isSelected, setIsSelected] = useState(false);
 
-    function onChange(e) {
+    function handleChange(e) {
         setAvatar(e.target.files[0]);
         setIsSelected(true);
 
@@ -16,7 +16,7 @@ function AvatarCard({ user }) {
         console.log(e.target.file[0])
     };
 
-    function onSubmit() {
+    function handleSubmit() {
         const formData = new FormData();
         formData.append('avatar', avatar);
 
@@ -44,7 +44,7 @@ function AvatarCard({ user }) {
                 <input
                     type="file"
                     accept="image/*"
-                    onChange={onChange}
+                    onChange={handleChange}
                     hidden
                 />
             </Button>
@@ -62,7 +62,7 @@ function AvatarCard({ user }) {
                 <p>Select a file to show details</p>
             )}
             <div>
-                <Button onClick={onSubmit}>Submit</Button>
+                <Button onClick={handleSubmit}>Submit</Button>
             </div>
         </div>
     );

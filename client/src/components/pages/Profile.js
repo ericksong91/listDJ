@@ -1,5 +1,6 @@
 import SetlistCard from "../cards/SetlistCard";
 import AvatarCard from "../cards/AvatarCard";
+import BiographyCard from "../cards/BiographyCard";
 // import TrackCard from "../cards/TrackCard";
 
 function Profile({ user, setlists }) {
@@ -10,8 +11,9 @@ function Profile({ user, setlists }) {
     return (
         <div className="Profile">
             <h1>Profile Page</h1>
-            <AvatarCard user={user}/>
-            {filteredSets}  
+            <AvatarCard user={user} />
+            <BiographyCard user={user} />
+            {filteredSets}
         </div>
     );
 };

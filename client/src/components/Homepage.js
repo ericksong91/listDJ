@@ -1,4 +1,5 @@
 import SetlistCard from "./cards/SetlistCard";
+import Search from "./top/Search";
 
 function Homepage({ setlists }) {
     const setlistCards = setlists.map((set) =>
@@ -7,6 +8,7 @@ function Homepage({ setlists }) {
 
     return (
         <div className="Home">
+            <Search />
             {setlistCards}
         </div>
     );
