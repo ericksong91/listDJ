@@ -1,5 +1,5 @@
-import { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { useState, useContext, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button, Container, Box, TextField } from '@mui/material';
 import { UserContext } from '../context/user';
 
@@ -8,7 +8,16 @@ function Login() {
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState([]);
-    const { login } = useContext(UserContext);
+    const { user, login } = useContext(UserContext);
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!!user && location.state?.from) {
+            return navigate(location.state.from)
+        };
+    }, [user, location.state.from, navigate]);
+
 
     function handleSubmit(e) {
         e.preventDefault();

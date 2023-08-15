@@ -6,11 +6,11 @@ import Profile from "./pages/Profile"
 import Login from "./top/Login";
 import Signup from "./top/Signup";
 import SetlistPage from "./pages/SetlistPage";
-import { Routes, Route, Navigate, Outlet } from "react-router-dom";
+import { Routes, Route, Navigate, Outlet, useLocation } from "react-router-dom";
 
 function App() {
   const [setlists, setSetlists] = useState([]);
-  const { user, users } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     fetch('/setlists')
@@ -23,25 +23,21 @@ function App() {
       });
   }, []);
 
-  console.log(users)
-
-  const AuthLayout = ({ authenticated }) =>
-    authenticated
-      ? <Outlet />
-      : <Navigate to="/login" replace />;
+  const AuthLayout = ({ authenticated }) => {
+    const location = useLocation();
+    return authenticated ? <Outlet /> : <Navigate to="/login" replace state={{ from: location }} />;
+  };
 
   return (
     <div className="App">
       <Navbar />
       <Routes>
-        <Route path='/' element={<Homepage setlists={setlists} />} />
-        <Route path='/sets/:id' element={<SetlistPage setlists={setlists} />} />
         <Route element={<AuthLayout authenticated={!!user} />}>
+          <Route path='/' element={<Homepage setlists={setlists} />} />
+          <Route path='/sets/:id' element={<SetlistPage setlists={setlists} />} />
           <Route path='/profile' element={<Profile user={user} setlists={setlists} />} />
         </Route>
-        <Route path='/login'
-          element={!user ? <Login /> : <Navigate replace to="/" />}
-        />
+        <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
       </Routes>
     </div>

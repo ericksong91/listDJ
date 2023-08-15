@@ -8,6 +8,7 @@ function Homepage({ setlists }) {
 
     const filteredSetList = setlists.filter((set) => {
         
+        
         const lowercase = set.name.toLowerCase();
         return lowercase.includes(search.toLowerCase());
     });
