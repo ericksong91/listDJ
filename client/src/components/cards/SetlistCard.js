@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Button, Card, CardContent, CardHeader } from '@mui/material';
 
 
-function SetlistCard({ set }) {
+function SetlistCard({ set, user }) {
     return (
         <Card sx={{ maxWidth: 700, maxHeight: 300 }}>
             <CardHeader
@@ -10,6 +10,7 @@ function SetlistCard({ set }) {
                 subheader={`${set.genre}`}
             />
             <CardContent>
+                <ul>{`By: ${user.username}`}</ul>
                 <ul>{`Average BPM: ${set.avg_bpm}`}</ul>
                 <ul>{`Est. Length: ${set.length} mins`}</ul>
             </CardContent>

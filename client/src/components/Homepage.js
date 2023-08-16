@@ -36,11 +36,21 @@ function Homepage({ setlists, users }) {
 
     let setlistList = [];
 
-    if(filter === "DJ Name") {
-        setlistList = filteredSetUsers.map((set) => <SetlistCard key={set.id} set={set} />)
+    if (filter === "DJ Name") {
+        if (search === "") {
+            setlistList = setlists.map((set) => <SetlistCard key={set.id}
+                set={set}
+                user={users.find((user) => user.id === parseInt(set.user_id))} />);
+        } else {
+            setlistList = filteredSetUsers.map((set) => <SetlistCard key={set.id}
+                set={set}
+                user={users.find((user) => user.id === parseInt(set.user_id))} />)
+        };
     } else {
-        setlistList = filteredSetList.map((set) => <SetlistCard key={set.id} set={set} />);
-    }
+        setlistList = filteredSetList.map((set) => <SetlistCard key={set.id}
+            set={set}
+            user={users.find((user) => user.id === parseInt(set.user_id))} />);
+    };
 
     return (
         <div className="Home">
