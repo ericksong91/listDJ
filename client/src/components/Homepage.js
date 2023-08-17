@@ -1,6 +1,10 @@
 import { useState } from "react";
 import SetlistCard from "./cards/SetlistCard";
 import Search from "./top/Search";
+import {
+    Container,
+    Grid
+} from "@mui/material";
 
 function Homepage({ setlists, users }) {
     const [search, setSearch] = useState("");
@@ -55,7 +59,11 @@ function Homepage({ setlists, users }) {
     return (
         <div className="Home">
             <Search onSearch={setSearch} onFilter={setFilter} filter={filter} search={search} />
-            {setlistList}
+            <Container>
+                <Grid container spacing={5}>
+                    {setlistList}
+                </Grid>
+            </Container>
         </div>
     );
 };
