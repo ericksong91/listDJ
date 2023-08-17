@@ -7,6 +7,7 @@ import Login from "./top/Login";
 import Signup from "./top/Signup";
 import SetlistPage from "./pages/SetlistPage";
 import { Routes, Route, Navigate, Outlet, useLocation } from "react-router-dom";
+import '../css/App.css'
 
 function App() {
   const [setlists, setSetlists] = useState([]);

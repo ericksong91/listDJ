@@ -1,3 +1,4 @@
+import record from '../images/record.png'
 import { Link } from 'react-router-dom';
 import {
     Button,
@@ -15,6 +16,7 @@ function SetlistCard({ set, user }) {
     return (
         <Grid item xs={12}>
             <Paper elevation={3} className="paper">
+                <img className="img" src={record}></img>
                 <Box xs={1}>
                     <Typography>
                         {set.name}
