@@ -19,8 +19,8 @@ function Profile({ users, setlists }) {
     return (
         <div className="Profile">
             <h1>Profile Page</h1>
-            <AvatarCard user={user} />
-            <BiographyCard user={user} />
+            <AvatarCard user={user} index={index} />
+            <BiographyCard user={user} index={index} />
             {filteredSets}
         </div>
     );

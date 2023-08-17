@@ -1,8 +1,8 @@
-import { useState, useContext } from 'react';
+import { useState  } from 'react';
 import { Button, Card, CardContent, CardHeader } from '@mui/material';
 
 
-function AvatarCard({ user }) {
+function AvatarCard({ user, index }) {
     const [avatar, setAvatar] = useState(null);
     const [isSelected, setIsSelected] = useState(false);
 
@@ -11,9 +11,6 @@ function AvatarCard({ user }) {
         setIsSelected(true);
 
         // Show alert if avatar.size is greater than the maximum file size
-
-        console.log(e.target.files[0]);
-        console.log(e.target.file[0])
     };
 
     function handleSubmit() {
