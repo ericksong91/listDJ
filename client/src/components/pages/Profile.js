@@ -1,14 +1,20 @@
-
-import { useEffect } from "react";
 import SetlistCard from "../cards/SetlistCard";
 import AvatarCard from "../cards/AvatarCard";
 import BiographyCard from "../cards/BiographyCard";
-// import TrackCard from "../cards/TrackCard";
+import { useParams } from "react-router-dom";
 
-function Profile({ user, setlists }) {
+function Profile({ users, setlists }) {
+    const index = parseInt(useParams().id);
+
+    if(!users) {
+        return <div>Loading...</div>
+    };
+
+    const user = users.find((user) => user.id === index);
+
     const filteredList = setlists.filter((set) => parseInt(set.user_id) === parseInt(user.id));
 
-    const filteredSets = filteredList.map((set) => <SetlistCard key={set.id} set={set} />);
+    const filteredSets = filteredList.map((set) => <SetlistCard key={set.id} user={user} set={set} />);
 
     return (
         <div className="Profile">

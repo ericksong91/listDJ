@@ -3,8 +3,8 @@ import { UserContext } from "../context/user";
 import { Button, Container, Grid } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 
-function Navbar() {
-  const { user, logout } = useContext(UserContext);
+function Navbar({ user }) {
+  const { logout } = useContext(UserContext);
   const navigate = useNavigate();
 
   return (
@@ -13,15 +13,15 @@ function Navbar() {
         {!user ? <h2>Welcome, Guest!</h2> : <h2>Welcome, {user.username}!</h2>}
         <Grid container spacing={2} justifyContent="center">
           <Grid item>
-              <Button variant="contained" onClick={() => navigate(-1)}>Back</Button>
+            <Button variant="contained" onClick={() => navigate(-1)}>Back</Button>
           </Grid>
           <Grid item>
-              <Link to="/"><Button variant="contained">Home</Button></Link>
+            <Link to="/"><Button variant="contained">Home</Button></Link>
           </Grid>
           <Grid item>
             {!user ? <Link to="/login"><Button variant="contained">Login</Button></Link>
               :
-              <Link to="/profile"><Button variant="contained">View Profile</Button></Link>}
+              <Link to={`/profile/${user.id}`}><Button variant="contained">View Profile</Button></Link>}
           </Grid>
           <Grid item>
             {!user ? null

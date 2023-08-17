@@ -30,12 +30,12 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
+      <Navbar user={user} />
       <Routes>
         <Route element={<AuthLayout authenticated={!!user} />}>
           <Route path='/' element={<Homepage setlists={setlists} users={users} />} />
           <Route path='/sets/:id' element={<SetlistPage setlists={setlists} />} />
-          <Route path='/profile' element={<Profile user={user} setlists={setlists} />} />
+          <Route path='/profile/:id' element={<Profile users={users} setlists={setlists} />} />
         </Route>
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />

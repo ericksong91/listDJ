@@ -14,7 +14,6 @@ function Homepage({ setlists, users }) {
     const filteredUsers = users.filter((user) => user.username.toLowerCase().includes(search.toLowerCase()));
 
     const filteredSetList = setlists.filter((set) => {
-
         if (filter === "Set Name") {
             return set.name.toLowerCase().includes(search.toLowerCase());
         } else if (filter === "Genre Name") {
@@ -27,11 +26,12 @@ function Homepage({ setlists, users }) {
                     if (parseInt(set.user_id) === user.id) {
                         return filteredSetUsers.push(set)
                     } else {
-                        return
+                        return null
                     };
                 });
             };
         };
+        return null
     });
 
     let setlistList = [];
