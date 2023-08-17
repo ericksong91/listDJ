@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import './css/index.css';
 import App from './components/App';
 import { UserProvider } from './components/context/user'
+import { Container } from '@mui/material';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -11,7 +12,9 @@ root.render(
   <React.StrictMode>
     <UserProvider>
       <Router>
-        <App />
+        <Container padding={5}>
+          <App />
+        </Container>
       </Router>
     </UserProvider>
   </React.StrictMode>

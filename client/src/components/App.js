@@ -7,6 +7,7 @@ import Login from "./top/Login";
 import Signup from "./top/Signup";
 import SetlistPage from "./pages/SetlistPage";
 import { Routes, Route, Navigate, Outlet, useLocation } from "react-router-dom";
+import { Paper } from "@mui/material";
 import '../css/App.css'
 
 function App() {
@@ -30,7 +31,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <Paper elevation={5} className="App">
       <Navbar user={user} />
       <Routes>
         <Route element={<AuthLayout authenticated={!!user} />}>
@@ -41,7 +42,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
       </Routes>
-    </div>
+    </Paper>
   )
 };
 
