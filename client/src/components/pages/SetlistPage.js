@@ -1,12 +1,15 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
-import TrackCard from "../cards/TrackCard";
-// import { useContext } from "react";
-// import { UserContext } from "../context/user";
+// import TrackCard from "../cards/TrackCard";
+import TrackListCard from "../cards/SetlistCard";
+import { Button } from "@mui/material";
 
-function SetlistPage( { setlists } ) {
+function SetlistPage({ setlists }) {
     const index = parseInt(useParams().id);
     const setFiltered = setlists.find(set => set.id === index);
+    const [edit, setEdit] = useState(false);
+
+    console.log(edit, setEdit)
 
     if (!setlists || !setFiltered) {
         return <div></div>
@@ -14,29 +17,35 @@ function SetlistPage( { setlists } ) {
 
     const tracks = setFiltered.tracks
     const setlistTracks = setFiltered.setlist_track_org
-    const filteredList = [];
+
+    // setlistTracks.forEach((slTrack) => {
+    //     filteredList.push(tracks.find((track) => track.id === slTrack.track_id))
+    // });
+
+    // const tracksList = filteredList.map((track, ind) => <TrackCard key={ind} track={track} />);
+
+    // //Component for just holding the tracks
+    // //Array of tracks, 
+
+    // console.log(tracks, setlistTracks)
+
+    return (
+        <div className="SetlistPage">
+            <Button variant="contained">Edit</Button>
+            <h1>Setlist Page</h1>
+            <TrackListCard tracks={tracks} setlistTracks={setlistTracks} />
+            {/* {tracksList} */}
+        </div>
+    );
+}
+
+export default SetlistPage;
 
     // When updating by adding or removing songs, I should ONLY be updating the local cache of the set before "Save" 
     // is hit by the user. To first organize the list, I should grab the array that represents the track order (setlist_tracks)
     // After getting setlist_tracks with track order, I compare that to the array with all the tracks currently used.
     // How to deal with tracks that are the same ID?
 
-    setlistTracks.forEach((slTrack) => {
-        filteredList.push(tracks.find((track) => track.id === slTrack.track_id))
-    });
-
-    const tracksList = filteredList.map((track, ind) => <TrackCard key={ind} track={track} />);
-
     // const testSort = setlistTracks.sort((a, b) => setlistTracks.indexOf(a.track_order) - setlistTracks.indexOf(b.track_order))
 
     // console.log(testSort)
-
-    return (
-        <div className="SetlistPage">
-            <h1>Setlist Page</h1>
-            {tracksList}
-        </div>
-    );
-}
-
-export default SetlistPage;
