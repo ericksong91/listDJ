@@ -31,7 +31,7 @@ function App() {
   };
 
   return (
-      <Paper className="App" elevation={5} variant="outlined" sx={{ margin: 4 }}>
+      <Paper className="App" elevation={5} sx={{ margin: 4, paddingBottom: 5, bgcolor: 'rgb(80, 75, 71)'  }}>
         <Navbar user={user} />
         <Routes>
           <Route element={<AuthLayout authenticated={!!user} />}>

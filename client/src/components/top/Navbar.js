@@ -1,7 +1,9 @@
+import logo from '../images/listDJlogo.png'
 import { useContext } from "react";
 import { UserContext } from "../context/user";
-import { Button, Container, Grid } from "@mui/material";
+import { Button, Container, Grid, Box, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
+
 
 function Navbar({ user }) {
   const { logout } = useContext(UserContext);
@@ -10,7 +12,15 @@ function Navbar({ user }) {
   return (
     <div className="Navbar">
       <Container maxWidth="lg">
-        {!user ? <h2>Welcome, Guest!</h2> : <h2>Welcome, {user.username}!</h2>}
+        {!user ? <h2>Welcome, Guest!</h2> : <Box sx={{display: 'flex'}}>
+          <img className="avatar-small" src={user.avatar} />
+          <Typography variant="h5" sx={{marginLeft: 5}}>
+            Welcome, {user.username}!
+          </Typography>
+        </Box>}
+        <Box align="center">
+          <img src={logo} alt='logo' />
+        </Box>
         <Grid container spacing={2} justifyContent="center">
           <Grid item>
             <Button variant="contained" onClick={() => navigate(-1)}>Back</Button>

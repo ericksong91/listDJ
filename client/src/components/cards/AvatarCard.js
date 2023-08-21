@@ -32,7 +32,7 @@ function AvatarCard({ user, index }) {
 
     return (
         <div className='AvatarCard'>
-            {!!user ? <img src={user.avatar} alt="default" /> : <h1>Loading...</h1>}
+            {!!user ? <img className='avatar' src={user.avatar} alt="default" /> : <h1>Loading...</h1>}
             <Button
                 variant="contained"
                 component="label"
