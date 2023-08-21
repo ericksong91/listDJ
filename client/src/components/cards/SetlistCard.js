@@ -1,9 +1,7 @@
 import record from '../images/record.png'
 import { useNavigate } from 'react-router-dom';
 import {
-    Button,
     Grid,
-    Box,
     Card,
     Typography
 } from '@mui/material';
@@ -19,7 +17,7 @@ function SetlistCard({ set, user }) {
             <Card>
                 <Grid container>
                     <Grid item xs={2}>
-                        <img className="img" src={record} />
+                        <img className="img" alt={`default`} src={record} />
                     </Grid>
                     <Grid item xs={2}>
                         <Typography variant="h4" component="h4">

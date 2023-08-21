@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom';
-import { Button, Card, CardContent, CardHeader } from '@mui/material';
+import { Card, CardContent, CardHeader } from '@mui/material';
 
 
 function TrackCard({ track }) {
@@ -13,9 +12,6 @@ function TrackCard({ track }) {
                 <ul>{`Average BPM: ${track.bpm}`}</ul>
                 <ul>{`Key: ${track.key}`}</ul>
             </CardContent>
-            {/* <CardContent>
-                <Link to={`/`}><Button variant="contained">More</Button></Link>
-            </CardContent> */}
         </Card>
     );
 }

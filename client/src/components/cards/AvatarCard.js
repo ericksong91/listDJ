@@ -1,5 +1,5 @@
 import { useState  } from 'react';
-import { Button, Card, CardContent, CardHeader } from '@mui/material';
+import { Button } from '@mui/material';
 
 
 function AvatarCard({ user, index }) {
@@ -32,7 +32,7 @@ function AvatarCard({ user, index }) {
 
     return (
         <div className='AvatarCard'>
-            {!!user ? <img src={user.avatar} /> : <h1>Loading...</h1>}
+            {!!user ? <img src={user.avatar} alt="default" /> : <h1>Loading...</h1>}
             <Button
                 variant="contained"
                 component="label"

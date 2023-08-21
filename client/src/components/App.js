@@ -31,7 +31,7 @@ function App() {
   };
 
   return (
-    <Paper elevation={5} className="App">
+    <Paper elevation={5}>
       <Navbar user={user} />
       <Routes>
         <Route element={<AuthLayout authenticated={!!user} />}>
