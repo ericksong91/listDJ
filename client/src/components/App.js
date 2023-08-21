@@ -31,19 +31,19 @@ function App() {
   };
 
   return (
-    <Paper elevation={5}>
-      <Navbar user={user} />
-      <Routes>
-        <Route element={<AuthLayout authenticated={!!user} />}>
-          <Route path='/' element={<Homepage setlists={setlists} users={users} />} />
-          <Route path='/sets/:id' element={<SetlistPage setlists={setlists} />} />
-          <Route path='/profile/:id' element={<Profile users={users} setlists={setlists} />} />
-        </Route>
-        <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<Signup />} />
-      </Routes>
-    </Paper>
-  )
+      <Paper className="App" elevation={5} variant="outlined" sx={{ margin: 4 }}>
+        <Navbar user={user} />
+        <Routes>
+          <Route element={<AuthLayout authenticated={!!user} />}>
+            <Route path='/' element={<Homepage setlists={setlists} users={users} />} />
+            <Route path='/sets/:id' element={<SetlistPage setlists={setlists} />} />
+            <Route path='/profile/:id' element={<Profile users={users} setlists={setlists} />} />
+          </Route>
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
+        </Routes>
+      </Paper>
+  );
 };
 
 export default App;

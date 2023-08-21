@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import {
     Grid,
     Card,
-    Typography
+    Typography,
 } from '@mui/material';
 
 function SetlistCard({ set, user }) {
@@ -14,7 +14,10 @@ function SetlistCard({ set, user }) {
 
     return (
         <Grid item xs={12} onClick={() => { navigate(`/sets/${set.id}`) }}>
-            <Card>
+            <Card className="setCard" sx={{'&:hover': {
+                boxShadow: 5,
+                backgroundColor: 'lightblue'
+            }}}>
                 <Grid container>
                     <Grid item xs={2}>
                         <img className="img" alt={`default`} src={record} />
