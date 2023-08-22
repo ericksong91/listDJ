@@ -1,15 +1,13 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 // import TrackCard from "../cards/TrackCard";
-import TrackListCard from "../cards/SetlistCard";
-import { Button } from "@mui/material";
+import TrackListCard from "../cards/TrackListCard";
+import { Button, Typography } from "@mui/material";
 
 function SetlistPage({ setlists }) {
     const index = parseInt(useParams().id);
     const setFiltered = setlists.find(set => set.id === index);
     const [edit, setEdit] = useState(false);
-
-    console.log(edit, setEdit)
 
     if (!setlists || !setFiltered) {
         return <div></div>
@@ -31,8 +29,10 @@ function SetlistPage({ setlists }) {
 
     return (
         <div className="SetlistPage">
-            <Button variant="contained">Edit</Button>
-            <h1>Setlist Page</h1>
+            <Button variant="contained" onChange={() => setEdit(!edit)}>Edit</Button>
+            <Typography variant="h4" sx={{color: 'white', alignContent: "center"}}>
+                Setlist Page
+            </Typography>
             <TrackListCard tracks={tracks} setlistTracks={setlistTracks} />
             {/* {tracksList} */}
         </div>

@@ -55,3 +55,5 @@ gem 'aws-sdk-s3', "~> 1.119"
 
 gem 'dotenv-rails', "~> 2.8"
 
+gem "net-http"
+
