@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import TrackCard from "../cards/TrackCard";
-import { Container, Paper } from "@mui/material";
+import { Container, Paper, Button } from "@mui/material";
 
-function TrackListCard({ tracks, setlistTracks }) {
+function TrackListCard({ tracks, setlistTracks, onSave }) {
     const [filteredList, setFilteredList] = useState([]);
+    const [edit, setEdit] = useState(false);
 
     useEffect(() => {
         if (!tracks || !setlistTracks) {
@@ -34,13 +35,24 @@ function TrackListCard({ tracks, setlistTracks }) {
             key={ind}
             track={track}
             order={ind + 1}
-            onOrder={handleOrder} />);
+            onOrder={handleOrder}
+            edit={edit}
+        />);
 
-
-    //Fetch to update setlist
+        
 
     return (
         <div className="SetlistTracks">
+            {edit ?
+                <div>
+                    <Button variant="contained" onClick={() => setEdit(!edit)}>Cancel</Button>
+                    <Button variant="contained" onClick={() => onSave(filteredList, setEdit)}>Save Changes</Button>
+                </div>
+                :
+                <div>
+                    <Button variant="contained" onClick={() => setEdit(!edit)}>Edit</Button>
+                </div>
+            }
             <Container sx={{ padding: 5 }}>
                 <Paper sx={{
                     alignContent: "center",
