@@ -34,7 +34,7 @@ function TrackCard({ track, order, onOrder }) {
                 </Grid>
                 <Grid item xs={1}>
                     <Button onClick={() => onOrder(order - 1, order - 2)}>Up</Button>
-                    <Button onClick={() => onOrder(order - 1, order + 1)}>Down</Button>
+                    <Button onClick={() => onOrder(order - 1, order)}>Down</Button>
                 </Grid>
             </Grid>
         </Card >
