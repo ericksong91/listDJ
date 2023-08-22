@@ -17,8 +17,6 @@ function TrackListCard({ tracks, setlistTracks }) {
         };
     }, [tracks, setlistTracks]);
 
-    console.log(filteredList.length)
-
     function handleOrder(from, to) {
 
         if (to < 0 || to > filteredList.length) {
@@ -37,6 +35,9 @@ function TrackListCard({ tracks, setlistTracks }) {
             track={track}
             order={ind + 1}
             onOrder={handleOrder} />);
+
+
+    //Fetch to update setlist
 
     return (
         <div className="SetlistTracks">
