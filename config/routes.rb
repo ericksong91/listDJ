@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-    resources :setlists, only: [:index, :show, :update]
+    resources :setlists, only: [:index, :show]
     resources :users, only: [:index, :destroy, :update]
-    resources :setlist_tracks, only: [:update]
     resources :tracks, only: [:index, :show]
 
     #User Routing, signups, profile, login, logout
@@ -9,6 +8,9 @@ Rails.application.routes.draw do
     get "/me", to: "users#show"
     post "/login", to: "sessions#create"
     delete "/logout", to: "sessions#destroy"
+
+    #Batch Update Setlist_tracks
+    patch "/setlist_tracks", to: "setlist_tracks#update"
 
     ## 
     get '*path',
