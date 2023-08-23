@@ -25,8 +25,41 @@ function App() {
       });
   }, []);
 
-  function handleEdit() {
-    console.log("You're editing")
+  function handleEdit(updatedSetListTracks, onEdit, onError) {
+    fetch(`/setlist_tracks`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(updatedSetListTracks)
+    })
+      .then((r) => {
+        onEdit(false);
+        if (r.ok) {
+          r.json().then((data) => {
+            const filteredSetlists = setlists.map((set) => {
+              if(set.id === data[0].setlist_id) {
+                return {
+                  id: set.id,
+                  genre: set.genre,
+                  avg_bpm: set.avg_bpm,
+                  length: set.length,
+                  name: set.name,
+                  user_id: set.user_id,
+                  setlist_track_org: data,
+                  tracks: set.tracks
+                  // Update tracks later when adding new tracks.
+                };
+              } else {
+                return set
+              }
+            });
+            setSetlists([...filteredSetlists]);
+          });
+        } else {
+          r.json().then((error) => onError(error.errors));
+        }
+      });
   };
 
   const AuthLayout = ({ authenticated }) => {

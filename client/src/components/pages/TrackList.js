@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import TrackCard from "../cards/TrackCard";
 import { Container, Paper, Button } from "@mui/material";
 
-function TrackList({ index, tracks, setlistTracks, onEdit }) {
+function TrackList({ tracks, setlistTracks, onError, onEdit }) {
     const [filteredTrackList, setFilteredTrackList] = useState([]);
     const [filteredSetlistTrackList, setFilteredSetlistTrackList] = useState([]);
     const [editing, setEditing] = useState(false);
@@ -34,7 +34,7 @@ function TrackList({ index, tracks, setlistTracks, onEdit }) {
             while (h <= arr.length) {
                 arr2.push({
                     id: filteredSetlistTrackList[h - 1].id,
-                    setlist_id: index,
+                    setlist_id: setlistTracks[0].setlist_id,
                     track_id: arr[h - 1].id,
                     track_order: h
                 });
@@ -67,7 +67,7 @@ function TrackList({ index, tracks, setlistTracks, onEdit }) {
                     }}>
                         Cancel
                     </Button>
-                    <Button variant="contained" onClick={() => onEdit(filteredSetlistTrackList, setEditing, setFilteredSetlistTrackList)}>Save Changes</Button>
+                    <Button variant="contained" onClick={() => onEdit(filteredSetlistTrackList, setEditing, onError)}>Save Changes</Button>
                 </div>
                 :
                 <div>
