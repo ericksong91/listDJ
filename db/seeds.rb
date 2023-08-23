@@ -68,7 +68,7 @@ pp "Building Setlists..."
 
 20.times do
     Setlist.create!(name: "#{Faker::Name.first_name} Mix", user_id: rand(User.first.id..User.last.id),  genre: genres[rand(0..7)],
-    avg_bpm: 1, length: 1)
+    avg_bpm: 1, length: 1, description: "#{Faker::Lorem.paragraphs(number:1)[0]}")
 end
 
 i = Setlist.first.id

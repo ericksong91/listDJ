@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import TrackCard from "./TrackCard";
 import { Container, Paper, Button } from "@mui/material";
 
-function TrackList({ tracks, setlistTracks, onError, onEdit }) {
+function TrackListCard({ tracks, setlistTracks, onError, onEdit }) {
     const [filteredTrackList, setFilteredTrackList] = useState([]);
     const [filteredSetlistTrackList, setFilteredSetlistTrackList] = useState([]);
     const [editing, setEditing] = useState(false);
@@ -86,4 +86,4 @@ function TrackList({ tracks, setlistTracks, onError, onEdit }) {
     );
 }
 
-export default TrackList;
+export default TrackListCard;

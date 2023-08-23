@@ -14,6 +14,8 @@ function App() {
   const [setlists, setSetlists] = useState([]);
   const { user, users } = useContext(UserContext);
 
+  console.log(setlists)
+
   useEffect(() => {
     fetch('/setlists')
       .then(r => {
@@ -68,12 +70,12 @@ function App() {
   };
 
   return (
-    <Paper className="App" elevation={5} sx={{ margin: 4, paddingBottom: 5, bgcolor: 'rgb(80, 75, 71)' }}>
+    <Paper className="App" elevation={5} sx={{ margin: 1, paddingBottom: 1, bgcolor: 'rgb(40, 40, 40)' }}>
       <Navbar user={user} />
       <Routes>
         <Route element={<AuthLayout authenticated={!!user} />}>
           <Route path='/' element={<Homepage setlists={setlists} users={users} />} />
-          <Route path='/sets/:id' element={<SetlistPage setlists={setlists} onEdit={handleEdit} />} />
+          <Route path='/sets/:id' element={<SetlistPage user={user} setlists={setlists} onEdit={handleEdit} />} />
           <Route path='/profile/:id' element={<Profile users={users} setlists={setlists} />} />
         </Route>
         <Route path='/login' element={<Login />} />

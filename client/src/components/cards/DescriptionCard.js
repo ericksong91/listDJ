@@ -4,17 +4,16 @@ import {
     Typography,
 } from '@mui/material';
 
-function DescriptionCard() {
+function DescriptionCard({ user }) {
 
     return (
         <div className="description">
             <Grid item>
-                
+            {user.username}
             </Grid>
-
         </div>
 
     );
 }
 
-export default SetlistCard;
+export default DescriptionCard;
