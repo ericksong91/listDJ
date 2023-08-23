@@ -3,7 +3,6 @@ import { Grid } from '@mui/material';
 import { Button } from '@mui/material';
 
 function TrackCard({ track, order, editing, onOrder }) {
-
     return (
         <Card sx={{ padding: 0.1, margin: 0.1, height: 70, display: 'flex' }}>
             <Grid container>
@@ -28,7 +27,7 @@ function TrackCard({ track, order, editing, onOrder }) {
                 </Grid>
                 <Grid item xs={6}>
                     <CardContent sx={{ display: 'flex', alignContent: 'center' }}>
-                        <ul>{`Average BPM: ${track.bpm}`}</ul>
+                        <ul>{`BPM: ${track.bpm}`}</ul>
                         <ul>{`Key: ${track.key}`}</ul>
                     </CardContent>
                 </Grid>
@@ -40,10 +39,8 @@ function TrackCard({ track, order, editing, onOrder }) {
                         </div>
                         :
                         <div>
-
                         </div>
                     }
-
                 </Grid>
             </Grid>
         </Card >

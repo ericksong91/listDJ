@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import TrackList from "./TrackList";
+import TrackListCard from "../cards/TrackListCard";
 import { Typography } from "@mui/material";
 
 function SetlistPage({ setlists, onEdit }) {
@@ -20,7 +20,7 @@ function SetlistPage({ setlists, onEdit }) {
             <Typography variant="h4" sx={{ color: 'white', alignContent: "center" }}>
                 Setlist Page
             </Typography>
-            <TrackList tracks={tracks} setlistTracks={setlistTracks} onError={setError} onEdit={onEdit} />
+            <TrackListCard tracks={tracks} setlistTracks={setlistTracks} onError={setError} onEdit={onEdit} />
             {error}
         </div>
     );

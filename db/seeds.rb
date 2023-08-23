@@ -20,6 +20,9 @@ genres = [
     "UK Garage",
     "Soulful House",
     "Tech House",
+    "Acid House",
+    "Hard Trance",
+    "Acid Techno"
 ]
 
 camelot_keys = [
@@ -58,9 +61,14 @@ pp "Building Setlists..."
 
 # Length in Minutes for Setlists
 
+# 20.times do
+#     Setlist.create!(name: "#{Faker::Name.first_name} Mix", user_id: rand(User.first.id..User.last.id),  genre: genres[rand(0..7)],
+#     avg_bpm: rand(100..200), length: rand(120..600))
+# end
+
 20.times do
     Setlist.create!(name: "#{Faker::Name.first_name} Mix", user_id: rand(User.first.id..User.last.id),  genre: genres[rand(0..7)],
-    avg_bpm: rand(100..200), length: rand(120..600))
+    avg_bpm: 1, length: 1)
 end
 
 i = Setlist.first.id
@@ -71,6 +79,16 @@ while i <= Setlist.last.id do
         Setlist.find_by(id: i).setlist_tracks.create!(track_id: rand(Track.first.id..Track.last.id), track_order: h)
         h+=1
     end
+    i+=1
+end
+
+# Update Setlists with appropriate genre, bpm, length
+
+i = Setlist.first.id
+
+while i <= Setlist.last.id do
+    setlist = Setlist.find_by(id: i)
+    setlist.update(avg_bpm: setlist.tracks.average(:bpm), length: setlist.tracks.sum(:length)/60)
     i+=1
 end
 

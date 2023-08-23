@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import TrackCard from "../cards/TrackCard";
+import TrackCard from "./TrackCard";
 import { Container, Paper, Button } from "@mui/material";
 
 function TrackList({ tracks, setlistTracks, onError, onEdit }) {
