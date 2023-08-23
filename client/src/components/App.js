@@ -27,7 +27,7 @@ function App() {
       });
   }, []);
 
-  function handleEdit(updatedSetListTracks, onEdit, onError) {
+  function handleEditSetlists(updatedSetListTracks, onEdit, onError) {
     fetch(`/setlist_tracks`, {
       method: "PATCH",
       headers: {
@@ -75,7 +75,7 @@ function App() {
       <Routes>
         <Route element={<AuthLayout authenticated={!!user} />}>
           <Route path='/' element={<Homepage setlists={setlists} users={users} />} />
-          <Route path='/sets/:id' element={<SetlistPage user={user} setlists={setlists} onEdit={handleEdit} />} />
+          <Route path='/sets/:id' element={<SetlistPage user={user} setlists={setlists} onEditSetlists={handleEditSetlists} />} />
           <Route path='/profile/:id' element={<Profile users={users} setlists={setlists} />} />
         </Route>
         <Route path='/login' element={<Login />} />

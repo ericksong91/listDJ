@@ -4,15 +4,19 @@ import {
     Typography,
 } from '@mui/material';
 
-function DescriptionCard({ user }) {
+function DescriptionCard({ user, set }) {
+
+    console.log(set)
 
     return (
         <div className="description">
-            <Grid item>
-            {user.username}
-            </Grid>
+            <Card>
+                <ul>{user.username}</ul>
+                <ul>{set.description}</ul>
+                <ul>{set.avg_bpm}</ul>
+                <ul>{set.genre}</ul>
+            </Card>
         </div>
-
     );
 }
 

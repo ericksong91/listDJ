@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import TrackCard from "./TrackCard";
 import { Container, Paper, Button } from "@mui/material";
 
-function TrackListCard({ tracks, setlistTracks, onError, onEdit }) {
+function TrackListCard({ tracks, setlistTracks, onError, onEditSetlists }) {
     const [filteredTrackList, setFilteredTrackList] = useState([]);
     const [filteredSetlistTrackList, setFilteredSetlistTrackList] = useState([]);
     const [editing, setEditing] = useState(false);
@@ -67,7 +67,7 @@ function TrackListCard({ tracks, setlistTracks, onError, onEdit }) {
                     }}>
                         Cancel
                     </Button>
-                    <Button variant="contained" onClick={() => onEdit(filteredSetlistTrackList, setEditing, onError)}>Save Changes</Button>
+                    <Button variant="contained" onClick={() => onEditSetlists(filteredSetlistTrackList, setEditing, onError)}>Save Changes</Button>
                 </div>
                 :
                 <div>

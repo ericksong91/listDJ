@@ -5,29 +5,32 @@ import DescriptionCard from "../cards/DescriptionCard";
 import { Grid, Typography } from "@mui/material";
 import BiographyCard from "../cards/BiographyCard";
 
-function SetlistPage({ user, setlists, onEdit }) {
+function SetlistPage({ user, setlists, onEditSetlists }) {
     const index = parseInt(useParams().id);
     const [error, setError] = useState([]);
     const setFiltered = setlists.find((set) => set.id === index);
+    
 
     if (!setlists || !setFiltered) {
         return <div></div>
     };
 
-    const tracks = setFiltered.tracks
-    const setlistTracks = setFiltered.setlist_track_org
-
     return (
         <div className="SetlistPage">
             <Typography variant="h4" sx={{ color: 'white' }}>
-                Setlist Page
+                {setFiltered.name}
             </Typography>
             <Grid container>
                 <Grid item xs={4}>
-                    <BiographyCard user={user} />
+                    <DescriptionCard user={user} set={setFiltered} />
                 </Grid>
                 <Grid item xs={8}>
-                    <TrackListCard tracks={tracks} setlistTracks={setlistTracks} onError={setError} onEdit={onEdit} />
+                    <TrackListCard
+                        tracks={setFiltered.tracks}
+                        setlistTracks={setFiltered.setlist_track_org}
+                        onError={setError}
+                        onEditSetlists={onEditSetlists}
+                    />
                 </Grid>
             </Grid>
             {error}

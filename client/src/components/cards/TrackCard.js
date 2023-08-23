@@ -4,7 +4,7 @@ import { Button } from '@mui/material';
 
 function TrackCard({ track, order, editing, onOrder }) {
     return (
-        <Card sx={{ padding: 0.5, margin: 0.5, height: 70, display: 'flex', bgcolor: 'rgb(50, 50, 50)', color: 'white' }}>
+        <Card sx={{ padding: 0.5, margin: 0.5, height: 80, display: 'flex', bgcolor: 'rgb(50, 50, 50)', color: 'white' }}>
             <Grid container>
                 <Grid item xs={1} sx={{
                     alignContent: "center",
@@ -21,7 +21,7 @@ function TrackCard({ track, order, editing, onOrder }) {
                     <CardHeader
                         title={`${track.name}`}
                         subheader={`${track.genre}`}
-                        titleTypographyProps={{ variant: 'h6' }}
+                        titleTypographyProps={{ variant: 'h7' }}
                         sx={{ display: 'flex' }}
                     />
                 </Grid>
