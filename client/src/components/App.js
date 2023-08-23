@@ -25,24 +25,28 @@ function App() {
       });
   }, []);
 
+  function handleEdit() {
+    console.log("You're editing")
+  };
+
   const AuthLayout = ({ authenticated }) => {
     const location = useLocation();
     return authenticated ? <Outlet /> : <Navigate to="/login" replace state={{ from: location }} />;
   };
 
   return (
-      <Paper className="App" elevation={5} sx={{ margin: 4, paddingBottom: 5, bgcolor: 'rgb(80, 75, 71)'  }}>
-        <Navbar user={user} />
-        <Routes>
-          <Route element={<AuthLayout authenticated={!!user} />}>
-            <Route path='/' element={<Homepage setlists={setlists} users={users} />} />
-            <Route path='/sets/:id' element={<SetlistPage setlists={setlists} />} />
-            <Route path='/profile/:id' element={<Profile users={users} setlists={setlists} />} />
-          </Route>
-          <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<Signup />} />
-        </Routes>
-      </Paper>
+    <Paper className="App" elevation={5} sx={{ margin: 4, paddingBottom: 5, bgcolor: 'rgb(80, 75, 71)' }}>
+      <Navbar user={user} />
+      <Routes>
+        <Route element={<AuthLayout authenticated={!!user} />}>
+          <Route path='/' element={<Homepage setlists={setlists} users={users} />} />
+          <Route path='/sets/:id' element={<SetlistPage setlists={setlists} onEdit={handleEdit} />} />
+          <Route path='/profile/:id' element={<Profile users={users} setlists={setlists} />} />
+        </Route>
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<Signup />} />
+      </Routes>
+    </Paper>
   );
 };
 

@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import TrackCard from "../cards/TrackCard";
 import { Container, Paper, Button } from "@mui/material";
 
-function TrackListCard({ index, tracks, setlistTracks, onSave }) {
-    const [filteredTrackList, setfilteredTrackList] = useState([]);
+function TrackList({ index, tracks, setlistTracks, onEdit }) {
+    const [filteredTrackList, setFilteredTrackList] = useState([]);
     const [filteredSetlistTrackList, setFilteredSetlistTrackList] = useState([]);
-    const [edit, setEdit] = useState(false);
+    const [editing, setEditing] = useState(false);
 
     useEffect(() => {
         if (!tracks || !setlistTracks) {
@@ -15,7 +15,7 @@ function TrackListCard({ index, tracks, setlistTracks, onSave }) {
             setlistTracks.forEach((slTrack) => {
                 arr.push(tracks.find((track) => track.id === slTrack.track_id));
             });
-            setfilteredTrackList([...arr]);
+            setFilteredTrackList([...arr]);
             setFilteredSetlistTrackList([...setlistTracks]);
         };
     }, [tracks, setlistTracks]);
@@ -26,7 +26,7 @@ function TrackListCard({ index, tracks, setlistTracks, onSave }) {
         } else {
             const arr = [...filteredTrackList];
             arr.splice(to, 0, arr.splice(from, 1)[0]);
-            setfilteredTrackList([...arr]);
+            setFilteredTrackList([...arr]);
 
             const arr2 = [];
             let h = 1;
@@ -50,28 +50,28 @@ function TrackListCard({ index, tracks, setlistTracks, onSave }) {
             track={track}
             order={ind + 1}
             onOrder={handleOrder}
-            edit={edit}
+            editing={editing}
         />);
 
     return (
         <div className="SetlistTracks">
-            {edit ?
+            {editing ?
                 <div>
                     <Button variant="contained" onClick={() => {
-                        setEdit(!edit);
+                        setEditing(!editing);
                         const arr = [];
                         setlistTracks.forEach((slTrack) => {
                             arr.push(tracks.find((track) => track.id === slTrack.track_id));
                         });
-                        setfilteredTrackList([...arr]);
+                        setFilteredTrackList([...arr]);
                     }}>
                         Cancel
                     </Button>
-                    <Button variant="contained" onClick={() => onSave(filteredSetlistTrackList, setEdit)}>Save Changes</Button>
+                    <Button variant="contained" onClick={() => onEdit(filteredSetlistTrackList, setEditing, setFilteredSetlistTrackList)}>Save Changes</Button>
                 </div>
                 :
                 <div>
-                    <Button variant="contained" onClick={() => setEdit(!edit)}>Edit</Button>
+                    <Button variant="contained" onClick={() => setEditing(!editing)}>Edit</Button>
                 </div>
             }
             <Container sx={{ padding: 5 }}>
@@ -86,4 +86,4 @@ function TrackListCard({ index, tracks, setlistTracks, onSave }) {
     );
 }
 
-export default TrackListCard;
+export default TrackList;

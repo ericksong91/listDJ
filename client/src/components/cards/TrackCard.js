@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, Typography } from '@mui/material';
 import { Grid } from '@mui/material';
 import { Button } from '@mui/material';
 
-function TrackCard({ track, order, edit, onOrder }) {
+function TrackCard({ track, order, editing, onOrder }) {
 
     return (
         <Card sx={{ padding: 0.1, margin: 0.1, height: 70, display: 'flex' }}>
@@ -33,7 +33,7 @@ function TrackCard({ track, order, edit, onOrder }) {
                     </CardContent>
                 </Grid>
                 <Grid item xs={1}>
-                    {edit ?
+                    {editing ?
                         <div>
                             <Button onClick={() => onOrder(order - 1, order - 2)}>Up</Button>
                             <Button onClick={() => onOrder(order - 1, order)}>Down</Button>
