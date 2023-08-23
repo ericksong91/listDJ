@@ -8,8 +8,7 @@ function BiographyCard({ user }) {
     return (
         <div className='bio'>
             <h1>biography card</h1>
-            {user.username}
-
+            
         </div>
     );
 }

@@ -6,6 +6,7 @@ import Profile from "./pages/Profile"
 import Login from "./top/Login";
 import Signup from "./top/Signup";
 import SetlistPage from "./pages/SetlistPage";
+import NewSetForm from "./pages/NewSetForm";
 import { Routes, Route, Navigate, Outlet, useLocation } from "react-router-dom";
 import { Paper } from "@mui/material";
 import '../css/App.css'
@@ -13,8 +14,6 @@ import '../css/App.css'
 function App() {
   const [setlists, setSetlists] = useState([]);
   const { user, users } = useContext(UserContext);
-
-  console.log(setlists)
 
   useEffect(() => {
     fetch('/setlists')
@@ -64,6 +63,10 @@ function App() {
       });
   };
 
+  function handleNewSetlists(newSetlist, onErrors) {
+    console.log("NewSelist", newSetlist)
+  };
+
   const AuthLayout = ({ authenticated }) => {
     const location = useLocation();
     return authenticated ? <Outlet /> : <Navigate to="/login" replace state={{ from: location }} />;
@@ -77,6 +80,7 @@ function App() {
           <Route path='/' element={<Homepage setlists={setlists} users={users} />} />
           <Route path='/sets/:id' element={<SetlistPage user={user} setlists={setlists} onEditSetlists={handleEditSetlists} />} />
           <Route path='/profile/:id' element={<Profile users={users} setlists={setlists} />} />
+          <Route path='/new' element={<NewSetForm user={user} onNewSetlist={handleNewSetlists} />} />
         </Route>
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />

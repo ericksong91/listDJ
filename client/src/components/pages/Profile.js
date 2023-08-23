@@ -10,8 +10,6 @@ function Profile({ users, setlists }) {
         return <div>Loading...</div>
     };
 
-    console.log(users)
-
     const user = users.find((user) => user.id === index);
 
     const filteredList = setlists.filter((set) => parseInt(set.user_id) === parseInt(user.id));
