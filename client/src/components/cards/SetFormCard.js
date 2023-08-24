@@ -10,7 +10,7 @@ function SetFormCard() {
 
     return (
         <Grid item xs={6}>
-            <Card sx={{ maxheight: 800, padding: 1, margin: 1 }} >
+            <Card sx={{ maxheight: 800, padding: 1, margin: 1, paddingBottom: 3}} >
                 <CardHeader
                     title={"Details"}
                     subheader={name}

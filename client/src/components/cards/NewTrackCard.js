@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {
-    Button, TextField, Card, CardHeader, Grid
+    Button, TextField, Card, CardHeader, Grid, Box
 } from '@mui/material';
 import {
     FormControl, InputLabel, Select
@@ -19,7 +19,7 @@ function NewTrackCard({ camelotKeys, genres }) {
             <Card sx={{ maxheight: 800, padding: 1, margin: 1 }}>
                 <CardHeader
                     title={"Add Track"}
-                    subheader={track}
+                    subheader={`${track} by ${trackArtist}`}
                 />
                 <TextField
                     margin="normal"
@@ -41,7 +41,7 @@ function NewTrackCard({ camelotKeys, genres }) {
                     name="trackartist"
                     type="text"
                     inputProps={{ maxLength: 50 }}
-                    label={`Artist Name (${50 - track.length} chars left)`}
+                    label={`Artist Name (${50 - trackArtist.length} chars left)`}
                     value={trackArtist}
                     onChange={(e) => setTrackArtist(e.target.value)}
                 />
@@ -67,7 +67,7 @@ function NewTrackCard({ camelotKeys, genres }) {
                                 };
                             }} />
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={4} sx={{marginLeft: 0.5}}>
                         <TextField
                             margin="normal"
                             required
@@ -127,6 +127,7 @@ function NewTrackCard({ camelotKeys, genres }) {
                     </Select>
                 </FormControl>
             </Card>
+            <Button variant="contained" fullWidth>Add Track</Button>
         </Grid>
     );
 }

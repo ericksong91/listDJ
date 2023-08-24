@@ -1,10 +1,12 @@
 import { useState, useContext } from 'react';
 import SetFormCard from '../cards/SetFormCard';
+import NewTrackCard from '../cards/NewTrackCard';
 import { UserContext } from '../context/user';
 import {
     Button, Container, Box, Grid, MenuItem
 } from '@mui/material';
-import NewTrackCard from '../cards/NewTrackCard';
+import { Typography } from '@mui/material';
+
 
 function NewSetForm({ user, onNewSetlist }) {
     const [isLoading, setIsLoading] = useState(false);
@@ -34,10 +36,19 @@ function NewSetForm({ user, onNewSetlist }) {
         // onNewSetlist(newSetlist, setErrors)
     };
 
+    // Add tracks sequentially through Add Track button
+    // When adding tracks, trigger function in NewSetForm to add it to Track array
+    // Have Track array make a Setlist_Tracks array as well to keep track of position
+    // Use these arrays to render out the DOM here, in the parent component
+    // After adding all necessary tracks, use Submit button to gather information
+    // Then send it to the App level where it will update the backend and force
+    // an app refresh. Possibly, may want to have state functions called from 
+    // NewSetForm for changing details OR just delete the card.
+
     return (
         <div className="NewSetForm">
             <Container className='NewPaintingForm' component="main">
-                <h1>Submit New Painting</h1>
+                <Typography variant="h1" sx={{ color: "orange" }}>Submit New Setlist</Typography>
                 <Box component="form" onSubmit={handleSubmit}>
                     <Grid container justifyContent={"center"}>
                         <SetFormCard onSubmit={handleSubmit} />
