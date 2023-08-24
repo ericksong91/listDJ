@@ -17,18 +17,20 @@ function TrackCard({ track, order, editing, onOrder }) {
                         {order}
                     </Typography>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={3}>
                     <CardHeader
                         title={`${track.name}`}
-                        subheader={`${track.genre}`}
+                        subheader={`${track.artist}`}
                         titleTypographyProps={{ variant: 'h7' }}
                         sx={{ display: 'flex' }}
                     />
                 </Grid>
                 <Grid item xs={6}>
                     <CardContent sx={{ display: 'flex', alignContent: 'center' }}>
+                        <ul>{`${Math.floor(track.length/60)}m  ${Math.floor(track.length % 60)}s`}</ul>
+                        <ul>{`${track.genre}`}</ul>
                         <ul>{`BPM: ${track.bpm}`}</ul>
-                        <ul>{`Key: ${track.key}`}</ul>
+                        <ul>{`${track.key}`}</ul>
                     </CardContent>
                 </Grid>
                 <Grid item xs={1}>

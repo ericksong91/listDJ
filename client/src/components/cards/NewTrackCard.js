@@ -6,13 +6,29 @@ import {
     FormControl, InputLabel, Select
 } from '@mui/material';
 
-function NewTrackCard({ camelotKeys, genres }) {
+function NewTrackCard({ camelotKeys, genres, onSetlist }) {
     const [track, setTrack] = useState("");
     const [trackArtist, setTrackArtist] = useState("");
     const [trackBPM, setTrackBPM] = useState("");
     const [trackKey, setTrackKey] = useState("");
     const [trackGenre, setTrackGenre] = useState("");
     const [trackLength, setTrackLength] = useState({ min: 0, sec: 0 });
+    const [order, setOrder] = useState(1);
+
+    function handleClick() {
+        const length = parseInt(trackLength.min * 60) + parseInt(trackLength.sec);
+        const newTrack = {
+            name: track,
+            artist: trackArtist,
+            genre: trackGenre,
+            length: length,
+            key: trackKey,
+            bpm: trackBPM
+        };
+
+        onSetlist(newTrack, order);
+        setOrder(order + 1);
+    };
 
     return (
         <Grid item xs={6}>
@@ -67,7 +83,7 @@ function NewTrackCard({ camelotKeys, genres }) {
                                 };
                             }} />
                     </Grid>
-                    <Grid item xs={4} sx={{marginLeft: 0.5}}>
+                    <Grid item xs={4} sx={{ marginLeft: 0.5 }}>
                         <TextField
                             margin="normal"
                             required
@@ -127,7 +143,7 @@ function NewTrackCard({ camelotKeys, genres }) {
                     </Select>
                 </FormControl>
             </Card>
-            <Button variant="contained" fullWidth>Add Track</Button>
+            <Button variant="contained" fullWidth onClick={() => handleClick()}>Add Track</Button>
         </Grid>
     );
 }
