@@ -5,6 +5,24 @@ const UserContext = React.createContext();
 function UserProvider({ children }) {
     const [user, setUser] = useState(null);
     const [users, setUsers] = useState([]);
+    const genresList = [
+        "Deep House",
+        "EDM",
+        "Dubstep",
+        "UK Hardcore",
+        "Hardstyle",
+        "UK Garage",
+        "Soulful House",
+        "Tech House",
+        "Acid House",
+        "Hard Trance",
+        "Acid Techno"
+    ];
+    const camelotKeys = [
+        "1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B", "5A", "5B", "6A", "6B", "7A", "7B",
+        "8A", "8B", "9A", "9B", "10A", "10B", "11A", "11B", "12A", "12B"
+    ];
+
 
     useEffect(() => {
         fetch('/users')
@@ -83,7 +101,7 @@ function UserProvider({ children }) {
     };
 
     return (
-        <UserContext.Provider value={{ user, users, setUser, login, logout, signup }}>
+        <UserContext.Provider value={{ user, users, genresList, camelotKeys, setUser, login, logout, signup }}>
             {children}
         </UserContext.Provider>
     )

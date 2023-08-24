@@ -53,7 +53,7 @@ pp "Building Tracks..."
 # Length in Seconds for Tracks
 
 20.times do
-    Track.create!(name: "The #{Faker::Name.first_name} Song", genre: genres[rand(0..7)], album: "#{Faker::Name.first_name}'s Album",
+    Track.create!(name: "The #{Faker::Name.first_name} Song", artist: "#{Faker::Name.first_name}" , genre: genres[rand(0..7)],
     length: rand(120..600), bpm: rand(100..200), key: camelot_keys[rand(0..23)])
 end
 
