@@ -65,6 +65,9 @@ function App() {
 
   function handleNewSetlists(newSetlist, onErrors) {
     console.log("NewSelist", newSetlist)
+
+    // Add additional forms to the bottom of the newSetlistPage
+    // Where I can add tracks and reposition them.
   };
 
   const AuthLayout = ({ authenticated }) => {
