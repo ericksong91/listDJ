@@ -9,8 +9,7 @@ class SetlistsController < ApplicationController
         render json: setlist, serializer: SetlistWithTracksSerializer
     end
 
-    def update
-        byebug
-        # For each item in the array, update each item 
+    def create
+        byebug 
     end
 end

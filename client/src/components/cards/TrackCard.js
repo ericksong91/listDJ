@@ -3,6 +3,7 @@ import { Grid } from '@mui/material';
 import { Button } from '@mui/material';
 
 function TrackCard({ track, order, editing, onOrder }) {
+    console.log(track)
     return (
         <Card sx={{ padding: 0.5, margin: 0.5, height: 80, display: 'flex', bgcolor: 'rgb(50, 50, 50)', color: 'white' }}>
             <Grid container>

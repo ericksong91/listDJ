@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-    resources :setlists, only: [:index, :show]
+    resources :setlists, only: [:index, :show, :create]
     resources :users, only: [:index, :destroy, :update]
     resources :tracks, only: [:index, :show]
 

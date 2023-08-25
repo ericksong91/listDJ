@@ -39,7 +39,7 @@ function App() {
         if (r.ok) {
           r.json().then((data) => {
             const filteredSetlists = setlists.map((set) => {
-              if(set.id === data[0].setlist_id) {
+              if (set.id === data[0].setlist_id) {
                 return {
                   id: set.id,
                   genre: set.genre,
@@ -63,11 +63,23 @@ function App() {
       });
   };
 
-  function handleNewSetlists(newSetlist, onErrors) {
-    console.log("NewSelist", newSetlist)
+  function handleNewSetlists(newSetlist, newSet, onErrors) {
+    console.log("NewSelist", newSetlist, newSet);
 
-    // Add additional forms to the bottom of the newSetlistPage
-    // Where I can add tracks and reposition them.
+    fetch('/setlists', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify([newSetlist, newSet])  
+    })
+      .then((r) => {
+        if (r.ok) {
+          r.json().then((data) => console.log(data));
+        } else {
+          r.json().then((error) => onErrors(error.errors));
+        }
+      })
   };
 
   const AuthLayout = ({ authenticated }) => {

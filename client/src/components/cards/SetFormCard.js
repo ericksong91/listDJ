@@ -3,14 +3,14 @@ import {
     Button, TextField, Card, CardHeader, Grid
 } from '@mui/material';
 
-function SetFormCard() {
+function SetFormCard({ onSetDetails }) {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [genre, setGenre] = useState("");
 
     return (
         <Grid item xs={6}>
-            <Card sx={{ maxheight: 800, padding: 1, margin: 1, paddingBottom: 3}} >
+            <Card sx={{ maxheight: 800, padding: 1, margin: 1, paddingBottom: 3 }} >
                 <CardHeader
                     title={"Details"}
                     subheader={name}
@@ -54,6 +54,15 @@ function SetFormCard() {
                     value={genre}
                     onChange={(e) => setGenre(e.target.value)}
                 />
+                <Button
+                    fullWidth
+                    type="submit"
+                    variant="contained"
+                    onClick={(e) => onSetDetails(e, name, description, genre)}
+                    sx={{ mt: 3, mb: 2 }}
+                >
+                    {"Update"}
+                </Button>
             </Card>
         </Grid>
     );
