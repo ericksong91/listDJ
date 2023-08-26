@@ -9,5 +9,5 @@ class User < ApplicationRecord
     has_secure_password
     has_one_attached :avatar
 
-    has_many :setlists
+    has_many :setlists, dependent: :destroy
 end

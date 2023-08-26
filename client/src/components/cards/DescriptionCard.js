@@ -5,9 +5,6 @@ import {
 } from '@mui/material';
 
 function DescriptionCard({ user, set }) {
-
-    console.log(set)
-
     return (
         <div className="description">
             <Card>

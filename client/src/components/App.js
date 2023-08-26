@@ -71,13 +71,27 @@ function App() {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({set: newSet, tracks: newSetlist})  
+      body: JSON.stringify({ set: newSet, tracks: newSetlist })
     })
       .then((r) => {
         if (r.ok) {
           r.json().then((data) => console.log(data));
         } else {
           r.json().then((error) => onErrors(error.errors));
+        }
+      })
+  };
+
+  function handleDeleteSetlists(id, onError, onIsLoading) {
+    fetch(`/setlists/${id}`, {
+      method: 'DELETE'
+    })
+      .then((r) => {
+        onIsLoading(false);
+        if (r.ok) {
+          // Update state for setlists
+        } else {
+          r.json().then((error) => onError(error.errors))
         }
       })
   };
@@ -93,7 +107,9 @@ function App() {
       <Routes>
         <Route element={<AuthLayout authenticated={!!user} />}>
           <Route path='/' element={<Homepage setlists={setlists} users={users} />} />
-          <Route path='/sets/:id' element={<SetlistPage user={user} setlists={setlists} onEditSetlists={handleEditSetlists} />} />
+          <Route path='/sets/:id' element={
+            <SetlistPage user={user} setlists={setlists} onEditSetlists={handleEditSetlists} onDeleteSetlists={handleDeleteSetlists} />}
+          />
           <Route path='/profile/:id' element={<Profile setlists={setlists} />} />
           <Route path='/new' element={<NewSetForm user={user} onNewSetlist={handleNewSetlists} />} />
         </Route>

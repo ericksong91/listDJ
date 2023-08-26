@@ -9,6 +9,10 @@ class ApplicationController < ActionController::API
     def current_user
       User.find_by(id: session[:user_id])
     end
+
+    def check_session
+      session[:user_id]
+    end
   
     def login_user
       session[:user_id] = @user.id
@@ -22,4 +26,7 @@ class ApplicationController < ActionController::API
       render json: { errors: exception.record.errors.full_messages }, status: :unprocessable_entity
     end
 
+    def render_not_authorized_response
+      render json:  { "errors": "Not authorized" }, status: :unauthorized
+    end
 end

@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import TrackCard from "./TrackCard";
+import { Navigate } from "react-router-dom";
 import { Container, Paper, Button, Box } from "@mui/material";
 
-function TrackListCard({ tracks, setlistTracks, onError, onEditSetlists }) {
+function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onEditSetlists, onDeleteSetlists }) {
     const [filteredTrackList, setFilteredTrackList] = useState([]);
     const [filteredSetlistTrackList, setFilteredSetlistTrackList] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     const [editing, setEditing] = useState(false);
 
     useEffect(() => {
@@ -62,24 +64,51 @@ function TrackListCard({ tracks, setlistTracks, onError, onEditSetlists }) {
                 }}>
                     {tracksList}
                 </Paper>
-                {editing ?
-                    <Box>
-                        <Button sx={{width: '50%'}} variant="contained" onClick={() => {
-                            setEditing(!editing);
-                            const arr = [];
-                            setlistTracks.forEach((slTrack) => {
-                                arr.push(tracks.find((track) => track.id === slTrack.track_id));
-                            });
-                            setFilteredTrackList([...arr]);
-                        }}>
-                            Cancel
-                        </Button>
-                        <Button sx={{width: '50%'}} variant="contained" onClick={() => onEditSetlists(filteredSetlistTrackList, setEditing, onError)}>Save Changes</Button>
-                    </Box>
+                {parseInt(user.id) === parseInt(owner)
+                    ?
+                    editing ?
+                        <Box>
+                            <Button sx={{ width: 1 / 3 }} variant="contained" onClick={() => {
+                                setEditing(!editing);
+                                const arr = [];
+                                setlistTracks.forEach((slTrack) => {
+                                    arr.push(tracks.find((track) => track.id === slTrack.track_id));
+                                });
+                                setFilteredTrackList([...arr]);
+                            }}>
+                                Cancel
+                            </Button>
+                            <Button sx={{ width: 1 / 3 }} variant="contained"
+                                onClick={() => onEditSetlists(filteredSetlistTrackList, setEditing, onError)}>
+                                Save Changes
+                            </Button>
+                            {isLoading ?
+                                <Button
+                                    variant="contained"
+                                    sx={{ width: 1 / 3 }}
+                                >Loading...</Button>
+                                :
+                                <Button sx={{ width: 1 / 3 }} variant="contained"
+                                    onClick={() => {
+
+                                        setIsLoading(true);
+                                        if (window.confirm("Are you sure you want to delete your set?")) {
+                                            onDeleteSetlists(index, onError, setIsLoading);
+                                            <Navigate replace to="/" />;
+                                        } else {
+                                            setIsLoading(false);
+                                        };
+                                    }}>
+                                    Delete
+                                </Button>
+                            }
+                        </Box>
+                        :
+                        <Box>
+                            <Button fullWidth variant="contained" onClick={() => setEditing(!editing)}>Edit</Button>
+                        </Box>
                     :
-                    <Box>
-                        <Button fullWidth variant="contained" onClick={() => setEditing(!editing)}>Edit</Button>
-                    </Box>
+                    <Box></Box>
                 }
             </Container>
         </div>

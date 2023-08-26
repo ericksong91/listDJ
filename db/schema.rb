@@ -55,7 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_24_200643) do
     t.integer "length"
     t.string "genre"
     t.integer "avg_bpm"
-    t.string "user_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "description"

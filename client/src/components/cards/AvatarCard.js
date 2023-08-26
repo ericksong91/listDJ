@@ -13,7 +13,7 @@ function AvatarCard({ user, onSubmit }) {
     };
 
     return (
-        <Card fullWidth className='AvatarCard'>
+        <Card className='AvatarCard'>
             <Grid container>
 
 

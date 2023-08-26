@@ -3,9 +3,8 @@ import { useParams } from "react-router-dom";
 import TrackListCard from "../cards/TrackListCard";
 import DescriptionCard from "../cards/DescriptionCard";
 import { Grid, Typography } from "@mui/material";
-import BiographyCard from "../cards/BiographyCard";
 
-function SetlistPage({ user, setlists, onEditSetlists }) {
+function SetlistPage({ user, setlists, onEditSetlists, onDeleteSetlists }) {
     const index = parseInt(useParams().id);
     const [error, setError] = useState([]);
     const setFiltered = setlists.find((set) => set.id === index);
@@ -26,10 +25,14 @@ function SetlistPage({ user, setlists, onEditSetlists }) {
                 </Grid>
                 <Grid item xs={8}>
                     <TrackListCard
+                        user={user}
+                        owner={setFiltered.user_id}
+                        index={index}
                         tracks={setFiltered.tracks}
                         setlistTracks={setFiltered.setlist_track_org}
                         onError={setError}
                         onEditSetlists={onEditSetlists}
+                        onDeleteSetlists={onDeleteSetlists}
                     />
                 </Grid>
             </Grid>
