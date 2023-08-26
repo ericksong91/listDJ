@@ -10,6 +10,18 @@ class SetlistsController < ApplicationController
     end
 
     def create
-        byebug 
+        setlist = Setlist.create!(setlist_params[:set])
+        tracks = setlist.tracks.create!(tracks_params[:tracks])
+        render json: setlist, status: :created
+    end
+
+    private
+
+    def setlist_params
+        params.permit(:set => [:name, :user_id, :description, :length, :genre, :avg_bpm])
+    end
+
+    def tracks_params
+        params.permit(:tracks => [:name, :genre, :length, :bpm, :key, :artist])
     end
 end

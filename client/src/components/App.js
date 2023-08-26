@@ -64,14 +64,14 @@ function App() {
   };
 
   function handleNewSetlists(newSetlist, newSet, onErrors) {
-    console.log("NewSelist", newSetlist, newSet);
+    console.log("NewSetlist", newSetlist, newSet);
 
     fetch('/setlists', {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify([newSetlist, newSet])  
+      body: JSON.stringify({set: newSet, tracks: newSetlist})  
     })
       .then((r) => {
         if (r.ok) {
