@@ -7,17 +7,29 @@ function UserProvider({ children }) {
     const [users, setUsers] = useState([]);
     const genresList = [
         "Deep House",
-        "EDM",
         "Dubstep",
-        "UK Hardcore",
+        "Happy Hardcore",
         "Hardstyle",
         "UK Garage",
         "Soulful House",
         "Tech House",
         "Acid House",
         "Hard Trance",
-        "Acid Techno"
+        "Acid Techno",
+        "Speed Garage",
+        "Breakbeat Hardcore",
+        "Drum and Bass",
+        "Liquid DnB",
+        "Jersey Club",
+        "Baltimore Club",
+        "Electro",
+        "Big Room",
+        "Trap",
+        "Disco",
+        "Hard Dance",
+        "Jungle"
     ];
+    
     const camelotKeys = [
         "1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B", "5A", "5B", "6A", "6B", "7A", "7B",
         "8A", "8B", "9A", "9B", "10A", "10B", "11A", "11B", "12A", "12B"

@@ -1,12 +1,8 @@
-import { useState } from 'react';
 import {
-    Button, TextField, Card, CardHeader, Grid
+    TextField, Card, CardHeader, Grid
 } from '@mui/material';
 
-function SetFormCard({ onSetDetails }) {
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
-    const [genre, setGenre] = useState("");
+function SetFormCard({ onName, onGenre, onDescription, name, description, genre }) {
 
     return (
         <Grid item xs={6}>
@@ -26,7 +22,7 @@ function SetFormCard({ onSetDetails }) {
                     inputProps={{ maxLength: 30 }}
                     autoFocus
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e) => onName(e.target.value)}
                 />
                 <TextField
                     margin="normal"
@@ -40,7 +36,7 @@ function SetFormCard({ onSetDetails }) {
                     inputProps={{ maxLength: 150 }}
                     label={`Description (${150 - description.length} chars left)`}
                     value={description}
-                    onChange={(e) => setDescription(e.target.value)}
+                    onChange={(e) => onDescription(e.target.value)}
                 />
                 <TextField
                     margin="normal"
@@ -52,17 +48,8 @@ function SetFormCard({ onSetDetails }) {
                     inputProps={{ maxLength: 50 }}
                     label={`Genre (${50 - genre.length} chars left)`}
                     value={genre}
-                    onChange={(e) => setGenre(e.target.value)}
+                    onChange={(e) => onGenre(e.target.value)}
                 />
-                <Button
-                    fullWidth
-                    type="submit"
-                    variant="contained"
-                    onClick={(e) => onSetDetails(e, name, description, genre)}
-                    sx={{ mt: 3, mb: 2 }}
-                >
-                    {"Update"}
-                </Button>
             </Card>
         </Grid>
     );

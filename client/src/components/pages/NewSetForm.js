@@ -8,12 +8,13 @@ import {
 } from '@mui/material';
 import { Typography } from '@mui/material';
 
-
 function NewSetForm({ user, onNewSetlist }) {
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState([]);
-    const [newSet, setNewSet] = useState({});
     const [newSetlist, setNewSetlist] = useState([]);
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
+    const [genre, setGenre] = useState("");
     const { genresList, camelotKeys } = useContext(UserContext);
 
     if (!user || !genresList || !camelotKeys) {
@@ -24,48 +25,28 @@ function NewSetForm({ user, onNewSetlist }) {
     const genresListSelect = genresList.map((gen, ind) => <MenuItem key={ind} value={gen}>{gen}</MenuItem>);
 
     function handleOrder(from, to) {
-        console.log("Changed Order")
         if (to < 0 || to > newSetlist.length) {
             return
         } else {
             const arr = [...newSetlist];
             arr.splice(to, 0, arr.splice(from, 1)[0]);
             setNewSetlist([...arr]);
-
-            // const arr2 = [];
-            // let h = 1;
-
-            // while (h <= arr.length) {
-            //     arr2.push({
-            //         id: filteredSetlistTrackList[h - 1].id,
-            //         setlist_id: setlistTracks[0].setlist_id,
-            //         track_id: arr[h - 1].id,
-            //         track_order: h
-            //     });
-            //     h++
-            // };
-            // setFilteredSetlistTrackList([...arr2]);
         };
     };
 
-    function handleSetDetails(e, name, description, genre) {
+    function handleSubmit(e) {
         e.preventDefault();
-        setNewSet({
+        setIsLoading(true);
+        
+        const newSet = {
             user_id: user.id,
             name: name,
             description: description,
             genre: genre,
             length: 0,
             avg_bpm: 0
-        });
+        };
 
-    
-    };
-
-    console.log(newSet)
-    function handleSubmit(e) {
-        e.preventDefault();
-        setIsLoading(true);
         onNewSetlist(newSetlist, newSet, setErrors);
     };
 
@@ -82,27 +63,30 @@ function NewSetForm({ user, onNewSetlist }) {
             onOrder={handleOrder}
         />);
 
-    // Add tracks sequentially through Add Track button
-    // When adding tracks, trigger function in NewSetForm to add it to Track array
-    // Have Track array make a Setlist_Tracks array as well to keep track of position
-    // Use these arrays to render out the DOM here, in the parent component
-    // After adding all necessary tracks, use Submit button to gather information
-    // Then send it to the App level where it will update the backend and force
-    // an app refresh. Possibly, may want to have state functions called from 
-    // NewSetForm for changing details OR just delete the card.
-
     return (
         <div className="NewSetForm">
             <Container className='NewPaintingForm' component="main">
                 <Typography variant="h1" sx={{ color: "orange" }}>Submit New Setlist</Typography>
                 <Box component="form" onSubmit={handleSubmit}>
                     <Grid container justifyContent={"center"}>
-                        <SetFormCard onSetDetails={handleSetDetails} />
-                        <NewTrackCard camelotKeys={camelotKeysSelect} genres={genresListSelect} onSetlist={handleSetlist} />
+                        <SetFormCard
+                            // onSetDetails={handleSetDetails}
+                            onName={setName}
+                            onGenre={setGenre}
+                            onDescription={setDescription}
+                            name={name}
+                            genre={genre}
+                            description={description}
+                        />
+                        <NewTrackCard
+                            camelotKeys={camelotKeysSelect}
+                            genres={genresListSelect}
+                            onSetlist={handleSetlist}
+                        />
                     </Grid>
                 </Box>
-                <Typography variant="h3" sx={{ color: "orange" }}>{newSet.name}</Typography>
-                <Typography variant="h5" sx={{ color: "grey" }}>{newSet.description}</Typography>
+                <Typography variant="h3" sx={{ color: "orange" }}>{name}</Typography>
+                <Typography variant="h5" sx={{ color: "grey" }}>{description}</Typography>
                 <Grid container sx={{ paddingTop: 5 }}>
                     <Grid item xs={12}>
                         {filteredSetlists}
