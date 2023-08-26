@@ -4,7 +4,8 @@ import Search from "./top/Search";
 import {
     Box,
     Grid,
-    Container
+    Container,
+    Paper
 } from "@mui/material";
 
 function Homepage({ setlists, users }) {
@@ -58,7 +59,7 @@ function Homepage({ setlists, users }) {
     };
 
     return (
-        <Box className="Home">
+        <Box className="Home" sx={{ padding: 3 }}>
             <Search onSearch={setSearch} onFilter={setFilter} filter={filter} search={search} />
             <Container>
                 <Grid container spacing={5}>

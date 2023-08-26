@@ -1,5 +1,5 @@
 import { TextField, Select, MenuItem } from "@mui/material";
-import { Box, Grid } from "@mui/material";
+import { Paper, Grid, Card } from "@mui/material";
 
 function Search({ search, filter, onFilter, onSearch }) {
     const list = [
@@ -11,28 +11,25 @@ function Search({ search, filter, onFilter, onSearch }) {
     const selectionList = list.map((li, ind) => <MenuItem key={ind} value={li}>{li}</MenuItem>);
 
     return (
-        <Box>
-            <Grid container sx={{marginTop: 5, marginBottom: 5}}>
-                {/* <Grid item>
-                    <SearchIcon sx={{ marginRight: '10px' }} />
-                </Grid> */}
-                <Grid item xs={10}>
+        <Card sx={{ bgcolor: 'rgb(60, 60, 60)', margin: 2 }}>
+            <Grid container sx={{ marginTop: 5, marginBottom: 5 }}>
+                <Grid item xs={8} sx={{marginRight: 1}}>
                     <TextField
-                        sx={{marginLeft: 5}}
+                        sx={{ marginLeft: 5, color: 'white', input: { color: 'white' }, label: {color: 'white'} }}
                         fullWidth
                         onChange={(e) => onSearch(e.target.value)}
                         value={search}
                         type='search'
+                        id="standard-search"
+                        label="Search field"
+                        variant="standard"
                     />
                 </Grid>
-                <Grid item>
-                    <Select sx={{marginLeft: 5}} value={filter} onChange={(e) => onFilter(e.target.value)}>{selectionList}</Select>
+                <Grid item xs={3}>
+                    <Select sx={{ marginLeft: 5, color: 'white' }} value={filter} onChange={(e) => onFilter(e.target.value)}>{selectionList}</Select>
                 </Grid>
-
             </Grid>
-        </Box>
-
-
+        </Card>
     );
 }
 

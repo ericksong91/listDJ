@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import TrackCard from "./TrackCard";
-import { Container, Paper, Button } from "@mui/material";
+import { Container, Paper, Button, Box } from "@mui/material";
 
 function TrackListCard({ tracks, setlistTracks, onError, onEditSetlists }) {
     const [filteredTrackList, setFilteredTrackList] = useState([]);
@@ -55,25 +55,6 @@ function TrackListCard({ tracks, setlistTracks, onError, onEditSetlists }) {
 
     return (
         <div className="SetlistTracks">
-            {editing ?
-                <div>
-                    <Button variant="contained" onClick={() => {
-                        setEditing(!editing);
-                        const arr = [];
-                        setlistTracks.forEach((slTrack) => {
-                            arr.push(tracks.find((track) => track.id === slTrack.track_id));
-                        });
-                        setFilteredTrackList([...arr]);
-                    }}>
-                        Cancel
-                    </Button>
-                    <Button variant="contained" onClick={() => onEditSetlists(filteredSetlistTrackList, setEditing, onError)}>Save Changes</Button>
-                </div>
-                :
-                <div>
-                    <Button variant="contained" onClick={() => setEditing(!editing)}>Edit</Button>
-                </div>
-            }
             <Container sx={{ padding: 5 }}>
                 <Paper sx={{
                     alignContent: "center",
@@ -81,6 +62,25 @@ function TrackListCard({ tracks, setlistTracks, onError, onEditSetlists }) {
                 }}>
                     {tracksList}
                 </Paper>
+                {editing ?
+                    <Box>
+                        <Button sx={{width: '50%'}} variant="contained" onClick={() => {
+                            setEditing(!editing);
+                            const arr = [];
+                            setlistTracks.forEach((slTrack) => {
+                                arr.push(tracks.find((track) => track.id === slTrack.track_id));
+                            });
+                            setFilteredTrackList([...arr]);
+                        }}>
+                            Cancel
+                        </Button>
+                        <Button sx={{width: '50%'}} variant="contained" onClick={() => onEditSetlists(filteredSetlistTrackList, setEditing, onError)}>Save Changes</Button>
+                    </Box>
+                    :
+                    <Box>
+                        <Button fullWidth variant="contained" onClick={() => setEditing(!editing)}>Edit</Button>
+                    </Box>
+                }
             </Container>
         </div>
     );

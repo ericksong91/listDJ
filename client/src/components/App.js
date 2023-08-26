@@ -94,7 +94,7 @@ function App() {
         <Route element={<AuthLayout authenticated={!!user} />}>
           <Route path='/' element={<Homepage setlists={setlists} users={users} />} />
           <Route path='/sets/:id' element={<SetlistPage user={user} setlists={setlists} onEditSetlists={handleEditSetlists} />} />
-          <Route path='/profile/:id' element={<Profile users={users} setlists={setlists} />} />
+          <Route path='/profile/:id' element={<Profile setlists={setlists} />} />
           <Route path='/new' element={<NewSetForm user={user} onNewSetlist={handleNewSetlists} />} />
         </Route>
         <Route path='/login' element={<Login />} />
