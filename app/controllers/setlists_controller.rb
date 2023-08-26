@@ -20,7 +20,7 @@ class SetlistsController < ApplicationController
             i+=1
         end
 
-        setlist.update!(avg_bpm: setlist.tracks.average(:bpm), length: setlist.tracks.sum(:length)/60)
+        setlist.update!(avg_bpm: setlist.tracks.average(:bpm), length: setlist.tracks.sum(&:length)/60)
         render json: setlist, serializer: SetlistWithTracksSerializer, status: :created
     end
 
