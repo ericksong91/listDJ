@@ -13,16 +13,27 @@ require 'faker'
 
 genres = [
     "Deep House",
-    "EDM",
     "Dubstep",
-    "UK Hardcore",
+    "Happy Hardcore",
     "Hardstyle",
     "UK Garage",
     "Soulful House",
     "Tech House",
     "Acid House",
     "Hard Trance",
-    "Acid Techno"
+    "Acid Techno",
+    "Speed Garage",
+    "Breakbeat Hardcore",
+    "Drum and Bass",
+    "Liquid DnB",
+    "Jersey Club",
+    "Baltimore Club",
+    "Electro",
+    "Big Room",
+    "Trap",
+    "Disco",
+    "Hard Dance",
+    "Jungle"
 ]
 
 camelot_keys = [

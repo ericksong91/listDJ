@@ -11,7 +11,7 @@ class SetlistsController < ApplicationController
 
     def create
         setlist = Setlist.create!(setlist_params[:set])
-        tracks = setlist.tracks.create!(tracks_params[:tracks])
+        tracks = setlist.tracks.create!(setlist_params[:tracks])
 
         i = 1
 
@@ -27,10 +27,10 @@ class SetlistsController < ApplicationController
     private
 
     def setlist_params
-        params.permit(:set => [:name, :user_id, :description, :length, :genre, :avg_bpm])
+        params.permit(:set => [:name, :user_id, :description, :length, :genre, :avg_bpm], :tracks => [:name, :genre, :length, :bpm, :key, :artist])
     end
 
-    def tracks_params
-        params.permit(:tracks => [:name, :genre, :length, :bpm, :key, :artist])
-    end
+    # def tracks_params
+    #     params.permit(:tracks => [:name, :genre, :length, :bpm, :key, :artist])
+    # end
 end

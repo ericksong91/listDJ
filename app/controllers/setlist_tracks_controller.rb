@@ -5,7 +5,6 @@ class SetlistTracksController < ApplicationController
         render json: updated, status: :accepted
     end
 
-
     private
 
     def tracklist_params
