@@ -28,6 +28,13 @@ function NewTrackCard({ camelotKeys, genres, onSetlist }) {
 
         onSetlist(newTrack, order);
         setOrder(order + 1);
+
+        setTrack("");
+        setTrackBPM("");
+        setTrackArtist("");
+        setTrackGenre("");
+        setTrackKey("");
+        setTrackLength({ min: 0, sec: 0 }); 
     };
 
     return (
