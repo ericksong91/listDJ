@@ -12,7 +12,16 @@ class SetlistsController < ApplicationController
     def create
         setlist = Setlist.create!(setlist_params[:set])
         tracks = setlist.tracks.create!(tracks_params[:tracks])
-        render json: setlist, status: :created
+
+        i = 1
+
+        setlist.setlist_tracks.each do |t|
+            t.update!(track_order: i)
+            i+=1
+        end
+
+        setlist.update!(avg_bpm: setlist.tracks.average(:bpm), length: setlist.tracks.sum(:length)/60)
+        render json: setlist, serializer: SetlistWithTracksSerializer, status: :created
     end
 
     private

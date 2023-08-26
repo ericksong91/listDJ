@@ -14,8 +14,6 @@ function NewSetForm({ user, onNewSetlist }) {
     const [errors, setErrors] = useState([]);
     const [newSet, setNewSet] = useState({});
     const [newSetlist, setNewSetlist] = useState([]);
-    const [totalLength, setTotalLength] = useState(0);
-    const [avgBPM, setAvgBPM] = useState(0);
     const { genresList, camelotKeys } = useContext(UserContext);
 
     if (!user || !genresList || !camelotKeys) {
@@ -57,7 +55,7 @@ function NewSetForm({ user, onNewSetlist }) {
             name: name,
             description: description,
             genre: genre,
-            length: Math.ceil(totalLength / 60),
+            length: 0,
             avg_bpm: 0
         });
 
@@ -72,7 +70,6 @@ function NewSetForm({ user, onNewSetlist }) {
     };
 
     function handleSetlist(track) {
-        setTotalLength(totalLength + parseInt(track.length));
         setNewSetlist([...newSetlist, track]);
     };
 
