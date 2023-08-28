@@ -1,8 +1,6 @@
-import { useState, useEffect, useContext } from "react";
-import { UserContext } from "../context/user";
+import { useState, useEffect } from "react";
 import TrackCard from "./TrackCard";
-import NewTrackCard from "./NewTrackCard";
-import { Navigate } from "react-router-dom";
+// import NewTrackCard from "./NewTrackCard";
 import { Container, Button, Box } from "@mui/material";
 
 function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onEditSetlists, onDeleteSetlists }) {
@@ -10,7 +8,7 @@ function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onE
     const [filteredSetlistTrackList, setFilteredSetlistTrackList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [editing, setEditing] = useState(false);
-    const { camelotKeys, genresList } = useContext(UserContext);
+    // const { camelotKeys, genresList } = useContext(UserContext);
 
     useEffect(() => {
         if (!tracks || !setlistTracks) {
@@ -48,9 +46,6 @@ function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onE
             setFilteredSetlistTrackList([...arr2]);
         };
     };
-
-    console.log(filteredTrackList);
-    console.log(filteredSetlistTrackList);
 
     // function handleSetlist(track, order) {
     //     setFilteredTrackList([...filteredTrackList, track]);
@@ -115,7 +110,6 @@ function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onE
                                         setIsLoading(true);
                                         if (window.confirm("Are you sure you want to delete your set?")) {
                                             onDeleteSetlists(index, onError, setIsLoading);
-                                            <Navigate replace to="/" />;
                                         } else {
                                             setIsLoading(false);
                                         };

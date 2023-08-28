@@ -8,7 +8,6 @@ function SetlistPage({ user, users, setlists, onEditSetlists, onDeleteSetlists }
     const index = parseInt(useParams().id);
     const [error, setError] = useState([]);
     const setFiltered = setlists.find((set) => set.id === index);
-    const [setlist, setSetlists] = useState([]);
     
 
     if (!setlists || !setFiltered) {

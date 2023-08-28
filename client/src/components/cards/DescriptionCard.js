@@ -1,12 +1,10 @@
 import {
-    Grid,
-    Card,
-    Typography,
+    Card
 } from '@mui/material';
 
 function DescriptionCard({ users, set }) {
 
-    if(!users) {
+    if (!users) {
         return <div></div>
     };
 

@@ -83,13 +83,23 @@ function App() {
   };
 
   function handleDeleteSetlists(id, onError, onIsLoading) {
+
+    console.log("Deleting")
+
     fetch(`/setlists/${id}`, {
       method: 'DELETE'
     })
       .then((r) => {
         onIsLoading(false);
         if (r.ok) {
-          // Update state for setlists
+          const filteredSetlists = setlists.map((set) => {
+            if (set.id !== id) {
+              return set
+            } else {
+              return {}
+            }
+          });
+          setSetlists([...filteredSetlists]);
         } else {
           r.json().then((error) => onError(error.errors))
         }

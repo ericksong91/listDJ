@@ -4,7 +4,7 @@ import NewTrackCard from '../cards/NewTrackCard';
 import TrackCard from '../cards/TrackCard';
 import { UserContext } from '../context/user';
 import {
-    Button, Container, Box, Grid, MenuItem
+    Button, Container, Box, Grid
 } from '@mui/material';
 import { Typography } from '@mui/material';
 
@@ -34,7 +34,7 @@ function NewSetForm({ user, onNewSetlist }) {
     function handleSubmit(e) {
         e.preventDefault();
         setIsLoading(true);
-        
+
         const newSet = {
             user_id: user.id,
             name: name,
