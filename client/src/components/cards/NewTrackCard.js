@@ -3,7 +3,7 @@ import {
     Button, TextField, Card, CardHeader, Grid, Box
 } from '@mui/material';
 import {
-    FormControl, InputLabel, Select
+    FormControl, InputLabel, Select, MenuItem
 } from '@mui/material';
 
 function NewTrackCard({ camelotKeys, genres, onSetlist }) {
@@ -14,6 +14,13 @@ function NewTrackCard({ camelotKeys, genres, onSetlist }) {
     const [trackGenre, setTrackGenre] = useState("");
     const [trackLength, setTrackLength] = useState({ min: 0, sec: 0 });
     const [order, setOrder] = useState(1);
+
+    if (!camelotKeys || !genres) {
+        return <div></div>
+    };
+
+    const camelotKeysSelect = camelotKeys.map((key, ind) => <MenuItem key={ind} value={key}>{key}</MenuItem>);
+    const genresListSelect = genres.map((gen, ind) => <MenuItem key={ind} value={gen}>{gen}</MenuItem>);
 
     function handleClick() {
         const length = parseInt(trackLength.min * 60) + parseInt(trackLength.sec);
@@ -135,7 +142,7 @@ function NewTrackCard({ camelotKeys, genres, onSetlist }) {
                         id="trackgenre"
                         onChange={(e) => setTrackGenre(e.target.value)}
                     >
-                        {genres}
+                        {genresListSelect}
                     </Select>
                 </FormControl>
                 <FormControl fullWidth required margin="normal">
@@ -146,7 +153,7 @@ function NewTrackCard({ camelotKeys, genres, onSetlist }) {
                         id="key"
                         onChange={(e) => setTrackKey(e.target.value)}
                     >
-                        {camelotKeys}
+                        {camelotKeysSelect}
                     </Select>
                 </FormControl>
             </Card>

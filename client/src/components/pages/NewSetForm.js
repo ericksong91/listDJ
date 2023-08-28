@@ -21,9 +21,6 @@ function NewSetForm({ user, onNewSetlist }) {
         return <div>Loading...</div>
     };
 
-    const camelotKeysSelect = camelotKeys.map((key, ind) => <MenuItem key={ind} value={key}>{key}</MenuItem>);
-    const genresListSelect = genresList.map((gen, ind) => <MenuItem key={ind} value={gen}>{gen}</MenuItem>);
-
     function handleOrder(from, to) {
         if (to < 0 || to > newSetlist.length) {
             return
@@ -79,8 +76,8 @@ function NewSetForm({ user, onNewSetlist }) {
                             description={description}
                         />
                         <NewTrackCard
-                            camelotKeys={camelotKeysSelect}
-                            genres={genresListSelect}
+                            camelotKeys={camelotKeys}
+                            genres={genresList}
                             onSetlist={handleSetlist}
                         />
                     </Grid>

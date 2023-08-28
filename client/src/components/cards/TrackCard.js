@@ -6,21 +6,21 @@ function TrackCard({ track, order, editing, onOrder }) {
     return (
         <Card sx={{ padding: 0.5, margin: 0.5, height: 80, display: 'flex', bgcolor: 'rgb(50, 50, 50)', color: 'white' }}>
             <Grid container>
-                <Grid item xs={1}>
-                    <Typography variant="h7">
+                <Grid item xs={0.1}>
+                    <Typography variant="h8">
                         {order}
                     </Typography>
                 </Grid>
-                <Grid item xs={1}>
+                <Grid item xs={2}>
                     <CardHeader
                         title={`${track.name}`}
-                        subheader={`${track.artist}`}
-                        titleTypographyProps={{ variant: 'h7' }}
+                        titleTypographyProps={{ variant: 'h10' }}
                         sx={{ display: 'flex' }}
                     />
                 </Grid>
-                <Grid item xs={9}>
+                <Grid item xs={8.5}>
                     <CardContent sx={{ display: 'flex', alignContent: 'center' }}>
+                        <ul>{`by ${track.artist}`}</ul>
                         <ul>{`${Math.floor(track.length/60)}m  ${Math.floor(track.length % 60)}s`}</ul>
                         <ul>{`${track.genre}`}</ul>
                         <ul>{`BPM: ${track.bpm}`}</ul>

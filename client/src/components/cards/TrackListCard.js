@@ -1,13 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { UserContext } from "../context/user";
 import TrackCard from "./TrackCard";
+import NewTrackCard from "./NewTrackCard";
 import { Navigate } from "react-router-dom";
-import { Container, Paper, Button, Box } from "@mui/material";
+import { Container, Button, Box } from "@mui/material";
 
 function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onEditSetlists, onDeleteSetlists }) {
     const [filteredTrackList, setFilteredTrackList] = useState([]);
     const [filteredSetlistTrackList, setFilteredSetlistTrackList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [editing, setEditing] = useState(false);
+    const { camelotKeys, genresList } = useContext(UserContext);
 
     useEffect(() => {
         if (!tracks || !setlistTracks) {
@@ -46,6 +49,29 @@ function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onE
         };
     };
 
+    console.log(filteredTrackList);
+    console.log(filteredSetlistTrackList);
+
+    // function handleSetlist(track, order) {
+    //     setFilteredTrackList([...filteredTrackList, track]);
+    //     const arr = [...filteredTrackList, track]
+
+    //     const arr2 = [];
+    //     let h = 1;
+
+    //     while (h <= arr.length) {
+    //         console.log(!!filteredSetlistTrackList[h - 1].id)
+    //         arr2.push({
+    //             id: !!filteredSetlistTrackList[h - 1].id ? filteredSetlistTrackList[h - 1].id : null,
+    //             setlist_id: setlistTracks[0].setlist_id,
+    //             track_id: !!arr[h - 1].id ? arr[h - 1].id : null,
+    //             track_order: h
+    //         });
+    //         h++
+    //     };
+    //     setFilteredSetlistTrackList([...arr2]);
+    // };
+
     const tracksList = filteredTrackList.map((track, ind) =>
         <TrackCard
             key={ind}
@@ -57,14 +83,9 @@ function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onE
 
     return (
         <div className="SetlistTracks">
-            <Container sx={{ padding: 5 }}>
-                <Paper sx={{
-                    alignContent: "center",
-                    bgcolor: 'rgb(80, 75, 71)'
-                }}>
-                    {tracksList}
-                </Paper>
-                {parseInt(user.id) === parseInt(owner)
+            <Container>
+                {tracksList}
+                {user.id === owner
                     ?
                     editing ?
                         <Box>
@@ -108,8 +129,22 @@ function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onE
                             <Button fullWidth variant="contained" onClick={() => setEditing(!editing)}>Edit</Button>
                         </Box>
                     :
-                    <Box></Box>
+                    <Box>
+
+                    </Box>
                 }
+                {/* <Box sx={{ width: '200%' }}>
+                    {
+                        editing ?
+                            <NewTrackCard
+                                camelotKeys={camelotKeys}
+                                genres={genresList}
+                                onSetlist={handleSetlist}
+                            />
+                            :
+                            <Box></Box>
+                    }
+                </Box> */}
             </Container>
         </div>
     );

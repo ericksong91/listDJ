@@ -53,7 +53,7 @@ camelot_keys = [
 pp "Now Seeding Users..."
 
 5.times do
-    User.create!(username: "#{Faker::Name.first_name}##{rand(1000...9999)}", password:"asdf", 
+    User.create!(username: "#{Faker::Name.first_name}##{rand(1000...9999)}".downcase, password:"asdf", 
         password_confirmation: "asdf", bio: "#{Faker::Lorem.paragraphs(number:1)[0]}")
 end
 

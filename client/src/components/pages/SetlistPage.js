@@ -4,10 +4,11 @@ import TrackListCard from "../cards/TrackListCard";
 import DescriptionCard from "../cards/DescriptionCard";
 import { Grid, Typography } from "@mui/material";
 
-function SetlistPage({ user, setlists, onEditSetlists, onDeleteSetlists }) {
+function SetlistPage({ user, users, setlists, onEditSetlists, onDeleteSetlists }) {
     const index = parseInt(useParams().id);
     const [error, setError] = useState([]);
     const setFiltered = setlists.find((set) => set.id === index);
+    const [setlist, setSetlists] = useState([]);
     
 
     if (!setlists || !setFiltered) {
@@ -21,7 +22,7 @@ function SetlistPage({ user, setlists, onEditSetlists, onDeleteSetlists }) {
             </Typography>
             <Grid container>
                 <Grid item xs={4}>
-                    <DescriptionCard user={user} set={setFiltered} />
+                    <DescriptionCard users={users} set={setFiltered} />
                 </Grid>
                 <Grid item xs={8}>
                     <TrackListCard

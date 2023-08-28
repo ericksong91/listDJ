@@ -108,7 +108,12 @@ function App() {
         <Route element={<AuthLayout authenticated={!!user} />}>
           <Route path='/' element={<Homepage setlists={setlists} users={users} />} />
           <Route path='/sets/:id' element={
-            <SetlistPage user={user} setlists={setlists} onEditSetlists={handleEditSetlists} onDeleteSetlists={handleDeleteSetlists} />}
+            <SetlistPage
+              user={user}
+              users={users}
+              setlists={setlists}
+              onEditSetlists={handleEditSetlists}
+              onDeleteSetlists={handleDeleteSetlists} />}
           />
           <Route path='/profile/:id' element={<Profile setlists={setlists} />} />
           <Route path='/new' element={<NewSetForm user={user} onNewSetlist={handleNewSetlists} />} />
