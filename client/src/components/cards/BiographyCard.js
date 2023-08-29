@@ -7,8 +7,9 @@ function BiographyCard({ user }) {
 
     return (
         <div className='bio'>
-            <h1>biography card</h1>
-            
+            <Card>
+                {user.bio}
+            </Card>
         </div>
     );
 }

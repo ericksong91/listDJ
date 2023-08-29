@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { UserContext } from '../context/user';
 import SetlistCard from "../cards/SetlistCard";
 import AvatarCard from "../cards/AvatarCard";
@@ -7,13 +7,15 @@ import { useParams } from "react-router-dom";
 import { Typography } from "@mui/material";
 import { Box, Grid } from "@mui/material";
 
-function Profile({ setlists }) {
+function Profile({ user, users, setlists }) {
     const index = parseInt(useParams().id);
-    const { user, setUser } = useContext(UserContext);
+    const { setUser } = useContext(UserContext);
 
-    if (!user) {
+    if (!user || !users) {
         return <div>Loading...</div>
     };
+
+    const profileUser = users.find((user) => user.id === index);
 
     function handleSubmit(e, avatar, setIsSelected, setUserAvatar) {
         e.preventDefault()
@@ -39,7 +41,7 @@ function Profile({ setlists }) {
 
     const filteredList = setlists.filter((set) => parseInt(set.user_id) === parseInt(index));
 
-    const filteredSets = filteredList.map((set) => <SetlistCard key={set.id} user={user} set={set} />);
+    const filteredSets = filteredList.map((set) => <SetlistCard key={set.id} user={profileUser} set={set} />);
 
     return (
         <Box className="Profile">
@@ -48,10 +50,10 @@ function Profile({ setlists }) {
             </Typography>
             <Grid container>
                 <Grid item xs={6}>
-                    <AvatarCard user={user} onSubmit={handleSubmit} />
+                    <AvatarCard profileUser={profileUser} user={user} onSubmit={handleSubmit} />
                 </Grid>
                 <Grid item xs={6}>
-                    <BiographyCard user={user} index={index} />
+                    <BiographyCard user={profileUser} index={index} />
                 </Grid>
             </Grid>
             {filteredSets}

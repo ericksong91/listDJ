@@ -37,6 +37,7 @@ function UserProvider({ children }) {
 
 
     useEffect(() => {
+        console.log('fetch users')
         fetch('/users')
             .then(r => {
                 if (r.ok) {

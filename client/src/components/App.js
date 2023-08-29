@@ -83,9 +83,6 @@ function App() {
   };
 
   function handleDeleteSetlists(id, onError, onIsLoading) {
-
-    console.log("Deleting")
-
     fetch(`/setlists/${id}`, {
       method: 'DELETE'
     })
@@ -125,7 +122,7 @@ function App() {
               onEditSetlists={handleEditSetlists}
               onDeleteSetlists={handleDeleteSetlists} />}
           />
-          <Route path='/profile/:id' element={<Profile setlists={setlists} />} />
+          <Route path='/profile/:id' element={<Profile setlists={setlists} user={user} users={users} />} />
           <Route path='/new' element={<NewSetForm user={user} onNewSetlist={handleNewSetlists} />} />
         </Route>
         <Route path='/login' element={<Login />} />

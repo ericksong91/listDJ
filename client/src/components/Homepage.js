@@ -12,7 +12,7 @@ function Homepage({ setlists, users }) {
     const [search, setSearch] = useState("");
     const [filter, setFilter] = useState("Set Name");
     const filteredSetUsers = [];
-
+    
     if (!setlists || !users) {
         return <div>Loading...</div>
     };
