@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { UserContext } from '../context/user';
 import { Navigate, Link } from "react-router-dom";
-import { Button, Container, Box, TextField } from '@mui/material';
+import { Button, Container, Box, TextField, Card, Typography } from '@mui/material';
 
 function Signup() {
     const [username, setUsername] = useState("");
@@ -25,89 +25,92 @@ function Signup() {
 
     return (
         <Container className='SignupPage' component="main" maxWidth="xs">
-            <Box
-                sx={{
-                    marginTop: 8,
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                }}
-            >
-                <h1>Sign Up</h1>
-                <Box component="form" onSubmit={handleSubmit}>
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="user"
-                        label="Username"
-                        name="user"
-                        autoComplete="user"
-                        autoFocus
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="password"
-                        name="password"
-                        label="Password (9 - 17 characters)"
-                        inputProps={{ maxLength: 17, minLength: 9 }}
-                        type="password"
-                        value={password}
-                        onChange={(e) => { setPassword(e.target.value) }}
-                    />
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="password_confirmation"
-                        name="password_confirmation"
-                        label="Password Confirmation"
-                        inputProps={{ maxLength: 17, minLength: 9 }}
-                        type="password"
-                        value={passwordConfirmation}
-                        onChange={(e) => { setPasswordConfirmation(e.target.value) }}
-                    />
-                    <TextField
-                        margin="normal"
-                        required
-                        multiline
-                        fullWidth
-                        id="biography"
-                        name="biography"
-                        label={`Biography (${300 - bio.length} chars left)`}
-                        inputProps={{ maxLength: 300 }}
-                        value={bio}
-                        onChange={(e) => { setBio(e.target.value) }}
-                    />
-                    {isLoading ?
-                        <Button
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                        >Loading...</Button>
-                        :
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                        >Signup</Button>}
-                    {errors}
-                </Box>
-            </Box>
-            <Link to="/login">
-                <Button
-                    type="submit"
-                    variant="contained"
-                    sx={{ mt: 3, mb: 2 }}
+            <Card sx={{ padding: 3, marginBottom: 3, bgcolor: 'rgb(50,50,50)', boxShadow: 10 }}>
+                <Box
+                    sx={{
+                        marginTop: 1,
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                    }}
                 >
-                    Already have an account? Login!
-                </Button>
-            </Link>
+                    <Typography variant="h4" sx={{ color: 'white' }}>Sign Up</Typography>
+                    <Box component="form" onSubmit={handleSubmit} sx={{ input: { color: 'white' }, label: { color: 'white' } }}>
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="user"
+                            label="Username"
+                            name="user"
+                            autoComplete="user"
+                            autoFocus
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="password"
+                            name="password"
+                            label="Password (9 - 17 characters)"
+                            inputProps={{ maxLength: 17, minLength: 9 }}
+                            type="password"
+                            value={password}
+                            onChange={(e) => { setPassword(e.target.value) }}
+                        />
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="password_confirmation"
+                            name="password_confirmation"
+                            label="Password Confirmation"
+                            inputProps={{ maxLength: 17, minLength: 9 }}
+                            type="password"
+                            value={passwordConfirmation}
+                            onChange={(e) => { setPasswordConfirmation(e.target.value) }}
+                        />
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            sx={{ multilineInput: { color: "white" } }}
+                            id="biography"
+                            name="biography"
+                            label={`Biography (${300 - bio.length} chars left)`}
+                            inputProps={{ maxLength: 300 }}
+                            value={bio}
+                            onChange={(e) => setBio(e.target.value)}
+                        />
+                        {isLoading ?
+                            <Button
+                                fullWidth
+                                variant="contained"
+                                sx={{ mt: 3, mb: 2 }}
+                            >Loading...</Button>
+                            :
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                sx={{ mt: 3, mb: 2 }}
+                            >Signup</Button>}
+                        {errors}
+                    </Box>
+                </Box>
+                <Link to="/login">
+                    <Button
+                        fullWidth
+                        type="submit"
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                    >
+                        Already have an account? Login!
+                    </Button>
+                </Link>
+            </Card>
         </Container>
     )
 }

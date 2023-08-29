@@ -12,8 +12,6 @@ function AvatarCard({ profileUser, user, onSubmit }) {
         setIsSelected(true);
     };
 
-    console.log(profileUser)
-
     return (
         <Card className='AvatarCard'>
             <Grid container>

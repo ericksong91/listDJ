@@ -15,6 +15,8 @@ function App() {
   const [setlists, setSetlists] = useState([]);
   const { user, users } = useContext(UserContext);
 
+  console.log(users, user)
+
   useEffect(() => {
     fetch('/setlists')
       .then(r => {

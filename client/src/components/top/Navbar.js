@@ -11,58 +11,67 @@ function Navbar({ user }) {
   return (
     <div className="Navbar">
       <Container maxWidth="lg">
-        {!user ? <h2>Welcome, Guest!</h2> : <Box sx={{ display: 'flex' }}>
-          <img className="avatar-small" alt="avatar" src={user.avatar} />
-          <Typography variant="h5" sx={{ marginLeft: 5 }}>
-            Welcome, {user.username}!
-          </Typography>
-        </Box>}
+        {!user ?
+          <Typography variant="h5" sx={{ color: "orange" }}>Welcome, Guest!</Typography>
+          :
+          <Grid container sx={{ display: 'flex' }}>
+            <Grid item>
+              {!!user.avatar ? <img className="avatar-small" alt="avatar" src={user.avatar} /> : <div></div>}
+            </Grid>
+            <Grid item>
+              <Typography variant="h5" sx={{ marginLeft: 5, color: 'orange' }}>
+                Welcome, {user.username}!
+              </Typography>
+            </Grid>
+          </Grid>}
         <Box align="center">
-          <img src={logo} alt='logo' />
+          <img src={logo} alt='logo' className='logo' />
         </Box>
-        <Grid container spacing={2} justifyContent="center">
-          <Grid item>
-            <Button variant="contained" sx={{
-              '&:hover': {
-                bgcolor: 'rgb(194,98,0)'
-              },
-              bgcolor: 'rgb(245,150,0)'
-            }} onClick={() => navigate(-1)}>Back</Button>
-          </Grid>
-          <Grid item>
-            <Link to="/"><Button variant="contained" sx={{
-              '&:hover': {
-                bgcolor: 'rgb(194,98,0)'
-              },
-              bgcolor: 'rgb(245,150,0)'
-            }}>Home</Button></Link>
-          </Grid>
-          <Grid item>
-            {!user ? <Link to="/login"><Button variant="contained" sx={{
-              '&:hover': {
-                bgcolor: 'rgb(194,98,0)'
-              },
-              bgcolor: 'rgb(245,150,0)'
-            }}>Login</Button></Link>
-              :
+        {!user ? null :
+          <Grid container spacing={2} justifyContent="center">
+            <Grid item>
+              <Button variant="contained" sx={{
+                '&:hover': {
+                  bgcolor: 'rgb(194,98,0)'
+                },
+                bgcolor: 'rgb(245,150,0)'
+              }} onClick={() => navigate(-1)}>Back</Button>
+            </Grid>
+            <Grid item>
+              <Link to="/"><Button variant="contained" sx={{
+                '&:hover': {
+                  bgcolor: 'rgb(194,98,0)'
+                },
+                bgcolor: 'rgb(245,150,0)'
+              }}>Home</Button></Link>
+
+            </Grid>
+            <Grid item>
               <Link to={`/profile/${user.id}`}><Button variant="contained" sx={{
                 '&:hover': {
                   bgcolor: 'rgb(194,98,0)'
                 },
                 bgcolor: 'rgb(245,150,0)'
-              }}>View Profile</Button></Link>}
-          </Grid>
-          <Grid item>
-            {!user ? null
-              :
+              }}>View Profile</Button></Link>
+            </Grid>
+            <Grid item>
+              <Link to="/new"><Button variant="contained" sx={{
+                '&:hover': {
+                  bgcolor: 'rgb(194,98,0)'
+                },
+                bgcolor: 'rgb(245,150,0)'
+              }}>Create New Set</Button></Link>
+            </Grid>
+            <Grid item>
               <Link to="/"><Button variant="contained" sx={{
                 '&:hover': {
                   bgcolor: 'rgb(194,98,0)'
-                }, 
+                },
                 bgcolor: 'rgb(245,150,0)'
-              }} onClick={logout}>Logout</Button></Link>}
+              }} onClick={logout}>Logout</Button></Link>
+            </Grid>
           </Grid>
-        </Grid>
+        }
       </Container>
     </div>
   );
