@@ -130,7 +130,7 @@ function NewTrackCard({ camelotKeys, genres, onSetlist }) {
                     label={`Set BPM (Beats Per Minute)`}
                     value={trackBPM}
                     onChange={(e) => {
-                        if (e.target.value.toString().length <= 3) {
+                        if (e.target.value.toString().length <= 3 && e.target.value > 0) {
                             setTrackBPM(e.target.value);
                         };
                     }} />

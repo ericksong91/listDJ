@@ -7,15 +7,14 @@ import Login from "./top/Login";
 import Signup from "./top/Signup";
 import SetlistPage from "./pages/SetlistPage";
 import NewSetForm from "./pages/NewSetForm";
-import { Routes, Route, Navigate, Outlet, useLocation } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate, Outlet, useLocation } from "react-router-dom";
 import { Paper } from "@mui/material";
 import '../css/App.css'
 
 function App() {
   const [setlists, setSetlists] = useState([]);
   const { user, users } = useContext(UserContext);
-
-  console.log(users, user)
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch('/setlists')
@@ -65,9 +64,7 @@ function App() {
       });
   };
 
-  function handleNewSetlists(newSetlist, newSet, onErrors) {
-    console.log("NewSetlist", newSetlist, newSet);
-
+  function handleNewSetlists(newSetlist, newSet, onErrors, onIsLoading) {
     fetch('/setlists', {
       method: "POST",
       headers: {
@@ -76,8 +73,12 @@ function App() {
       body: JSON.stringify({ set: newSet, tracks: newSetlist })
     })
       .then((r) => {
+        onIsLoading(false);
         if (r.ok) {
-          r.json().then((data) => console.log(data));
+          r.json().then((data) => {
+            setSetlists([...setlists, data]);
+            navigate('/');
+          });
         } else {
           r.json().then((error) => onErrors(error.errors));
         }

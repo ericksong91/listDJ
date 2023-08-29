@@ -44,7 +44,7 @@ function NewSetForm({ user, onNewSetlist }) {
             avg_bpm: 0
         };
 
-        onNewSetlist(newSetlist, newSet, setErrors);
+        onNewSetlist(newSetlist, newSet, setErrors, setIsLoading);
     };
 
     function handleSetlist(track) {
@@ -67,7 +67,6 @@ function NewSetForm({ user, onNewSetlist }) {
                 <Box component="form" onSubmit={handleSubmit}>
                     <Grid container justifyContent={"center"}>
                         <SetFormCard
-                            // onSetDetails={handleSetDetails}
                             onName={setName}
                             onGenre={setGenre}
                             onDescription={setDescription}
