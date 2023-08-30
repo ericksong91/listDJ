@@ -49,6 +49,10 @@ function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onE
         };
     };
 
+    function handleDelete(track, pos) {
+        console.log(track, pos)
+    };
+
     // function handleSetlist(track, order) {
     //     setFilteredTrackList([...filteredTrackList, track]);
     //     const arr = [...filteredTrackList, track]
@@ -76,6 +80,7 @@ function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onE
             order={ind + 1}
             onOrder={handleOrder}
             editing={editing}
+            onDelete={handleDelete}
         />);
 
     return (

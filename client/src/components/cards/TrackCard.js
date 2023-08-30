@@ -33,7 +33,6 @@ function TrackCard({ track, order, editing, onOrder, onDelete }) {
                         </Grid>
                     </Card >
                 </Grid>
-
                 {editing ?
                     <Grid item xs={2}>
                         <Card sx={{ padding: 0.5, margin: 0.5, height: 80, display: 'flex', bgcolor: 'rgb(50, 50, 50)', color: 'white' }}>
@@ -70,7 +69,7 @@ function TrackCard({ track, order, editing, onOrder, onDelete }) {
                                 alignItems="center"
                             >
                                 <Grid item xs={1}>
-                                    <Button onClick={() => onDelete(track)}>X</Button>
+                                    <Button onClick={() => onDelete(track, order)}>X</Button>
                                 </Grid>
                             </Grid>
                         </Card>

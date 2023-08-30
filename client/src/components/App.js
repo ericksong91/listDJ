@@ -15,6 +15,7 @@ function App() {
   const [setlists, setSetlists] = useState([]);
   const { user, users } = useContext(UserContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     fetch('/setlists')
@@ -124,7 +125,7 @@ function App() {
               onEditSetlists={handleEditSetlists}
               onDeleteSetlists={handleDeleteSetlists} />}
           />
-          <Route path='/profile/:id' element={<Profile setlists={setlists} user={user} users={users} />} />
+          <Route path='/profile/:id' element={<Profile setlists={setlists} />} />
           <Route path='/new' element={<NewSetForm user={user} onNewSetlist={handleNewSetlists} />} />
         </Route>
         <Route path='/login' element={<Login />} />

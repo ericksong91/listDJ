@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button, Container, Box, TextField, Card, Typography } from '@mui/material';
+import { CircularProgress } from "@mui/material";
 import { UserContext } from '../context/user';
 
 function Login() {
@@ -8,7 +9,7 @@ function Login() {
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState([]);
-    const { user, login } = useContext(UserContext);
+    const { user, isFetching, login } = useContext(UserContext);
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -25,6 +26,18 @@ function Login() {
 
         login(username, password, setIsLoading, setErrors);
         setPassword("");
+    };
+
+    // if (!!user && location.state?.from) {
+    //     return navigate(location.state.from)
+    // }
+
+    if (isFetching) {
+        return (
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
+                <CircularProgress sx={{ padding: 20 }} />
+            </Box>
+        );
     };
 
     return (

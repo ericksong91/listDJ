@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext } from 'react';
 import { UserContext } from '../context/user';
 import SetlistCard from "../cards/SetlistCard";
 import AvatarCard from "../cards/AvatarCard";
@@ -7,9 +7,9 @@ import { useParams } from "react-router-dom";
 import { Typography } from "@mui/material";
 import { Box, Grid } from "@mui/material";
 
-function Profile({ user, users, setlists }) {
+function Profile({ setlists }) {
     const index = parseInt(useParams().id);
-    const { setUser } = useContext(UserContext);
+    const { user, users, setUser } = useContext(UserContext);
 
     if (!user || !users) {
         return <div>Loading...</div>

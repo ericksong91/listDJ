@@ -5,6 +5,7 @@ const UserContext = React.createContext();
 function UserProvider({ children }) {
     const [user, setUser] = useState(null);
     const [users, setUsers] = useState([]);
+    const [isFetching, setIsFetching] = useState(true);
     const genresList = [
         "Deep House",
         "Dubstep",
@@ -49,8 +50,13 @@ function UserProvider({ children }) {
     useEffect(() => {
         fetch('/me').then(r => {
             if (r.ok) {
-                r.json().then((data) => setUser(data))
-            }
+                r.json().then((data) => {
+                    setIsFetching(false);
+                    setUser(data);
+                })
+            } else {
+                setIsFetching(false);
+            };
         });
     }, []);
 
@@ -113,7 +119,7 @@ function UserProvider({ children }) {
     };
 
     return (
-        <UserContext.Provider value={{ user, users, genresList, camelotKeys, setUser, login, logout, signup }}>
+        <UserContext.Provider value={{ user, users, genresList, camelotKeys, isFetching, setUser, setIsFetching, login, logout, signup }}>
             {children}
         </UserContext.Provider>
     )

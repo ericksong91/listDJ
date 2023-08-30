@@ -3,14 +3,19 @@ import { Button, Card, Grid } from '@mui/material';
 
 
 function AvatarCard({ profileUser, user, onSubmit }) {
-    const [userAvatar, setUserAvatar] = useState(!!profileUser.avatar ? profileUser.avatar : null)
+    const [userAvatar, setUserAvatar] = useState(!!profileUser ? profileUser.avatar : null)
     const [file, setFile] = useState(null);
     const [isSelected, setIsSelected] = useState(false);
+
+    if(!profileUser || !user) {
+        return <div></div>
+    };
 
     function handleChange(e) {
         setFile(e.target.files[0]);
         setIsSelected(true);
     };
+
 
     return (
         <Card className='AvatarCard'>
