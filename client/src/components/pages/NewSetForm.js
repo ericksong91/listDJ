@@ -31,6 +31,11 @@ function NewSetForm({ user, onNewSetlist }) {
         };
     };
 
+    function handleDelete(pos) {
+        console.log("delete", pos)
+
+    };
+
     function handleSubmit(e) {
         e.preventDefault();
         setIsLoading(true);
@@ -58,6 +63,7 @@ function NewSetForm({ user, onNewSetlist }) {
             order={order + 1}
             editing={true}
             onOrder={handleOrder}
+            onDelete={handleDelete}
         />);
 
     return (

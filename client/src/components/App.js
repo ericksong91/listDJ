@@ -76,8 +76,8 @@ function App() {
         onIsLoading(false);
         if (r.ok) {
           r.json().then((data) => {
-            setSetlists([...setlists, data]);
-            navigate('/');
+            setSetlists([data, ...setlists]);
+            navigate(`profile/${data.user_id}`);
           });
         } else {
           r.json().then((error) => onErrors(error.errors));
@@ -85,21 +85,20 @@ function App() {
       })
   };
 
-  function handleDeleteSetlists(id, onError, onIsLoading) {
+  function handleDeleteSetlists(id, onError, onIsLoading, navigate) {
     fetch(`/setlists/${id}`, {
       method: 'DELETE'
     })
       .then((r) => {
         onIsLoading(false);
         if (r.ok) {
-          const filteredSetlists = setlists.map((set) => {
+          const filteredSetlists = setlists.filter((set) => {
             if (set.id !== id) {
               return set
-            } else {
-              return {}
-            }
+            };
           });
           setSetlists([...filteredSetlists]);
+          navigate('/');
         } else {
           r.json().then((error) => onError(error.errors))
         }

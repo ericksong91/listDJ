@@ -8,7 +8,6 @@ function SetlistPage({ user, users, setlists, onEditSetlists, onDeleteSetlists }
     const index = parseInt(useParams().id);
     const [error, setError] = useState([]);
     const setFiltered = setlists.find((set) => set.id === index);
-    
 
     if (!setlists || !setFiltered) {
         return <div></div>
@@ -20,10 +19,10 @@ function SetlistPage({ user, users, setlists, onEditSetlists, onDeleteSetlists }
                 {setFiltered.name}
             </Typography>
             <Grid container>
-                <Grid item xs={4}>
+                <Grid item xs={2}>
                     <DescriptionCard users={users} set={setFiltered} />
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs={10}>
                     <TrackListCard
                         user={user}
                         owner={setFiltered.user_id}

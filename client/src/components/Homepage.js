@@ -4,15 +4,14 @@ import Search from "./top/Search";
 import {
     Box,
     Grid,
-    Container,
-    Paper
+    Container
 } from "@mui/material";
 
 function Homepage({ setlists, users }) {
     const [search, setSearch] = useState("");
     const [filter, setFilter] = useState("Set Name");
     const filteredSetUsers = [];
-    
+
     if (!setlists || !users) {
         return <div>Loading...</div>
     };

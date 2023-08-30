@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import TrackCard from "./TrackCard";
+import { useNavigate } from "react-router-dom";
 // import NewTrackCard from "./NewTrackCard";
 import { Container, Button, Box } from "@mui/material";
 
@@ -8,6 +9,7 @@ function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onE
     const [filteredSetlistTrackList, setFilteredSetlistTrackList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [editing, setEditing] = useState(false);
+    const navigate = useNavigate();
     // const { camelotKeys, genresList } = useContext(UserContext);
 
     useEffect(() => {
@@ -106,10 +108,9 @@ function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onE
                                 :
                                 <Button sx={{ width: 1 / 3 }} variant="contained"
                                     onClick={() => {
-
                                         setIsLoading(true);
                                         if (window.confirm("Are you sure you want to delete your set?")) {
-                                            onDeleteSetlists(index, onError, setIsLoading);
+                                            onDeleteSetlists(index, onError, setIsLoading, navigate);
                                         } else {
                                             setIsLoading(false);
                                         };

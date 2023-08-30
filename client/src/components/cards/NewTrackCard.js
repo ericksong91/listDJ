@@ -13,6 +13,7 @@ function NewTrackCard({ camelotKeys, genres, onSetlist }) {
     const [trackKey, setTrackKey] = useState("");
     const [trackGenre, setTrackGenre] = useState("");
     const [trackLength, setTrackLength] = useState({ min: 0, sec: 0 });
+    const [errors, setErrors] = useState([]);
     const [order, setOrder] = useState(1);
 
     if (!camelotKeys || !genres) {
@@ -41,7 +42,8 @@ function NewTrackCard({ camelotKeys, genres, onSetlist }) {
         setTrackArtist("");
         setTrackGenre("");
         setTrackKey("");
-        setTrackLength({ min: 0, sec: 0 }); 
+        setTrackLength({ min: 0, sec: 0 });
+        setErrors([]);
     };
 
     return (
@@ -158,6 +160,7 @@ function NewTrackCard({ camelotKeys, genres, onSetlist }) {
                 </FormControl>
             </Card>
             <Button variant="contained" fullWidth onClick={() => handleClick()}>Add Track</Button>
+            {errors}
         </Grid>
     );
 }
