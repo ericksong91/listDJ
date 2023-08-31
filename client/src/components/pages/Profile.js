@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../context/user';
 import SetlistCard from "../cards/SetlistCard";
 import AvatarCard from "../cards/AvatarCard";
@@ -9,15 +9,24 @@ import { Box, Grid } from "@mui/material";
 
 function Profile({ setlists }) {
     const index = parseInt(useParams().id);
-    const { user, users, setUser } = useContext(UserContext);
+    const { user, users, setUser, setUsers } = useContext(UserContext);
+    const profileUser = users.find((user) => user.id === index);
+    const [userAvatar, setUserAvatar] = useState('');
+
+    useEffect(() => {
+        if (!!profileUser) {
+            setUserAvatar(profileUser.avatar);
+        };
+    }, [userAvatar, profileUser])
 
     if (!user || !users || !setlists) {
         return <div>Loading...</div>
     };
 
-    const profileUser = users.find((user) => user.id === index);
+    console.log(user)
+    console.log(users)
 
-    function handleSubmit(e, avatar, setIsSelected, setUserAvatar) {
+    function handleSubmit(e, avatar, setIsSelected) {
         e.preventDefault()
         const formData = new FormData();
         formData.append('avatar', avatar);
@@ -29,7 +38,16 @@ function Profile({ setlists }) {
             .then(r => {
                 if (r.ok) {
                     r.json().then((data) => {
+                        const filteredUsers = users.map((u) => {
+                            if (u.id === data.id) {
+                                return data
+                            } else {
+                                return u
+                            }
+                        });
+
                         setUser(data);
+                        setUsers(filteredUsers);
                         setUserAvatar(data.avatar);
                         setIsSelected(false);
                     })
@@ -50,7 +68,7 @@ function Profile({ setlists }) {
             </Typography>
             <Grid container>
                 <Grid item xs={6}>
-                    {!profileUser ? <div></div> : <AvatarCard profileUser={profileUser} user={user} onSubmit={handleSubmit} />}
+                    {!profileUser ? <div></div> : <AvatarCard avatar={userAvatar} profileUser={profileUser} user={user} onSubmit={handleSubmit} />}
                 </Grid>
                 <Grid item xs={6}>
                     {!profileUser ? <div></div> : <BiographyCard user={profileUser} index={index} />}

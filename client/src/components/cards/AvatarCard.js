@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Button, Card, Grid } from '@mui/material';
 
 
-function AvatarCard({ profileUser, user, onSubmit }) {
-    const [userAvatar, setUserAvatar] = useState(!!profileUser ? profileUser.avatar : null)
+function AvatarCard({ avatar, profileUser, user, onSubmit }) {
+    // const [userAvatar, setUserAvatar] = useState(!!profileUser ? profileUser.avatar : null)
     const [file, setFile] = useState(null);
     const [isSelected, setIsSelected] = useState(false);
 
@@ -20,7 +20,7 @@ function AvatarCard({ profileUser, user, onSubmit }) {
         <Card className='AvatarCard'>
             <Grid container>
                 <Grid item xs={12}> 
-                    {!!profileUser.avatar ? <img className='avatar' src={userAvatar} alt="default" /> : <div></div>}
+                    {!!avatar ? <img className='avatar' src={avatar} alt="default" /> : <div></div>}
                 </Grid>
                 {
                     profileUser.id === user.id ?
@@ -53,7 +53,7 @@ function AvatarCard({ profileUser, user, onSubmit }) {
                                 )}
                             </Grid>
                             <Grid item>
-                                <Button onClick={(e) => onSubmit(e, file, setIsSelected, setUserAvatar)}>Submit</Button>
+                                <Button onClick={(e) => onSubmit(e, file, setIsSelected)}>Submit</Button>
                             </Grid>
                         </div>
                         :
