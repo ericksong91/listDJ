@@ -11,7 +11,7 @@ function Profile({ setlists }) {
     const index = parseInt(useParams().id);
     const { user, users, setUser } = useContext(UserContext);
 
-    if (!user || !users) {
+    if (!user || !users || !setlists) {
         return <div>Loading...</div>
     };
 
@@ -50,10 +50,10 @@ function Profile({ setlists }) {
             </Typography>
             <Grid container>
                 <Grid item xs={6}>
-                    <AvatarCard profileUser={profileUser} user={user} onSubmit={handleSubmit} />
+                    {!profileUser ? <div></div> : <AvatarCard profileUser={profileUser} user={user} onSubmit={handleSubmit} />}
                 </Grid>
                 <Grid item xs={6}>
-                    <BiographyCard user={profileUser} index={index} />
+                    {!profileUser ? <div></div> : <BiographyCard user={profileUser} index={index} />}
                 </Grid>
             </Grid>
             {filteredSets}
