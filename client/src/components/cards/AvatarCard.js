@@ -3,7 +3,6 @@ import { Button, Card, Grid } from '@mui/material';
 
 
 function AvatarCard({ avatar, profileUser, user, onSubmit }) {
-    // const [userAvatar, setUserAvatar] = useState(!!profileUser ? profileUser.avatar : null)
     const [file, setFile] = useState(null);
     const [isSelected, setIsSelected] = useState(false);
 
@@ -17,7 +16,7 @@ function AvatarCard({ avatar, profileUser, user, onSubmit }) {
     };
 
     return (
-        <Card className='AvatarCard'>
+        <Card className='AvatarCard' sx={{ bgcolor: 'rgb(50, 50, 50)', color: 'white' }}>
             <Grid container>
                 <Grid item xs={12}> 
                     {!!avatar ? <img className='avatar' src={avatar} alt="default" /> : <div></div>}

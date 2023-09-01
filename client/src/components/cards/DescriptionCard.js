@@ -1,5 +1,7 @@
+
+import { Link } from 'react-router-dom';
 import {
-    Card
+    Card, CardHeader, Button, Grid
 } from '@mui/material';
 
 function DescriptionCard({ users, set }) {
@@ -13,7 +15,10 @@ function DescriptionCard({ users, set }) {
     return (
         <div className="description">
             <Card>
-                <ul>{userFiltered.username}</ul>
+                <CardHeader
+                    title={`By ${userFiltered.username}`}
+                />
+                <Link to={`/profile/${set.user_id}`}><Button>View DJ Profile</Button></Link>
                 <ul>{set.description}</ul>
                 <ul>{set.avg_bpm}</ul>
                 <ul>{set.genre}</ul>
