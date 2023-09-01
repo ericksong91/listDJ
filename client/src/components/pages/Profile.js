@@ -19,7 +19,7 @@ function Profile({ setlists }) {
         };
     }, [userAvatar, profileUser])
 
-    if (!user || !users || !setlists) {
+    if (!user || !users || !setlists || !profileUser) {
         return <div>Loading...</div>
     };
 
@@ -60,15 +60,17 @@ function Profile({ setlists }) {
 
     return (
         <Box className="Profile">
-            <Grid container justifyContent="center">
+            <Grid container justifyContent="center" sx={{marginBottom: 2}}>
                 <Grid item>
                     <Typography variant="h2" sx={{ color: 'orange' }}>
                         {`${profileUser.username}'s Page`}
                     </Typography>
                 </Grid>
                 <Grid container justifyContent={'center'}>
-                    {!profileUser ? <div></div> : <AvatarCard avatar={userAvatar} profileUser={profileUser} user={user} onSubmit={handleSubmit} />}
-                    <Grid item xs={6} sx={{ bgcolor: 'rgb(50, 50, 50)', color: 'white' }}>
+                    <Grid item>
+                        {!profileUser ? <div></div> : <AvatarCard avatar={userAvatar} profileUser={profileUser} user={user} onSubmit={handleSubmit} />}
+                    </Grid>
+                    <Grid item xs={6}>
                         {!profileUser ? <div></div> : <BiographyCard profileUser={profileUser} user={user} index={index} />}
                     </Grid>
                 </Grid>

@@ -1,19 +1,21 @@
-import { Button, Card, CardContent, CardHeader } from '@mui/material';
+import { Box, Button, Card, CardContent, CardHeader } from '@mui/material';
 
 function BiographyCard({ profileUser, user }) {
 
     return (
-        <div className='bio'>
-            <Card sx={{ bgcolor: 'rgb(50, 50, 50)', color: 'white' }}>
+        <Box className='bio'>
+            <Card sx={{ bgcolor: 'rgb(50, 50, 50)', color: 'white', padding: 1, margin: 1 }}>
                 <CardHeader
-                    title={profileUser.bio}
+                    title="Biography"
                 />
                 <CardContent>
-                    {`Links`}
+                    {profileUser.bio}
                 </CardContent>
-                {user.id === profileUser.id ? <Button variant="contained">Edit</Button> : <div></div>}
+                <CardContent>
+                    {user.id === profileUser.id ? <Button variant="contained">Edit</Button> : <div></div>}
+                </CardContent>
             </Card>
-        </div>
+        </Box>
     );
 }
 
