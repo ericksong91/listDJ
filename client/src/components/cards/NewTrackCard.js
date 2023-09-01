@@ -6,21 +6,20 @@ import {
     FormControl, InputLabel, Select, MenuItem
 } from '@mui/material';
 
-function NewTrackCard({ camelotKeys, genres, onSetlist }) {
+function NewTrackCard({ genres, onSetlist }) {
     const [track, setTrack] = useState("");
     const [trackArtist, setTrackArtist] = useState("");
     const [trackBPM, setTrackBPM] = useState("");
-    const [trackKey, setTrackKey] = useState("");
+    // const [trackKey, setTrackKey] = useState("");
     const [trackGenre, setTrackGenre] = useState("");
     const [trackLength, setTrackLength] = useState({ min: 0, sec: 0 });
     const [errors, setErrors] = useState([]);
     const [order, setOrder] = useState(1);
 
-    if (!camelotKeys || !genres) {
+    if (!genres) {
         return <div></div>
     };
 
-    const camelotKeysSelect = camelotKeys.map((key, ind) => <MenuItem key={ind} value={key}>{key}</MenuItem>);
     const genresListSelect = genres.map((gen, ind) => <MenuItem key={ind} value={gen}>{gen}</MenuItem>);
 
     function handleClick() {
@@ -30,9 +29,10 @@ function NewTrackCard({ camelotKeys, genres, onSetlist }) {
             artist: trackArtist,
             genre: trackGenre,
             length: length,
-            key: trackKey,
             bpm: trackBPM
         };
+
+        // if(newTrack.name.length < 0 || track.artist.length < 0 || )
 
         onSetlist(newTrack, order);
         setOrder(order + 1);

@@ -33,3 +33,7 @@ planner.txt
 
 #ignore copy
 NewSetForm copy.js
+
+TrackCard copy.js
+
+NewTrackCard copy.js

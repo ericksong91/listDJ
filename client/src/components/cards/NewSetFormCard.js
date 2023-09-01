@@ -2,7 +2,7 @@ import {
     TextField, Card, CardHeader, Grid
 } from '@mui/material';
 
-function SetFormCard({ onName, onGenre, onDescription, name, description, genre }) {
+function NewSetFormCard({ onName, onGenre, onDescription, name, description, genre }) {
 
     return (
         <Grid item xs={6}>
@@ -55,4 +55,4 @@ function SetFormCard({ onName, onGenre, onDescription, name, description, genre 
     );
 }
 
-export default SetFormCard;
+export default NewSetFormCard;

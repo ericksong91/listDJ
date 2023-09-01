@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import SetFormCard from '../cards/SetFormCard';
+import SetFormCard from '../cards/NewSetFormCard';
 import NewTrackCard from '../cards/NewTrackCard';
 import TrackCard from '../cards/TrackCard';
 import { UserContext } from '../context/user';
