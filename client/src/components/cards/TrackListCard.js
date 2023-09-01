@@ -1,8 +1,6 @@
-import { useState, useEffect, useContext } from "react";
-import { UserContext } from "../context/user";
+import { useState, useEffect } from "react";
 import TrackCard from "./TrackCard";
 import { useNavigate } from "react-router-dom";
-// import NewTrackCard from "./NewTrackCard";
 import { Container, Button, Box } from "@mui/material";
 
 function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onEditSetlists, onDeleteSetlists }) {
@@ -11,7 +9,6 @@ function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onE
     const [isLoading, setIsLoading] = useState(false);
     const [editing, setEditing] = useState(false);
     const navigate = useNavigate();
-    const { camelotKeys, genresList } = useContext(UserContext);
 
     useEffect(() => {
         if (!tracks || !setlistTracks) {

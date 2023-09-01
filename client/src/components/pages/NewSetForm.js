@@ -15,9 +15,9 @@ function NewSetForm({ user, onNewSetlist }) {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [genre, setGenre] = useState("");
-    const { genresList, camelotKeys } = useContext(UserContext);
+    const { genresList } = useContext(UserContext);
 
-    if (!user || !genresList || !camelotKeys) {
+    if (!user || !genresList ) {
         return <div>Loading...</div>
     };
 
@@ -81,7 +81,6 @@ function NewSetForm({ user, onNewSetlist }) {
                             description={description}
                         />
                         <NewTrackCard
-                            camelotKeys={camelotKeys}
                             genres={genresList}
                             onSetlist={handleSetlist}
                         />

@@ -13,21 +13,32 @@ function TrackCard({ track, order, editing, onOrder, onDelete }) {
                             justifyContent="space-evenly"
                             alignItems="center"
                         >
-                            <Grid item xs={1}>
+                            <Grid item xs={1} sx={{paddingLeft: 2}}>
                                 <Typography variant="h8">
                                     {order}
                                 </Typography>
                             </Grid>
-                            <Grid item xs={1}>
-                                <Typography variant="h10">{track.name}</Typography>
+                            <Grid item xs={3}>
+                                <Typography variant="h7">{track.name}</Typography>
                             </Grid>
-                            <Grid item xs={10}>
+                            <Grid item xs={2}>
                                 <CardContent sx={{ display: 'flex', alignContent: 'center' }}>
-                                    <ul>{`${track.artist}`}</ul>
-                                    <ul>{`${Math.floor(track.length / 60)}m  ${Math.floor(track.length % 60)}s`}</ul>
-                                    <ul>{`${track.genre}`}</ul>
-                                    <ul>{`${track.bpm}`}</ul>
-                                    <ul>{`${track.key}`}</ul>
+                                    {`${track.artist}`}
+                                </CardContent>
+                            </Grid>
+                            <Grid item xs={2}>
+                                <CardContent sx={{ display: 'flex', alignContent: 'center' }}>
+                                    {`${Math.floor(track.length / 60)}m  ${Math.floor(track.length % 60)}s`}
+                                </CardContent>
+                            </Grid>
+                            <Grid item xs={2}>
+                                <CardContent sx={{ display: 'flex', alignContent: 'center' }}>
+                                    {`${track.genre}`}
+                                </CardContent>
+                            </Grid>
+                            <Grid item xs={2}>
+                                <CardContent sx={{ display: 'flex', alignContent: 'center' }}>
+                                    {`${track.bpm}`}
                                 </CardContent>
                             </Grid>
                         </Grid>

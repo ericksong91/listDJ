@@ -41,7 +41,7 @@ function NewTrackCard({ genres, onSetlist }) {
         setTrackBPM("");
         setTrackArtist("");
         setTrackGenre("");
-        setTrackKey("");
+        // setTrackKey("");
         setTrackLength({ min: 0, sec: 0 });
         setErrors([]);
     };
@@ -147,7 +147,7 @@ function NewTrackCard({ genres, onSetlist }) {
                         {genresListSelect}
                     </Select>
                 </FormControl>
-                <FormControl fullWidth required margin="normal">
+                {/* <FormControl fullWidth required margin="normal">
                     <InputLabel>Key</InputLabel>
                     <Select
                         label="key"
@@ -157,7 +157,7 @@ function NewTrackCard({ genres, onSetlist }) {
                     >
                         {camelotKeysSelect}
                     </Select>
-                </FormControl>
+                </FormControl> */}
             </Card>
             <Button variant="contained" fullWidth onClick={() => handleClick()}>Add Track</Button>
             {errors}
