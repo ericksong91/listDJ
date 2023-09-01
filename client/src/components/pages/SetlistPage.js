@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import TrackListCard from "../cards/TrackListCard";
 import DescriptionCard from "../cards/DescriptionCard";
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, Box } from "@mui/material";
 
 function SetlistPage({ user, users, setlists, onEditSetlists, onDeleteSetlists }) {
     const index = parseInt(useParams().id);
@@ -14,10 +14,12 @@ function SetlistPage({ user, users, setlists, onEditSetlists, onDeleteSetlists }
     };
 
     return (
-        <div className="SetlistPage">
-            <Typography variant="h4" sx={{ color: 'white' }}>
-                {setFiltered.name}
-            </Typography>
+        <Box className="SetlistPage">
+            <Box sx={{padding: 1}}>
+                <Typography variant="h4" sx={{ color: 'white' }}>
+                    {setFiltered.name}
+                </Typography>
+            </Box>
             <Grid container>
                 <Grid item xs={2}>
                     <DescriptionCard users={users} set={setFiltered} />
@@ -36,7 +38,7 @@ function SetlistPage({ user, users, setlists, onEditSetlists, onDeleteSetlists }
                 </Grid>
             </Grid>
             {error}
-        </div>
+        </Box>
     );
 }
 

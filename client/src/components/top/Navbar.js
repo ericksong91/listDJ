@@ -9,17 +9,17 @@ function Navbar({ user }) {
   const navigate = useNavigate();
 
   return (
-    <div className="Navbar">
+    <Box className="Navbar">
       <Container maxWidth="lg">
         {!user ?
-          <Typography variant="h5" sx={{ color: "orange" }}>Welcome, Guest!</Typography>
+          <Typography variant="h6" sx={{ paddingTop: 1.5, paddingLeft: 1, color: "orange" }}>Welcome, Guest!</Typography>
           :
-          <Grid container sx={{ display: 'flex' }}>
-            <Grid item>
+          <Grid container>
+            <Grid item xs={0.5}>
               {!!user.avatar ? <img className="avatar-small" alt="avatar" src={user.avatar} /> : <div></div>}
             </Grid>
-            <Grid item>
-              <Typography variant="h5" sx={{ marginLeft: 5, color: 'orange' }}>
+            <Grid item sx={{ paddingTop: 1.5, paddingLeft: 1 }}>
+              <Typography variant="h6" sx={{ color: 'orange' }}>
                 Welcome, {user.username}!
               </Typography>
             </Grid>
@@ -73,7 +73,7 @@ function Navbar({ user }) {
           </Grid>
         }
       </Container>
-    </div>
+    </Box>
   );
 }
 

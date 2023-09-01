@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Button, Card, Grid } from '@mui/material';
+import { Typography } from '@mui/material';
+import { Button, Card, Grid, Box } from '@mui/material';
 
 
 function AvatarCard({ avatar, profileUser, user, onSubmit }) {
@@ -16,8 +17,8 @@ function AvatarCard({ avatar, profileUser, user, onSubmit }) {
     };
 
     return (
-        <Card className='AvatarCard' sx={{ bgcolor: 'rgb(50, 50, 50)', color: 'white' }}>
-            <Grid container>
+        <Card className='AvatarCard' sx={{ bgcolor: 'rgb(50, 50, 50)', color: 'white', margin: 1 }}>
+            <Grid container justifyContent={"center"}>
                 <Grid item xs={12}> 
                     {!!avatar ? <img className='avatar' src={avatar} alt="default" /> : <div></div>}
                 </Grid>
@@ -38,15 +39,11 @@ function AvatarCard({ avatar, profileUser, user, onSubmit }) {
                                     />
                                 </Button>
                                 {isSelected ? (
-                                    <div>
+                                    <Box>
                                         <p>Filename: {file.name}</p>
                                         <p>Filetype: {file.type}</p>
                                         <p>Size in bytes: {file.size}</p>
-                                        <p>
-                                            lastModifiedDate:{' '}
-                                            {file.lastModifiedDate.toLocaleDateString()}
-                                        </p>
-                                    </div>
+                                    </Box>
                                 ) : (
                                     <p>Select a file to show details</p>
                                 )}

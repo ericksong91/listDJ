@@ -1,7 +1,7 @@
 
 import { Link } from 'react-router-dom';
 import {
-    Card, CardHeader, Button, Grid
+    Card, CardHeader, Button
 } from '@mui/material';
 
 function DescriptionCard({ users, set }) {
@@ -14,7 +14,7 @@ function DescriptionCard({ users, set }) {
 
     return (
         <div className="description">
-            <Card>
+            <Card sx={{ marginLeft: 1, bgcolor: 'rgb(50, 50, 50)', color: 'white' }}>
                 <CardHeader
                     title={`By ${userFiltered.username}`}
                 />
