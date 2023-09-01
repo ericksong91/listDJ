@@ -1,8 +1,6 @@
 
 import { Link } from 'react-router-dom';
-import {
-    Card, CardHeader, Button
-} from '@mui/material';
+import { Card, CardHeader, Button, Box } from '@mui/material';
 
 function DescriptionCard({ users, set }) {
 
@@ -13,17 +11,17 @@ function DescriptionCard({ users, set }) {
     const userFiltered = users.find((user) => user.id === parseInt(set.user_id));
 
     return (
-        <div className="description">
-            <Card sx={{ marginLeft: 1, bgcolor: 'rgb(50, 50, 50)', color: 'white' }}>
+        <Box className="description">
+            <Card sx={{ marginLeft: 1, bgcolor: 'rgb(50, 50, 50)', color: 'white', paddingBottom: 2 }}>
                 <CardHeader
-                    title={`By ${userFiltered.username}`}
+                    title={`${userFiltered.username}`}
                 />
-                <Link to={`/profile/${set.user_id}`}><Button>View DJ Profile</Button></Link>
                 <ul>{set.description}</ul>
                 <ul>{set.avg_bpm}</ul>
                 <ul>{set.genre}</ul>
+                <Link to={`/profile/${set.user_id}`}><Button fullWidth sx={{ color: 'orange' }}>View DJ Profile</Button></Link>
             </Card>
-        </div>
+        </Box>
     );
 }
 

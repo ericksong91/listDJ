@@ -1,6 +1,15 @@
+import { useContext } from 'react';
+import { UserContext } from '../context/user';
 import { Box, Button, Card, CardContent, CardHeader } from '@mui/material';
 
 function BiographyCard({ profileUser, user }) {
+    // const {user, users} = useContext(UserContext);
+
+    // function handleEdit(e) {
+
+    // };
+
+    //Try to update User biography by replacing the text with textfields
 
     return (
         <Box className='bio'>

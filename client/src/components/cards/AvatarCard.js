@@ -29,7 +29,6 @@ function AvatarCard({ avatar, profileUser, user, onSubmit }) {
                     sx={{ width: 100, height: 100 }}
                     image={!!avatar ? avatar : null}
                 />
-                {/* {!!avatar ? <img className='avatar' src={avatar} alt="default" /> : <div></div>} */}
             </Card>
             <Card sx={{ bgcolor: 'rgb(50, 50, 50)', color: 'white', margin: 1 }}>
                 {

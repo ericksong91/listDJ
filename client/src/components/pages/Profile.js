@@ -60,7 +60,7 @@ function Profile({ setlists }) {
 
     return (
         <Box className="Profile">
-            <Grid container justifyContent="center" sx={{marginBottom: 2}}>
+            <Grid container justifyContent="center" sx={{marginBottom: 2    }}>
                 <Grid item>
                     <Typography variant="h2" sx={{ color: 'orange' }}>
                         {`${profileUser.username}'s Page`}
@@ -71,7 +71,7 @@ function Profile({ setlists }) {
                         {!profileUser ? <div></div> : <AvatarCard avatar={userAvatar} profileUser={profileUser} user={user} onSubmit={handleSubmit} />}
                     </Grid>
                     <Grid item xs={6}>
-                        {!profileUser ? <div></div> : <BiographyCard profileUser={profileUser} user={user} index={index} />}
+                        {!profileUser ? <div></div> : <BiographyCard user={user} profileUser={profileUser} index={index} />}
                     </Grid>
                 </Grid>
             </Grid>

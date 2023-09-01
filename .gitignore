@@ -30,3 +30,6 @@
 
 # ignore planner
 planner.txt
+
+#ignore copy
+NewSetForm copy.js

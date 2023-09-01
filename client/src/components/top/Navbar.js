@@ -15,10 +15,10 @@ function Navbar({ user }) {
           <Typography variant="h6" sx={{ paddingTop: 1.5, paddingLeft: 1, color: "orange" }}>Welcome, Guest!</Typography>
           :
           <Grid container>
-            <Grid item xs={0.5}>
+            <Grid item xs={0.7}>
               {!!user.avatar ? <img className="avatar-small" alt="avatar" src={user.avatar} /> : <div></div>}
             </Grid>
-            <Grid item sx={{ paddingTop: 1.5, paddingLeft: 1 }}>
+            <Grid item sx={{ paddingTop: 2, paddingLeft: 1 }}>
               <Typography variant="h6" sx={{ color: 'orange' }}>
                 Welcome, {user.username}!
               </Typography>
