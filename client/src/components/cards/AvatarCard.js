@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Typography } from '@mui/material';
 import { Button, Card, Grid, Box, CardMedia } from '@mui/material';
 
 
@@ -23,21 +22,22 @@ function AvatarCard({ avatar, profileUser, user, onSubmit }) {
 
     return (
         <Box className='AvatarCard' >
-            <Card sx={{ bgcolor: 'rgb(50, 50, 50)', color: 'white', margin: 1, width: 100 }}>
+            <Card sx={{ bgcolor: 'rgb(50, 50, 50)', color: 'white', margin: 1, width: 100, marginTop:3 }}>
                 <CardMedia
                     component="img"
                     sx={{ width: 100, height: 100 }}
                     image={!!avatar ? avatar : null}
                 />
             </Card>
-            <Card sx={{ bgcolor: 'rgb(50, 50, 50)', color: 'white', margin: 1 }}>
+            <Card sx={{ bgcolor: 'rgb(50, 50, 50)', color: 'white', margin: 1, width: 300, padding: 0.5 }}>
                 {
                     profileUser.id === user.id ?
                         <Grid container justifyContent={"center"}>
-                            <Grid item>
+                            <Grid item xs={12}>
                                 <Button
                                     variant="contained"
                                     component="label"
+                                    sx={{width: "50%"}}
                                 >
                                     Upload Avatar
                                     <input
@@ -62,7 +62,7 @@ function AvatarCard({ avatar, profileUser, user, onSubmit }) {
                                     </Box>
                                 )}
                             </Grid>
-                            <Grid item>
+                            <Grid item xs={12} >
                                 <Button onClick={(e) => onSubmit(e, file, setIsSelected)}>Submit</Button>
                             </Grid>
                         </Grid>

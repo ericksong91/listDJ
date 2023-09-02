@@ -13,7 +13,7 @@ function BiographyCard({ profileUser, user }) {
 
     return (
         <Box className='bio'>
-            <Card sx={{ bgcolor: 'rgb(50, 50, 50)', color: 'white', padding: 1, margin: 1 }}>
+            <Card sx={{ bgcolor: 'rgb(50, 50, 50)', color: 'white', padding: 1, margin: 1, marginTop: 5 }}>
                 <CardHeader
                     title="Biography"
                 />

@@ -5,7 +5,7 @@ import AvatarCard from "../cards/AvatarCard";
 import BiographyCard from "../cards/BiographyCard";
 import { useParams } from "react-router-dom";
 import { Typography } from "@mui/material";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Container } from "@mui/material";
 
 function Profile({ setlists }) {
     const index = parseInt(useParams().id);
@@ -60,7 +60,7 @@ function Profile({ setlists }) {
 
     return (
         <Box className="Profile">
-            <Grid container justifyContent="center" sx={{marginBottom: 2    }}>
+            <Grid container justifyContent="center" sx={{ marginBottom: 2 }}>
                 <Grid item>
                     <Typography variant="h2" sx={{ color: 'orange' }}>
                         {`${profileUser.username}'s Page`}
@@ -75,7 +75,12 @@ function Profile({ setlists }) {
                     </Grid>
                 </Grid>
             </Grid>
-            {filteredSets}
+
+            <Container>
+                <Grid container spacing={5}>
+                    {filteredSets}
+                </Grid>
+            </Container>
         </Box>
     );
 };

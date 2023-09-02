@@ -17,7 +17,6 @@ function App() {
   const [setlists, setSetlists] = useState([]);
   const { user, users } = useContext(UserContext);
   const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
     fetch('/setlists')
@@ -95,11 +94,7 @@ function App() {
       .then((r) => {
         onIsLoading(false);
         if (r.ok) {
-          const filteredSetlists = setlists.filter((set) => {
-            if (set.id !== id) {
-              return set
-            };
-          });
+          const filteredSetlists = setlists.filter((set) => set.id !== id);
           setSetlists([...filteredSetlists]);
           navigate('/');
         } else {

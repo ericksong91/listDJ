@@ -1,10 +1,10 @@
-import { Card, CardContent, CardHeader, Typography } from '@mui/material';
+import { Card, CardContent, Typography } from '@mui/material';
 import { Grid, Box } from '@mui/material';
 import { Button } from '@mui/material';
 
 function TrackCard({ track, order, editing, onOrder, onDelete }) {
     return (
-        <Box>
+        <Box className="trackCard">
             <Grid container>
                 <Grid item xs={editing ? 9 : 12}>
                     <Card sx={{ padding: 0.5, margin: 0.5, height: 80, display: 'flex', bgcolor: 'rgb(50, 50, 50)', color: 'white' }}>

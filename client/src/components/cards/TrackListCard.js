@@ -51,26 +51,6 @@ function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onE
         console.log(track, pos)
     };
 
-    // function handleSetlist(track, order) {
-    //     setFilteredTrackList([...filteredTrackList, track]);
-    //     const arr = [...filteredTrackList, track]
-
-    //     const arr2 = [];
-    //     let h = 1;
-
-    //     while (h <= arr.length) {
-    //         console.log(!!filteredSetlistTrackList[h - 1].id)
-    //         arr2.push({
-    //             id: !!filteredSetlistTrackList[h - 1].id ? filteredSetlistTrackList[h - 1].id : null,
-    //             setlist_id: setlistTracks[0].setlist_id,
-    //             track_id: !!arr[h - 1].id ? arr[h - 1].id : null,
-    //             track_order: h
-    //         });
-    //         h++
-    //     };
-    //     setFilteredSetlistTrackList([...arr2]);
-    // };
-
     const tracksList = filteredTrackList.map((track, ind) =>
         <TrackCard
             key={ind}
@@ -131,18 +111,6 @@ function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onE
 
                     </Box>
                 }
-                {/* <Box sx={{ width: '200%' }}>
-                    {
-                        editing ?
-                            <NewTrackCard
-                                camelotKeys={camelotKeys}
-                                genres={genresList}
-                                onSetlist={handleSetlist}
-                            />
-                            :
-                            <Box></Box>
-                    }
-                </Box> */}
             </Container>
         </div>
     );

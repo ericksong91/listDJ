@@ -32,7 +32,11 @@ function NewTrackCard({ genres, onSetlist }) {
             bpm: trackBPM
         };
 
-        // if(newTrack.name.length < 0 || track.artist.length < 0 || )
+        //LETS ADD VALIDATION
+
+        // if(newTrack.name.length === 0 || newTrack.artist.length === 0 || newTrack.genre.length < 0 || newTrack.length.min === 0 && newTrack.length.sec === 0 || )
+
+        console.log(newTrack.artist.length)
 
         onSetlist(newTrack, order);
         setOrder(order + 1);

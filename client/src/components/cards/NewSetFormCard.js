@@ -5,7 +5,7 @@ import {
 function NewSetFormCard({ onName, onGenre, onDescription, name, description, genre }) {
 
     return (
-        <Grid item xs={6}>
+        <Grid className="newSetFormCard" item xs={6}>
             <Card sx={{ maxheight: 800, padding: 1, margin: 1, paddingBottom: 3 }} >
                 <CardHeader
                     title={"Details"}
