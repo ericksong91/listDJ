@@ -1,11 +1,7 @@
 import { useState } from "react";
 import SetlistCard from "./cards/SetlistCard";
 import Search from "./top/Search";
-import {
-    Box,
-    Grid,
-    Container
-} from "@mui/material";
+import { Box, Grid, Container, Typography } from "@mui/material";
 
 function Homepage({ setlists, users }) {
     const [search, setSearch] = useState("");
@@ -61,6 +57,7 @@ function Homepage({ setlists, users }) {
         <Box className="Home" sx={{ padding: 3 }}>
             <Search onSearch={setSearch} onFilter={setFilter} filter={filter} search={search} />
             <Container>
+                <Typography variant="h3" sx={{ color: 'orange', padding: 2 }}>Latest Mixes</Typography>
                 <Grid container spacing={5}>
                     {setlistList}
                 </Grid>
