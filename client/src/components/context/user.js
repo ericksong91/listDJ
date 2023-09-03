@@ -116,8 +116,9 @@ function UserProvider({ children }) {
     function handleDeleteUser(id) {
         console.log("Deleting", id)
 
-        // ADd Delete, Fix strong params on backend for avatars
+        // Add Delete, Fix strong params on backend for avatars
         // Make sure avatars are deleted permanently
+        // Work on editable bio
 
     };
 

@@ -57,3 +57,4 @@ gem 'dotenv-rails', "~> 2.8"
 
 gem "net-http"
 
+gem 'active_storage_validations'
