@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     post "/login", to: "sessions#create"
     delete "/logout", to: "sessions#destroy"
 
-    #Batch Update Setlist_tracks
+    #Batch Update, Setlist_tracks
     patch "/setlist_tracks", to: "setlist_tracks#update"
 
     ## 

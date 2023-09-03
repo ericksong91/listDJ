@@ -12,10 +12,10 @@ class UsersController < ApplicationController
 
     def update
         if current_user
-            # byebug
             user = current_user
-            user.avatar.attach(user_avatar_params[:avatar])
-            user.save(validate: false)
+            user.skip_validations = true
+            user.avatar.attach(user_avatar_params)
+            user.save
             render json: user, status: :accepted
         else
             render_not_authorized_response
@@ -51,6 +51,6 @@ class UsersController < ApplicationController
     end
 
     def user_avatar_params
-        params.permit(:avatar)
+        params.permit(:avatar)[:avatar]
     end
 end
