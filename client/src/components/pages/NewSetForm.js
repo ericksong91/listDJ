@@ -17,7 +17,7 @@ function NewSetForm({ user, onNewSetlist }) {
     const [genre, setGenre] = useState("");
     const { genresList } = useContext(UserContext);
 
-    if (!user || !genresList ) {
+    if (!user || !genresList) {
         return <div>Loading...</div>
     };
 
@@ -54,7 +54,16 @@ function NewSetForm({ user, onNewSetlist }) {
             avg_bpm: 0
         };
 
-        onNewSetlist(newSetlist, newSet, setErrors, setIsLoading);
+        if (newSet.user_id.length === 0 || newSet.name.length === 0
+            || newSet.description.length === 0 || newSet.genre.length === 0) {
+            setErrors(["Must fill out form"]);
+            setIsLoading(false);
+        } else if (newSetlist.length === 0) {
+            setErrors(["Must have at least one track"]);
+            setIsLoading(false);
+        } else {
+            onNewSetlist(newSetlist, newSet, setErrors, setIsLoading);
+        };
     };
 
     const filteredSetlists = newSetlist.map((track, order) =>
@@ -87,6 +96,7 @@ function NewSetForm({ user, onNewSetlist }) {
                         />
                     </Grid>
                 </Box>
+                <Typography variant="h7" sx={{ color: 'red' }}>{errors}</Typography>
                 <Typography variant="h3" sx={{ color: "orange" }}>{name}</Typography>
                 <Typography variant="h5" sx={{ color: "grey" }}>{description}</Typography>
                 <Grid container sx={{ paddingTop: 5 }}>
@@ -104,7 +114,6 @@ function NewSetForm({ user, onNewSetlist }) {
                             {isLoading ? "Loading..." : "Submit"}
                         </Button>
                     </Grid>
-                    {errors}
                 </Grid>
             </Container>
         </div>
