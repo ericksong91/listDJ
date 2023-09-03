@@ -48,7 +48,7 @@ class SetlistsController < ApplicationController
     private
 
     def setlist_params
-        params.permit(:set => [:name, :user_id, :description, :length, :genre, :avg_bpm], :tracks => [:name, :genre, :length, :bpm, :key, :artist])
+        params.permit(:set => [:name, :user_id, :description, :length, :genre, :avg_bpm], :tracks => [:name, :genre, :length, :bpm, :artist])
     end
 
     def find_setlist

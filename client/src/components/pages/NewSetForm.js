@@ -32,8 +32,13 @@ function NewSetForm({ user, onNewSetlist }) {
     };
 
     function handleDelete(pos) {
-        console.log("delete", pos)
+        const arr = [...newSetlist];
+        arr.splice(pos - 1, 1);
+        setNewSetlist([...arr]);
+    };
 
+    function handleSetlist(track) {
+        setNewSetlist([...newSetlist, track]);
     };
 
     function handleSubmit(e) {
@@ -50,10 +55,6 @@ function NewSetForm({ user, onNewSetlist }) {
         };
 
         onNewSetlist(newSetlist, newSet, setErrors, setIsLoading);
-    };
-
-    function handleSetlist(track) {
-        setNewSetlist([...newSetlist, track]);
     };
 
     const filteredSetlists = newSetlist.map((track, order) =>

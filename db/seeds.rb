@@ -36,10 +36,10 @@ genres = [
     "Jungle"
 ]
 
-camelot_keys = [
-    "1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B", "5A", "5B", "6A", "6B", "7A", "7B",
-    "8A", "8B", "9A", "9B", "10A", "10B", "11A", "11B", "12A", "12B"
-]
+# camelot_keys = [
+#     "1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B", "5A", "5B", "6A", "6B", "7A", "7B",
+#     "8A", "8B", "9A", "9B", "10A", "10B", "11A", "11B", "12A", "12B"
+# ]
 
 # tags = [
 #     "#highenergy",
@@ -65,7 +65,7 @@ pp "Building Tracks..."
 
 20.times do
     Track.create!(name: "The #{Faker::Name.first_name} Song", artist: "#{Faker::Name.first_name}" , genre: genres[rand(0..7)],
-    length: rand(120..600), bpm: rand(100..200), key: camelot_keys[rand(0..23)])
+    length: rand(120..600), bpm: rand(100..200))
 end
 
 pp "Building Setlists..."

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {
-    Button, TextField, Card, CardHeader, Grid
+    Button, TextField, Card, CardHeader, Grid, Typography
 } from '@mui/material';
 import {
     FormControl, InputLabel, Select, MenuItem
@@ -10,10 +10,9 @@ function NewTrackCard({ genres, onSetlist }) {
     const [track, setTrack] = useState("");
     const [trackArtist, setTrackArtist] = useState("");
     const [trackBPM, setTrackBPM] = useState("");
-    // const [trackKey, setTrackKey] = useState("");
     const [trackGenre, setTrackGenre] = useState("");
     const [trackLength, setTrackLength] = useState({ min: 0, sec: 0 });
-    const [errors, setErrors] = useState([]);
+    const [error, setError] = useState("");
     const [order, setOrder] = useState(1);
 
     if (!genres) {
@@ -32,22 +31,23 @@ function NewTrackCard({ genres, onSetlist }) {
             bpm: trackBPM
         };
 
-        //LETS ADD VALIDATION
+        if (newTrack.name.length === 0 || newTrack.artist.length === 0
+            || newTrack.genre.length < 0 || newTrack.bpm.length === 0
+            || newTrack.length === 0) {
+            setError("Must fill out every field")
+        } else {
 
-        // if(newTrack.name.length === 0 || newTrack.artist.length === 0 || newTrack.genre.length < 0 || newTrack.length.min === 0 && newTrack.length.sec === 0 || )
+            onSetlist(newTrack, order);
+            setOrder(order + 1);
 
-        console.log(newTrack.artist.length)
+            setTrack("");
+            setTrackBPM("");
+            setTrackArtist("");
+            setTrackGenre("");
+            setTrackLength({ min: 0, sec: 0 });
+            setError("");
 
-        onSetlist(newTrack, order);
-        setOrder(order + 1);
-
-        setTrack("");
-        setTrackBPM("");
-        setTrackArtist("");
-        setTrackGenre("");
-        // setTrackKey("");
-        setTrackLength({ min: 0, sec: 0 });
-        setErrors([]);
+        };
     };
 
     return (
@@ -151,20 +151,9 @@ function NewTrackCard({ genres, onSetlist }) {
                         {genresListSelect}
                     </Select>
                 </FormControl>
-                {/* <FormControl fullWidth required margin="normal">
-                    <InputLabel>Key</InputLabel>
-                    <Select
-                        label="key"
-                        value={trackKey}
-                        id="key"
-                        onChange={(e) => setTrackKey(e.target.value)}
-                    >
-                        {camelotKeysSelect}
-                    </Select>
-                </FormControl> */}
+                <Typography variant="h7" sx={{ color: 'red' }}>{error ? `*${error}` : null}</Typography>
             </Card>
             <Button variant="contained" fullWidth onClick={() => handleClick()}>Add Track</Button>
-            {errors}
         </Grid>
     );
 }
