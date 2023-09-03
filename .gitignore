@@ -28,12 +28,8 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
-# ignore planner
+# Ignore planner
 planner.txt
 
-#ignore copy
-NewSetForm copy.js
-
-TrackCard copy.js
-
-NewTrackCard copy.js
+# Ignore byebug history
+.byebug_history
