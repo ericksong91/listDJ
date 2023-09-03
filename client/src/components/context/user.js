@@ -113,8 +113,19 @@ function UserProvider({ children }) {
             });
     };
 
+    function handleDeleteUser(id) {
+        console.log("Deleting", id)
+
+        // ADd Delete, Fix strong params on backend for avatars
+        // Make sure avatars are deleted permanently
+
+    };
+
     return (
-        <UserContext.Provider value={{ user, users, genresList, isFetching, setUser, setUsers, setIsFetching, login, logout, signup }}>
+        <UserContext.Provider value={{
+            user, users, genresList, isFetching, setUser, setUsers,
+            setIsFetching, login, logout, signup, handleDeleteUser
+        }}>
             {children}
         </UserContext.Provider>
     )

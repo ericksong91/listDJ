@@ -5,7 +5,7 @@ import AvatarCard from "../cards/AvatarCard";
 import BiographyCard from "../cards/BiographyCard";
 import { useParams } from "react-router-dom";
 import { Typography } from "@mui/material";
-import { Box, Grid, Container } from "@mui/material";
+import { Box, Grid, Container, Button } from "@mui/material";
 
 function Profile({ setlists }) {
     const index = parseInt(useParams().id);
@@ -23,7 +23,7 @@ function Profile({ setlists }) {
         return <div>Loading...</div>
     };
 
-    function handleSubmit(e, avatar, setIsSelected) {
+    function handleSubmitAvatar(e, avatar, setIsSelected) {
         e.preventDefault()
         const formData = new FormData();
         formData.append('avatar', avatar);
@@ -68,7 +68,7 @@ function Profile({ setlists }) {
                 </Grid>
                 <Grid container justifyContent={'center'}>
                     <Grid item>
-                        {!profileUser ? <div></div> : <AvatarCard avatar={userAvatar} profileUser={profileUser} user={user} onSubmit={handleSubmit} />}
+                        {!profileUser ? <div></div> : <AvatarCard avatar={userAvatar} profileUser={profileUser} user={user} onSubmitAvatar={handleSubmitAvatar} />}
                     </Grid>
                     <Grid item xs={6}>
                         {!profileUser ? <div></div> : <BiographyCard user={user} profileUser={profileUser} index={index} />}

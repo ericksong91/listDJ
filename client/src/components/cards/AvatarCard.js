@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button, Card, Grid, Box, CardMedia } from '@mui/material';
 
 
-function AvatarCard({ avatar, profileUser, user, onSubmit }) {
+function AvatarCard({ avatar, profileUser, user, onSubmitAvatar }) {
     const [file, setFile] = useState(null);
     const [isSelected, setIsSelected] = useState(false);
     const [error, setError] = useState('');
@@ -63,7 +63,7 @@ function AvatarCard({ avatar, profileUser, user, onSubmit }) {
                                 )}
                             </Grid>
                             <Grid item xs={12} >
-                                <Button onClick={(e) => onSubmit(e, file, setIsSelected)}>Submit</Button>
+                                <Button onClick={(e) => onSubmitAvatar(e, file, setIsSelected)}>Submit</Button>
                             </Grid>
                         </Grid>
                         :
