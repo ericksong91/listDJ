@@ -1,5 +1,5 @@
 import { TextField, Select, MenuItem } from "@mui/material";
-import { Paper, Grid, Card } from "@mui/material";
+import { Grid, Card } from "@mui/material";
 
 function Search({ search, filter, onFilter, onSearch }) {
     const list = [

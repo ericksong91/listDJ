@@ -1,15 +1,17 @@
-import {
-    TextField, Card, CardHeader, Grid
-} from '@mui/material';
+import { TextField, Card, CardHeader, Grid } from '@mui/material';
 
 function NewSetFormCard({ onName, onGenre, onDescription, name, description, genre }) {
 
     return (
         <Grid className="newSetFormCard" item xs={6}>
-            <Card sx={{ maxheight: 800, padding: 1, margin: 1, paddingBottom: 3 }} >
+            <Card sx={{
+                color: 'white', input: { color: 'white' }, label: { color: 'white' }, subheader: { color: 'white' },
+                maxheight: 800, padding: 1, margin: 1, paddingBottom: 3, bgcolor: 'rgb(50,50,50)', boxShadow: 10
+            }}>
                 <CardHeader
                     title={"Details"}
                     subheader={name}
+                    subheaderTypographyProps={{ style: { color: 'white' } }}
                 />
                 <TextField
                     margin="normal"
@@ -33,7 +35,7 @@ function NewSetFormCard({ onName, onGenre, onDescription, name, description, gen
                     id="description"
                     name="description"
                     type="text"
-                    inputProps={{ maxLength: 150 }}
+                    inputProps={{ style: { color: 'white' }, maxLength: 150 }}
                     label={`Description (${150 - description.length} chars left)`}
                     value={description}
                     onChange={(e) => onDescription(e.target.value)}

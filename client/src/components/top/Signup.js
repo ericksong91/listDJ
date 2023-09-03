@@ -76,11 +76,11 @@ function Signup() {
                             margin="normal"
                             required
                             fullWidth
-                            sx={{ multilineInput: { color: "white" } }}
+                            multiline
                             id="biography"
                             name="biography"
-                            label={`Biography (${300 - bio.length} chars left)`}
-                            inputProps={{ maxLength: 300 }}
+                            label={`Biography (${150 - bio.length} chars left)`}
+                            inputProps={{ style: { color: 'white' }, maxLength: 150 }}
                             value={bio}
                             onChange={(e) => setBio(e.target.value)}
                         />

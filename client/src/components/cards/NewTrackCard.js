@@ -52,10 +52,14 @@ function NewTrackCard({ genres, onSetlist }) {
 
     return (
         <Grid item xs={6}>
-            <Card sx={{ maxheight: 800, padding: 1, margin: 1 }}>
+            <Card sx={{
+                color: 'white', input: { color: 'white' }, label: { color: 'white' }, subheader: { color: 'white' },
+                maxheight: 800, padding: 1, margin: 1, paddingBottom: 3, bgcolor: 'rgb(50,50,50)', boxShadow: 10,
+            }}>
                 <CardHeader
                     title={"Add Track"}
                     subheader={`${track} by ${trackArtist}`}
+                    subheaderTypographyProps={{ style: { color: 'white' } }}
                 />
                 <TextField
                     margin="normal"
