@@ -47,8 +47,24 @@ function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onE
         };
     };
 
-    function handleDelete(track, pos) {
-        console.log(track, pos)
+    function handleDelete(pos) {
+        const arr = [...filteredTrackList];
+        arr.splice(pos - 1, 1);
+        setFilteredTrackList([...arr]);
+
+        const arr2 = [];
+        let h = 1;
+
+        while (h <= arr.length) {
+            arr2.push({
+                id: filteredSetlistTrackList[h - 1].id,
+                setlist_id: setlistTracks[0].setlist_id,
+                track_id: arr[h - 1].id,
+                track_order: h
+            });
+            h++
+        };
+        setFilteredSetlistTrackList([...arr2]);
     };
 
     const tracksList = filteredTrackList.map((track, ind) =>

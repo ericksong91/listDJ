@@ -80,7 +80,7 @@ function TrackCard({ track, order, editing, onOrder, onDelete }) {
                                 alignItems="center"
                             >
                                 <Grid item xs={1}>
-                                    <Button onClick={() => onDelete(track, order)}>X</Button>
+                                    <Button onClick={() => onDelete(order)}>X</Button>
                                 </Grid>
                             </Grid>
                         </Card>

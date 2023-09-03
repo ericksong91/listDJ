@@ -18,8 +18,6 @@ function App() {
   const { user, users } = useContext(UserContext);
   const navigate = useNavigate();
 
-  console.log(setlists)
-
   useEffect(() => {
     fetch('/setlists')
       .then(r => {
@@ -32,6 +30,9 @@ function App() {
   }, []);
 
   function handleEditSetlists(updatedSetListTracks, onEdit, onError) {
+
+    console.log(updatedSetListTracks);
+
     fetch(`/setlist_tracks`, {
       method: "PATCH",
       headers: {
