@@ -11,8 +11,6 @@ import { Routes, Route, useNavigate, Navigate, Outlet, useLocation } from "react
 import { Paper } from "@mui/material";
 import '../css/App.css'
 
-//NEED TO ORGANIZE ERROR HANDLING
-
 function App() {
   const [setlists, setSetlists] = useState([]);
   const { user, users } = useContext(UserContext);
@@ -77,7 +75,7 @@ function App() {
       avg_bpm: set.avg_bpm,
       length: set.length
     };
-    
+
     fetch(`/setlists/${set.id}`, {
       method: "PATCH",
       headers: {
