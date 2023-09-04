@@ -38,8 +38,9 @@ function Profile({ setlists }) {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                ...user,
-                bio: biography
+                id: user.id,
+                bio: biography,
+                username: user.username
             })
         })
             .then((r) => {

@@ -7,8 +7,8 @@ class User < ApplicationRecord
     validates :username, uniqueness: true, unless: :skip_validations
     validates :username, uniqueness: { case_sensitive: false }, unless: :skip_validations
     validates :password_digest, presence: true, unless: :skip_validations
-    validates :password, presence: true, unless: :skip_validations
-    validates :password_confirmation, presence: true, unless: :skip_validations
+    validates :password, presence: true, unless: Proc.new { |user| user.password.blank? }
+    validates :password_confirmation, presence: true, unless: Proc.new { |user| user.password.blank? }
     validates :bio, presence: true, unless: :skip_validations
     validates :avatar,
         content_type: [:gif, :png, :jpg, :jpeg],

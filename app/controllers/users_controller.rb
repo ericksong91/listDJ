@@ -5,6 +5,7 @@ class UsersController < ApplicationController
     end
 
     def create
+        # byebug
         @user = User.create!(user_params)
         login_user
         render json: @user, status: :created
@@ -19,7 +20,6 @@ class UsersController < ApplicationController
                 user.save
                 render json: user, status: :accepted
             else
-                byebug
                 user = current_user
                 user.update!(user_params)
                 render json: user, status: :accepted
