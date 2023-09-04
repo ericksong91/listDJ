@@ -66,14 +66,9 @@ function App() {
   };
 
   function handleEditSetlists(set, name, description, onIsLoading, onIsEditing, onErrors) {
-    console.log(set)
-
     const editedSet = {
-      id: set.id,
       name: name,
-      description: description,
-      avg_bpm: set.avg_bpm,
-      length: set.length
+      description: description
     };
 
     fetch(`/setlists/${set.id}`, {
@@ -160,7 +155,7 @@ function App() {
               onEditSetlistTracks={handleEditSetlistTracks}
               onDeleteSetlists={handleDeleteSetlists} />}
           />
-          <Route path='/profile/:id' element={<Profile setlists={setlists} />} />
+          <Route path='/profile/:id' element={<Profile setlists={setlists} user={user} users={users} />} />
           <Route path='/new' element={<NewSetForm user={user} onNewSetlist={handleNewSetlists} />} />
         </Route>
         <Route path='/login' element={<Login />} />

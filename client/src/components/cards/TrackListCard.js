@@ -77,13 +77,15 @@ function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onE
             onDelete={handleDelete}
         />);
 
-        console.log(user.id === owner)
+
+    console.log(owner)
+    console.log(user)
 
     return (
         <div className="SetlistTracks">
             <Container>
                 {tracksList}
-                {user.id === owner
+                {user.id === owner.user_id
                     ?
                     isEditing ?
                         <Box>

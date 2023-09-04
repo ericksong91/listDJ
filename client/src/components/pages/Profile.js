@@ -7,9 +7,9 @@ import { useParams } from "react-router-dom";
 import { Typography } from "@mui/material";
 import { Box, Grid, Container } from "@mui/material";
 
-function Profile({ setlists }) {
+function Profile({ setlists, user, users }) {
     const index = parseInt(useParams().id);
-    const { user, users, setUser, setUsers } = useContext(UserContext);
+    const { setUser, setUsers } = useContext(UserContext);
     const profileUser = users.find((user) => user.id === index);
     const [userAvatar, setUserAvatar] = useState('');
     const [errors, setErrors] = useState([]);
@@ -40,9 +40,18 @@ function Profile({ setlists }) {
                 setIsLoading(false);
                 if (r.ok) {
                     r.json().then((data) => {
+                        const filteredUsers = users.map((user) => {
+                            if (user.id === data.id) {
+                                return data
+                            } else {
+                                return user
+                            }
+                        });
+
+                        setUser(data);
+                        setUsers([...filteredUsers]);
                         setIsEditing(false);
                         setErrors([]);
-                        console.log(data)
                     })
                 } else {
                     r.json().then((error) => setErrors(error.errors))

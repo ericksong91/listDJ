@@ -22,7 +22,7 @@ function SetlistPage({ user, users, setlists, onEditSetlists, onEditSetlistTrack
                 <Grid item xs={10}>
                     <TrackListCard
                         user={user}
-                        owner={setFiltered.user_id}
+                        owner={setFiltered}
                         index={index}
                         tracks={setFiltered.tracks}
                         setlistTracks={setFiltered.setlist_track_org}
