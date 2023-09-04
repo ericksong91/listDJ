@@ -1,10 +1,6 @@
 import { useState } from 'react';
-import {
-    Button, TextField, Card, CardHeader, Grid, Typography
-} from '@mui/material';
-import {
-    FormControl, InputLabel, Select, MenuItem
-} from '@mui/material';
+import { Button, TextField, Card, CardHeader, Grid, Typography } from '@mui/material';
+import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 
 function NewTrackCard({ genres, onSetlist }) {
     const [track, setTrack] = useState("");

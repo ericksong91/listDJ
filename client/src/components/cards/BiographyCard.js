@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Box, Button, Card, CardContent, CardHeader } from '@mui/material';
 import { Typography, TextField } from '@mui/material';
 
-function BiographyCard({ profileUser, user, errors, onDelete, onEdit }) {
+function BiographyCard({ profileUser, user, errors, onDelete, onEdit, onErrors }) {
     const [biography, setBiography] = useState(profileUser.bio);
     const [isEditing, setIsEditing] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -63,7 +63,7 @@ function BiographyCard({ profileUser, user, errors, onDelete, onEdit }) {
                                 variant="contained"
                                 color="error"
                                 sx={{ mt: 3, mb: 2 }}
-                                onClick={() => onDelete(setIsLoading)}
+                                onClick={() => onDelete(user.id, setIsLoading, onErrors)}
                             >Delete Account</Button>
                         :
                         <div></div>

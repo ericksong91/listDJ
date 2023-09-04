@@ -69,8 +69,8 @@ function UserProvider({ children }) {
             if (r.ok) {
                 r.json().then((data) => setUser(data));
             } else {
-                r.json().then((error) => setErrors(error.errors))
-            }
+                r.json().then((error) => setErrors(error.errors));
+            };
         });
     };
 
@@ -100,7 +100,6 @@ function UserProvider({ children }) {
                     r.json().then((error) => setErrors(error.errors));
                 }
             })
-
     };
 
     function logout() {
@@ -112,14 +111,8 @@ function UserProvider({ children }) {
             });
     };
 
-    function handleDeleteUser(id) {
-        console.log("Deleting", id);
-
-        
-
-        // Add Delete
-        // Make sure avatars are deleted permanently
-        // Work on editable bio
+    function handleDeleteUser(id, onIsLoading, onErrors, setSetlists) {
+        console.log("Deleting", id, onIsLoading, onErrors, setSetlists);
 
     };
 

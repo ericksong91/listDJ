@@ -13,7 +13,7 @@ import '../css/App.css'
 
 function App() {
   const [setlists, setSetlists] = useState([]);
-  const { user, users } = useContext(UserContext);
+  const { user, users, handleDeleteUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -98,6 +98,16 @@ function App() {
       });
   };
 
+  function handleNewTrack() {
+
+  }
+
+  function handleDelete(id, onIsLoading, onErrors) {
+    console.log("delete");
+
+    handleDeleteUser(id, onIsLoading, onErrors, setSetlists)
+  };
+
   function handleNewSetlists(newSetlist, newSet, onErrors, onIsLoading) {
     fetch('/setlists', {
       method: "POST",
@@ -155,7 +165,7 @@ function App() {
               onEditSetlistTracks={handleEditSetlistTracks}
               onDeleteSetlists={handleDeleteSetlists} />}
           />
-          <Route path='/profile/:id' element={<Profile setlists={setlists} user={user} users={users} />} />
+          <Route path='/profile/:id' element={<Profile setlists={setlists} user={user} users={users} onDelete={handleDelete} />} />
           <Route path='/new' element={<NewSetForm user={user} onNewSetlist={handleNewSetlists} />} />
         </Route>
         <Route path='/login' element={<Login />} />

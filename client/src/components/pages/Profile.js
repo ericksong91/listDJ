@@ -7,9 +7,9 @@ import { useParams } from "react-router-dom";
 import { Typography } from "@mui/material";
 import { Box, Grid, Container } from "@mui/material";
 
-function Profile({ setlists, user, users }) {
+function Profile({ setlists, user, users, onDelete }) {
     const index = parseInt(useParams().id);
-    const { setUser, setUsers, handleDeleteUser } = useContext(UserContext);
+    const { setUser, setUsers } = useContext(UserContext);
     const profileUser = users.find((user) => user.id === index);
     const [userAvatar, setUserAvatar] = useState('');
     const [errors, setErrors] = useState([]);
@@ -90,10 +90,6 @@ function Profile({ setlists, user, users }) {
             });
     };
 
-    function handleDelete() {
-        console.log("delete")
-    }
-
     const filteredList = setlists.filter((set) => set.user_id === index);
 
     const filteredSets = filteredList.map((set) => <SetlistCard key={set.id} user={profileUser} set={set} />);
@@ -119,8 +115,8 @@ function Profile({ setlists, user, users }) {
                             <div></div>
                             :
                             <BiographyCard user={user} profileUser={profileUser}
-                                index={index} errors={errors} onDelete={handleDelete}
-                                onEdit={handleEdit} />}
+                                index={index} errors={errors} onDelete={onDelete}
+                                onEdit={handleEdit} onErrors={setErrors} />}
                     </Grid>
                 </Grid>
             </Grid>
