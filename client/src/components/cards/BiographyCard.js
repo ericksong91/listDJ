@@ -1,25 +1,11 @@
-import { useContext, useState } from 'react';
-import { UserContext } from '../context/user';
+import { useState } from 'react';
 import { Box, Button, Card, CardContent, CardHeader } from '@mui/material';
 import { Typography, TextField } from '@mui/material';
 
-function BiographyCard({ profileUser, user }) {
+function BiographyCard({ profileUser, user, errors, onDelete, onEdit }) {
     const [biography, setBiography] = useState(profileUser.bio);
-    const [isEditing, setIsEditing] = useState(false)
-    const { setUser } = useContext(UserContext);
-
-    const styles = theme => ({
-        multilineColor: {
-            color: 'red'
-        }
-    });
-
-    function handleEdit() {
-        console.log("Saving", biography);
-
-        fetch('/user')
-
-    };
+    const [isEditing, setIsEditing] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     return (
         <Box className='bio'>
@@ -59,12 +45,31 @@ function BiographyCard({ profileUser, user }) {
                 <CardContent>
                     {user.id === profileUser.id ?
                         isEditing ?
-                            <Button variant="contained" onClick={() => setIsEditing(!isEditing)}>Edit</Button>
+                            <Button variant="contained" onClick={() => onEdit(biography, user.id, setIsEditing, setIsLoading)}>Save</Button>
                             :
-                            <Button variant="contained" onClick={() => handleEdit()}>Save</Button>
+                            <Button variant="contained" onClick={() => setIsEditing(!isEditing)}>Edit</Button>
                         :
                         <div></div>}
                 </CardContent>
+                <CardContent>
+                    {isEditing ?
+                        isLoading ?
+                            <Button
+                                variant="contained"
+                                sx={{ mt: 3, mb: 2 }}
+                            >Loading...</Button>
+                            :
+                            <Button
+                                variant="contained"
+                                color="error"
+                                sx={{ mt: 3, mb: 2 }}
+                                onClick={() => onDelete(setIsLoading)}
+                            >Delete Account</Button>
+                        :
+                        <div></div>
+                    }
+                </CardContent>
+                <Typography variant="h7" sx={{ color: 'red' }}>{errors}</Typography>
             </Card>
         </Box>
     );

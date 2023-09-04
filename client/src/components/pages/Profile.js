@@ -5,13 +5,14 @@ import AvatarCard from "../cards/AvatarCard";
 import BiographyCard from "../cards/BiographyCard";
 import { useParams } from "react-router-dom";
 import { Typography } from "@mui/material";
-import { Box, Grid, Container, Button } from "@mui/material";
+import { Box, Grid, Container } from "@mui/material";
 
 function Profile({ setlists }) {
     const index = parseInt(useParams().id);
     const { user, users, setUser, setUsers } = useContext(UserContext);
     const profileUser = users.find((user) => user.id === index);
     const [userAvatar, setUserAvatar] = useState('');
+    const [errors, setErrors] = useState([]);
 
     useEffect(() => {
         if (!!profileUser) {
@@ -21,6 +22,38 @@ function Profile({ setlists }) {
 
     if (!user || !users || !setlists || !profileUser) {
         return <div>Loading...</div>
+    };
+
+    function handleDelete() {
+        console.log("delete")
+    }
+
+    function handleEdit(biography, id, setIsEditing, setIsLoading) {
+        console.log("Saving", biography);
+
+
+        fetch(`/users/${id}`, {
+            method: 'PATCH',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                ...user,
+                bio: biography
+            })
+        })
+            .then((r) => {
+                setIsLoading(false);
+                if (r.ok) {
+                    r.json().then((data) => {
+                        setIsEditing(false);
+                        console.log(data)
+                    })
+                } else {
+                    r.json().then((error) => setErrors(error.errors))
+                }
+            })
+
     };
 
     function handleSubmitAvatar(e, avatar, setIsSelected) {
@@ -49,7 +82,7 @@ function Profile({ setlists }) {
                         setIsSelected(false);
                     })
                 } else {
-                    r.json().then((error) => console.log(error))
+                    r.json().then((error) => setErrors(error.errors))
                 }
             });
     };
@@ -68,10 +101,19 @@ function Profile({ setlists }) {
                 </Grid>
                 <Grid container justifyContent={'center'}>
                     <Grid item>
-                        {!profileUser ? <div></div> : <AvatarCard avatar={userAvatar} profileUser={profileUser} user={user} onSubmitAvatar={handleSubmitAvatar} />}
+                        {!profileUser ?
+                            <div></div>
+                            :
+                            <AvatarCard avatar={userAvatar} profileUser={profileUser}
+                                user={user} onSubmitAvatar={handleSubmitAvatar} />}
                     </Grid>
                     <Grid item xs={6}>
-                        {!profileUser ? <div></div> : <BiographyCard user={user} profileUser={profileUser} index={index} />}
+                        {!profileUser ?
+                            <div></div>
+                            :
+                            <BiographyCard user={user} profileUser={profileUser}
+                                index={index} errors={errors} onDelete={handleDelete}
+                                onEdit={handleEdit} />}
                     </Grid>
                 </Grid>
             </Grid>

@@ -55,7 +55,6 @@ function UserProvider({ children }) {
         });
     }, []);
 
-
     function login(username, password, setIsLoading, setErrors) {
         username = username.toLowerCase();
         setErrors([]);
@@ -114,9 +113,11 @@ function UserProvider({ children }) {
     };
 
     function handleDeleteUser(id) {
-        console.log("Deleting", id)
+        console.log("Deleting", id);
 
-        // Add Delete, Fix strong params on backend for avatars
+        
+
+        // Add Delete
         // Make sure avatars are deleted permanently
         // Work on editable bio
 

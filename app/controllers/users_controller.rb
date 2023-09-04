@@ -12,11 +12,18 @@ class UsersController < ApplicationController
 
     def update
         if current_user
-            user = current_user
-            user.skip_validations = true
-            user.avatar.attach(user_avatar_params)
-            user.save
-            render json: user, status: :accepted
+            if check_update_params
+                user = current_user
+                user.skip_validations = true
+                user.avatar.attach(user_avatar_params)
+                user.save
+                render json: user, status: :accepted
+            else
+                byebug
+                user = current_user
+                user.update!(user_params)
+                render json: user, status: :accepted
+            end
         else
             render_not_authorized_response
         end
@@ -44,6 +51,10 @@ class UsersController < ApplicationController
 
     def render_not_authorized_response
         render json:  { "errors": "Not authorized" }, status: :unauthorized
+    end
+
+    def check_update_params
+        params.key?("avatar")
     end
 
     def user_params
