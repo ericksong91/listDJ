@@ -103,9 +103,8 @@ function App() {
   }
 
   function handleDelete(id, onIsLoading, onErrors) {
-    console.log("delete");
-
-    handleDeleteUser(id, onIsLoading, onErrors, setSetlists)
+    handleDeleteUser(id, setlists, onIsLoading, onErrors, setSetlists);
+    navigate('/');
   };
 
   function handleNewSetlists(newSetlist, newSet, onErrors, onIsLoading) {

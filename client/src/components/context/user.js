@@ -111,9 +111,23 @@ function UserProvider({ children }) {
             });
     };
 
-    function handleDeleteUser(id, onIsLoading, onErrors, setSetlists) {
-        console.log("Deleting", id, onIsLoading, onErrors, setSetlists);
+    function handleDeleteUser(id, setlists, onIsLoading, onErrors, setSetlists) {
+        fetch(`/users/${id}`, {
+            method: 'DELETE'
+        })
+            .then((r) => {
+                onIsLoading(false);
+                if (r.ok) {
+                    const filteredSetlists = setlists.filter((set) => set.user_id !== id);
+                    const filteredUsers = users.filter((user) => user.id !== id);
 
+                    setUser(null);
+                    setUsers([...filteredUsers]);
+                    setSetlists([...filteredSetlists]);
+                } else {
+                    r.json().then((error) => onErrors(error.errors));
+                };
+            });
     };
 
     return (
