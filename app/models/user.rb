@@ -15,4 +15,5 @@ class User < ApplicationRecord
         size: { less_than: 1.megabytes , message: 'is too large - You cannot upload an image file greater than 1MB' }
 
     has_many :setlists, dependent: :destroy
+    has_many :tracks, through: :setlists
 end

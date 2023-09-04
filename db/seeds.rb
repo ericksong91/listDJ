@@ -99,7 +99,7 @@ i = Setlist.first.id
 
 while i <= Setlist.last.id do
     setlist = Setlist.find_by(id: i)
-    setlist.update(avg_bpm: setlist.tracks.average(:bpm), length: setlist.tracks.sum(:length)/60)
+    setlist.update(avg_bpm: setlist.tracks.average(:bpm), length: setlist.setlist_tracks.map {|t| t.track}.sum(&:length)/60)
     i+=1
 end
 
