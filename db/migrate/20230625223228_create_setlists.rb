@@ -5,7 +5,7 @@ class CreateSetlists < ActiveRecord::Migration[7.0]
       t.integer :length
       t.string :genre
       t.integer :avg_bpm
-      t.integer :user_id
+      t.string :user_id
 
       t.timestamps
     end

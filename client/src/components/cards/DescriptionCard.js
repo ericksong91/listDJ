@@ -14,7 +14,7 @@ function DescriptionCard({ user, users, set, onEditSetlists }) {
         return <div></div>
     };
 
-    const userFiltered = users.find((user) => user.id === parseInt(set.user_id));
+    const userFiltered = users.find((user) => user.id === set.user_id);
 
     return (
         <Box className="description">
@@ -69,7 +69,7 @@ function DescriptionCard({ user, users, set, onEditSetlists }) {
                 <CardContent>{`Genre: ${set.genre}`}</CardContent>
                 <Link to={`/profile/${set.user_id}`}><Button fullWidth sx={{ color: 'orange' }}>View DJ Profile</Button></Link>
 
-                {user.id === parseInt(userFiltered.id) ?
+                {user.id === userFiltered.id ?
                     <CardContent>
                         {isEditing ?
                             isLoading ?

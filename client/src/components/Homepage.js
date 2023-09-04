@@ -24,7 +24,7 @@ function Homepage({ setlists, users }) {
                 return set
             } else {
                 filteredUsers.find((user) => {
-                    if (parseInt(set.user_id) === user.id) {
+                    if (set.user_id === user.id) {
                         return filteredSetUsers.push(set)
                     } else {
                         return null
@@ -41,16 +41,16 @@ function Homepage({ setlists, users }) {
         if (search === "") {
             setlistList = setlists.map((set) => <SetlistCard key={set.id}
                 set={set}
-                user={users.find((user) => user.id === parseInt(set.user_id))} />);
+                user={users.find((user) => user.id === set.user_id)} />);
         } else {
             setlistList = filteredSetUsers.map((set) => <SetlistCard key={set.id}
                 set={set}
-                user={users.find((user) => user.id === parseInt(set.user_id))} />)
+                user={users.find((user) => user.id === set.user_id)} />)
         };
     } else {
         setlistList = filteredSetList.map((set) => <SetlistCard key={set.id}
             set={set}
-            user={users.find((user) => user.id === parseInt(set.user_id))} />);
+            user={users.find((user) => user.id === set.user_id)} />);
     };
 
     return (

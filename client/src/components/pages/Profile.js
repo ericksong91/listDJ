@@ -94,7 +94,7 @@ function Profile({ setlists, user, users }) {
         console.log("delete")
     }
 
-    const filteredList = setlists.filter((set) => parseInt(set.user_id) === parseInt(index));
+    const filteredList = setlists.filter((set) => set.user_id === index);
 
     const filteredSets = filteredList.map((set) => <SetlistCard key={set.id} user={profileUser} set={set} />);
 

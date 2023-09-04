@@ -81,7 +81,7 @@ function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onE
         <div className="SetlistTracks">
             <Container>
                 {tracksList}
-                {parseInt(user.id) === parseInt(owner.user_id)
+                {user.id === owner.user_id
                     ?
                     isEditing ?
                         <Box>
