@@ -14,22 +14,22 @@ class SetlistsController < ApplicationController
             user = current_user
             setlist = find_setlist
 
-            if user.id == setlist.user_id
+            if user.id == setlist.user_id.to_i
                 setlist.update!(setlist_info_params)
                 render json: setlist, serializer: SetlistWithTracksSerializer
             else
-                user = current_user
-                setlist = find_setlist
-                arr = [current_user, find_setlist, "in second", user.id == setlist.user_id]
-                render json: arr
-                # render_not_authorized_response
+                # user = current_user
+                # setlist = find_setlist
+                # arr = [current_user, find_setlist, "in second", user.id == setlist.user_id]
+                # render json: arr
+                render_not_authorized_response
             end
         else
-            user = current_user
-            setlist = find_setlist
-            arr = [current_user, find_setlist, "In First", user.id == setlist.user_id]
-            render json: user
-            # render_not_authorized_response
+            # user = current_user
+            # setlist = find_setlist
+            # arr = [current_user, find_setlist, "In First", user.id == setlist.user_id]
+            # render json: user
+            render_not_authorized_response
         end
     end
 
@@ -58,7 +58,7 @@ class SetlistsController < ApplicationController
             user = current_user
             setlist = find_setlist
 
-            if setlist.user_id == user.id
+            if setlist.user_id.to_i == user.id
                 setlist.destroy
                 head :no_content
             else

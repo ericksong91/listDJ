@@ -4,7 +4,7 @@ class SetlistTracksController < ApplicationController
             user = find_user
             setlist = find_setlist
 
-            if setlist.user_id === user.id
+            if setlist.user_id.to_i === user.id
                 grouped_tracks = tracklist_params[:_json].index_by{ |tr| tr[:id]}
                 updated = SetlistTrack.update(grouped_tracks.keys, grouped_tracks.values)
                 ids = updated.map{|i| i['id'].to_i}
