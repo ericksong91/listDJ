@@ -69,7 +69,7 @@ function BiographyCard({ profileUser, user, errors, onDelete, onEdit }) {
                         <div></div>
                     }
                 </CardContent>
-                <Typography variant="h7" sx={{ color: 'red' }}>{errors}</Typography>
+                <Typography variant="h7" sx={{ color: 'red' }}>{errors.map((error, ind) => <li key={ind + 1}>{error}</li>)}</Typography>
             </Card>
         </Box>
     );

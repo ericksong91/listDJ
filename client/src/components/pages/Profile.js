@@ -48,13 +48,13 @@ function Profile({ setlists }) {
                 if (r.ok) {
                     r.json().then((data) => {
                         setIsEditing(false);
+                        setErrors([]);
                         console.log(data)
                     })
                 } else {
                     r.json().then((error) => setErrors(error.errors))
                 }
             })
-
     };
 
     function handleSubmitAvatar(e, avatar, setIsSelected) {

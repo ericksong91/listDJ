@@ -97,7 +97,7 @@ function Signup() {
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2 }}
                             >Signup</Button>}
-                        {errors}
+                        <Typography variant="h7" sx={{ color: 'red' }}>{errors.map((error, ind) => <li key={ind + 1}>{error}</li>)}</Typography>
                     </Box>
                 </Box>
                 <Link to="/login">
