@@ -3,10 +3,10 @@ import TrackCard from "./TrackCard";
 import { useNavigate } from "react-router-dom";
 import { Container, Button, Box } from "@mui/material";
 
-function TrackListCard({ user, owner, index, tracks, description, isEditing,
-    onIsEditing, setlistTracks, onError, onEditSetlists, onDeleteSetlists }) {
+function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onEditSetlistTracks, onDeleteSetlists }) {
     const [filteredTrackList, setFilteredTrackList] = useState([]);
     const [filteredSetlistTrackList, setFilteredSetlistTrackList] = useState([]);
+    const [isEditing, setIsEditing] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
@@ -86,7 +86,7 @@ function TrackListCard({ user, owner, index, tracks, description, isEditing,
                     isEditing ?
                         <Box>
                             <Button sx={{ width: 1 / 3 }} variant="contained" onClick={() => {
-                                onIsEditing(!isEditing);
+                                setIsEditing(!isEditing);
                                 const arr = [];
                                 setlistTracks.forEach((slTrack) => {
                                     arr.push(tracks.find((track) => track.id === slTrack.track_id));
@@ -95,10 +95,17 @@ function TrackListCard({ user, owner, index, tracks, description, isEditing,
                             }}>
                                 Cancel
                             </Button>
-                            <Button sx={{ width: 1 / 3 }} variant="contained"
-                                onClick={() => onEditSetlists(filteredSetlistTrackList, onIsEditing, onError)}>
-                                Save Changes
-                            </Button>
+                            {isLoading ?
+                                <Button
+                                    variant="contained"
+                                    sx={{ width: 1 / 3 }}
+                                >Loading...</Button>
+                                :
+                                <Button sx={{ width: 1 / 3 }} variant="contained"
+                                    onClick={() => onEditSetlistTracks(filteredSetlistTrackList, setIsEditing, setIsLoading, onError)}>
+                                    Save Changes
+                                </Button>
+                            }
                             {isLoading ?
                                 <Button
                                     variant="contained"
@@ -120,12 +127,10 @@ function TrackListCard({ user, owner, index, tracks, description, isEditing,
                         </Box>
                         :
                         <Box>
-                            <Button fullWidth variant="contained" onClick={() => onIsEditing(!isEditing)}>Edit</Button>
+                            <Button fullWidth variant="contained" onClick={() => setIsEditing(!isEditing)}>Edit</Button>
                         </Box>
                     :
-                    <Box>
-
-                    </Box>
+                    null
                 }
             </Container>
         </div>

@@ -29,7 +29,7 @@ function App() {
       });
   }, []);
 
-  function handleEditSetlists(updatedSetListTracks, description, onEdit, onError) {
+  function handleEditSetlistTracks(updatedSetListTracks, onEdit, onIsLoading, onError) {
     fetch(`/setlist_tracks`, {
       method: "PATCH",
       headers: {
@@ -39,6 +39,7 @@ function App() {
     })
       .then((r) => {
         onEdit(false);
+        onIsLoading(false);
         if (r.ok) {
           r.json().then((data) => {
             const filteredSetlists = setlists.map((set) => {
@@ -46,14 +47,13 @@ function App() {
                 return {
                   id: set.id,
                   genre: set.genre,
-                  description: description,
+                  description: set.description,
                   avg_bpm: set.avg_bpm,
                   length: set.length,
                   name: set.name,
                   user_id: set.user_id,
                   setlist_track_org: data,
                   tracks: set.tracks
-                  // Update tracks later when adding new tracks.
                 };
               } else {
                 return set
@@ -63,6 +63,44 @@ function App() {
           });
         } else {
           r.json().then((error) => onError(error.errors));
+        }
+      });
+  };
+
+  function handleEditSetlists(set, name, description, onIsLoading, onIsEditing, onErrors) {
+    console.log(set)
+
+    const editedSet = {
+      id: set.id,
+      name: name,
+      description: description,
+      avg_bpm: set.avg_bpm,
+      length: set.length
+    };
+    
+    fetch(`/setlists/${set.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(editedSet)
+    })
+      .then((r) => {
+        onIsLoading(false);
+        onIsEditing(false);
+        if (r.ok) {
+          r.json().then((data) => {
+            const filteredSetlists = setlists.map((set) => {
+              if (set.id === data.id) {
+                return data
+              } else {
+                return set
+              }
+            });
+            setSetlists([...filteredSetlists]);
+          })
+        } else {
+          r.json().then((error) => onErrors(error.errors))
         }
       });
   };
@@ -121,6 +159,7 @@ function App() {
               users={users}
               setlists={setlists}
               onEditSetlists={handleEditSetlists}
+              onEditSetlistTracks={handleEditSetlistTracks}
               onDeleteSetlists={handleDeleteSetlists} />}
           />
           <Route path='/profile/:id' element={<Profile setlists={setlists} />} />

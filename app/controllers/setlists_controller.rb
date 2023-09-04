@@ -9,6 +9,22 @@ class SetlistsController < ApplicationController
         render json: setlist, serializer: SetlistWithTracksSerializer
     end
 
+    def update
+        if check_session
+            user = current_user
+            setlist = find_setlist
+
+            if user.id == setlist.user_id
+                setlist.update!(setlist_info_params)
+                render json: setlist, serializer: SetlistWithTracksSerializer
+            else
+                render_not_authorized_response
+            end
+        else
+            render_not_authorized_response
+        end
+    end
+
     def create
         if check_session
             setlist = Setlist.create!(setlist_params[:set])
@@ -34,7 +50,7 @@ class SetlistsController < ApplicationController
             user = current_user
             setlist = find_setlist
 
-            if setlist.user_id === user.id
+            if setlist.user_id == user.id
                 setlist.destroy
                 head :no_content
             else
@@ -49,6 +65,10 @@ class SetlistsController < ApplicationController
 
     def setlist_params
         params.permit(:set => [:name, :user_id, :description, :length, :genre, :avg_bpm], :tracks => [:name, :genre, :length, :bpm, :artist])
+    end
+
+    def setlist_info_params
+        params.permit(:name, :description)
     end
 
     def find_setlist
