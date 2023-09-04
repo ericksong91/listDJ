@@ -29,7 +29,7 @@ function App() {
       });
   }, []);
 
-  function handleEditSetlists(updatedSetListTracks, onEdit, onError) {
+  function handleEditSetlists(updatedSetListTracks, description, onEdit, onError) {
     fetch(`/setlist_tracks`, {
       method: "PATCH",
       headers: {
@@ -46,6 +46,7 @@ function App() {
                 return {
                   id: set.id,
                   genre: set.genre,
+                  description: description,
                   avg_bpm: set.avg_bpm,
                   length: set.length,
                   name: set.name,
@@ -109,7 +110,7 @@ function App() {
   };
 
   return (
-    <Paper className="App" elevation={5} sx={{ margin: 1, paddingBottom: 1, bgcolor: 'rgb(40, 40, 40)' }}>
+    <Paper className="App" elevation={5} sx={{ margin: 1, paddingBottom: 5, bgcolor: 'rgb(40, 40, 40)' }}>
       <Navbar user={user} />
       <Routes>
         <Route element={<AuthLayout authenticated={!!user} />}>

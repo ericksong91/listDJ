@@ -2,18 +2,18 @@ import { Card, CardContent, Typography } from '@mui/material';
 import { Grid, Box } from '@mui/material';
 import { Button } from '@mui/material';
 
-function TrackCard({ track, order, editing, onOrder, onDelete }) {
+function TrackCard({ track, order, isEditing, onOrder, onDelete }) {
     return (
         <Box className="trackCard">
             <Grid container>
-                <Grid item xs={editing ? 9 : 12}>
+                <Grid item xs={isEditing ? 9 : 12}>
                     <Card sx={{ padding: 0.5, margin: 0.5, height: 80, display: 'flex', bgcolor: 'rgb(50, 50, 50)', color: 'white' }}>
                         <Grid container
                             direction="row"
                             justifyContent="space-evenly"
                             alignItems="center"
                         >
-                            <Grid item xs={1} sx={{paddingLeft: 2}}>
+                            <Grid item xs={1} sx={{ paddingLeft: 2 }}>
                                 <Typography variant="h8">
                                     {order}
                                 </Typography>
@@ -44,7 +44,7 @@ function TrackCard({ track, order, editing, onOrder, onDelete }) {
                         </Grid>
                     </Card >
                 </Grid>
-                {editing ?
+                {isEditing ?
                     <Grid item xs={2}>
                         <Card sx={{ padding: 0.5, margin: 0.5, height: 80, display: 'flex', bgcolor: 'rgb(50, 50, 50)', color: 'white' }}>
                             <Grid container
@@ -52,7 +52,7 @@ function TrackCard({ track, order, editing, onOrder, onDelete }) {
                                 justifyContent="space-evenly"
                                 alignItems="center"
                             >
-                                {editing ?
+                                {isEditing ?
                                     <div>
                                         <Grid item xs={1} sx={{ alignContent: 'center' }}>
                                             <Button onClick={() => onOrder(order - 1, order - 2)}>Up</Button>
@@ -71,7 +71,7 @@ function TrackCard({ track, order, editing, onOrder, onDelete }) {
                     :
                     <div></div>
                 }
-                {editing ?
+                {isEditing ?
                     <Grid item xs={1}>
                         <Card sx={{ padding: 0.5, margin: 0.5, height: 80, display: 'flex', bgcolor: 'rgb(50, 50, 50)', color: 'white' }}>
                             <Grid container

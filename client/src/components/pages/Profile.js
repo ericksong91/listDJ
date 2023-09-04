@@ -96,7 +96,7 @@ function Profile({ setlists }) {
         <Box className="Profile">
             <Grid container justifyContent="center" sx={{ marginBottom: 2 }}>
                 <Grid item>
-                    <Typography variant="h2" sx={{ color: 'orange' }}>
+                    <Typography variant="h2" sx={{ color: 'orange', paddingTop: 1 }}>
                         {`${profileUser.username}'s Page`}
                     </Typography>
                 </Grid>
@@ -118,7 +118,6 @@ function Profile({ setlists }) {
                     </Grid>
                 </Grid>
             </Grid>
-
             <Container>
                 <Grid container spacing={5}>
                     {filteredSets}
