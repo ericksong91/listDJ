@@ -41,6 +41,7 @@ class SetlistsController < ApplicationController
 
                 @setlist.update!(avg_bpm: @setlist.tracks.average(:bpm), length: @setlist.setlist_tracks.map {|t| t.track}.sum(&:length)/60)
             end
+            
             render json: @setlist, serializer: SetlistWithTracksSerializer, status: :created
         else
             render_not_authorized_response

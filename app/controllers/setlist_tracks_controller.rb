@@ -5,12 +5,14 @@ class SetlistTracksController < ApplicationController
             setlist = find_setlist
 
             if setlist.user_id === user.id
-                grouped_tracks = tracklist_params[:_json].index_by{ |tr| tr[:id]}
-                updated = SetlistTrack.update(grouped_tracks.keys, grouped_tracks.values)
-                ids = updated.map{|i| i['id'].to_i}
-                setlist_delete = setlist.setlist_tracks.where.not(id: ids).destroy_all
-    
-                render json: updated, status: :accepted
+                ActiveRecord::Base.transaction do
+                    grouped_tracks = tracklist_params[:_json].index_by{ |tr| tr[:id]}
+                    @updated = SetlistTrack.update(grouped_tracks.keys, grouped_tracks.values)
+                    ids = @updated.map{|i| i['id'].to_i}
+                    setlist_delete = setlist.setlist_tracks.where.not(id: ids).destroy_all
+                end
+
+                render json: @updated, status: :accepted
             else
                 render_not_authorized_response
             end
