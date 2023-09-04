@@ -24,9 +24,7 @@ class UsersController < ApplicationController
                 render json: user, status: :accepted
             end
         else
-            user = current_user
-            render json: user
-            # render_not_authorized_response
+            render_not_authorized_response
         end
     end
 

@@ -18,10 +18,18 @@ class SetlistsController < ApplicationController
                 setlist.update!(setlist_info_params)
                 render json: setlist, serializer: SetlistWithTracksSerializer
             else
-                render_not_authorized_response
+                user = current_user
+                setlist = find_setlist
+                arr = [current_user, find_setlist, "in second", user.id == setlist.user_id]
+                render json: arr
+                # render_not_authorized_response
             end
         else
-            render_not_authorized_response
+            user = current_user
+            setlist = find_setlist
+            arr = [current_user, find_setlist, "In First", user.id == setlist.user_id]
+            render json: user
+            # render_not_authorized_response
         end
     end
 
