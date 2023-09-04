@@ -16,9 +16,6 @@ function App() {
   const { user, users } = useContext(UserContext);
   const navigate = useNavigate();
 
-  console.log(user, users);
-  console.log(setlists);
-
   useEffect(() => {
     fetch('/setlists')
       .then(r => {

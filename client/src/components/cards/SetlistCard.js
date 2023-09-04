@@ -4,6 +4,7 @@ import {
     Grid,
     Card,
     Typography,
+    CardHeader,
 } from '@mui/material';
 
 function SetlistCard({ set, user }) {
@@ -23,28 +24,41 @@ function SetlistCard({ set, user }) {
                 padding: 1,
                 bgcolor: 'rgb(31, 30, 29)'
             }}>
-                <Grid container>
-                    <Grid item xs={2} align="center">
+                <Grid container sx={{ flexDirection: 'row' }}>
+                    <Grid item xs={2} sx={{ paddingRight: 2 }}>
                         {user.avatar ? <img className="disc" alt={`${user.username}`} src={user.avatar} /> : <img className="disc" alt={`default`} src={record} />}
                     </Grid>
-                    <Grid item xs={2} align="center">
-                        <Typography variant="h4" component="h4" sx={{ color: 'white' }}>
+                    <Grid item xs={2} sx={{ paddingTop: 4, paddingRight: 5 }}>
+                        <Typography variant="h4" sx={{ color: 'orange' }}>
                             {set.name}
                         </Typography>
+                        <Typography variant="p" sx={{ color: "white" }}>
+                            {set.date}
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={2} sx={{ paddingTop: 9 }}>
                         <Typography variant="h5" component="h5" sx={{ color: 'white' }}>
                             {set.genre}
                         </Typography>
                     </Grid>
-                    <Grid item xs={8} sm={8} md={8} lg={6} xl={4} align="center">
+                    <Grid item xs={2} sx={{ paddingTop: 9 }}>
                         <Typography variant="h5" sx={{ color: 'white' }}>
-                            <ul>{`By: ${user.username}`}</ul>
-                            <ul>{`Average BPM: ${set.avg_bpm}`}</ul>
-                            <ul>{`Est. Length: ${set.length} mins`}</ul>
+                            {`BPM: ${set.avg_bpm}`}
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={2} sx={{ paddingTop: 9 }}>
+                        <Typography variant="h5" sx={{ color: 'white' }}>
+                            {`${set.length} mins`}
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={2} sx={{ paddingTop: 9 }}>
+                        <Typography variant="h6" sx={{ color: 'white' }}>
+                            {`By: ${user.username}`}
                         </Typography>
                     </Grid>
                 </Grid>
-            </Card>
-        </Grid>
+            </Card >
+        </Grid >
     );
 }
 

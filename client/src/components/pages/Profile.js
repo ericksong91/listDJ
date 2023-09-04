@@ -9,7 +9,7 @@ import { Box, Grid, Container } from "@mui/material";
 
 function Profile({ setlists, user, users }) {
     const index = parseInt(useParams().id);
-    const { setUser, setUsers } = useContext(UserContext);
+    const { setUser, setUsers, handleDeleteUser } = useContext(UserContext);
     const profileUser = users.find((user) => user.id === index);
     const [userAvatar, setUserAvatar] = useState('');
     const [errors, setErrors] = useState([]);

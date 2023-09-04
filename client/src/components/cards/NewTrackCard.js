@@ -150,6 +150,7 @@ function NewTrackCard({ genres, onSetlist }) {
                         label="trackgenre"
                         value={trackGenre}
                         id="trackgenre"
+                        sx={{ color: 'white' }}
                         onChange={(e) => setTrackGenre(e.target.value)}
                     >
                         {genresListSelect}
