@@ -5,7 +5,6 @@ class UsersController < ApplicationController
     end
 
     def create
-        # byebug
         @user = User.create!(user_params)
         login_user
         render json: @user, status: :created
@@ -25,7 +24,9 @@ class UsersController < ApplicationController
                 render json: user, status: :accepted
             end
         else
-            render_not_authorized_response
+            user = current_user
+            render json: user
+            # render_not_authorized_response
         end
     end
 
