@@ -1,11 +1,6 @@
 import record from '../images/record.png'
 import { useNavigate } from 'react-router-dom';
-import {
-    Grid,
-    Card,
-    Typography,
-    CardHeader,
-} from '@mui/material';
+import { Grid, Card, Typography } from '@mui/material';
 
 function SetlistCard({ set, user }) {
     const navigate = useNavigate()

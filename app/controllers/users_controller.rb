@@ -48,10 +48,6 @@ class UsersController < ApplicationController
 
     private
 
-    def render_not_authorized_response
-        render json:  { "errors": "Not authorized" }, status: :unauthorized
-    end
-
     def check_update_params
         params.key?("avatar")
     end

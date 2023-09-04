@@ -27,6 +27,18 @@ function App() {
       });
   }, []);
 
+  console.log(setlists)
+
+  function handleNewTrack(track) {
+    console.log("new track", track)
+
+    //Two fetch requests. one fetch request to save new tracks
+    //After new tracks are saved using Setlist.tracks.create! (?)
+    // Create with first_or_initialize
+    // Once list of tracks are created, try to use list order to make setlist_tracks in order?
+
+  };
+
   function handleEditSetlistTracks(updatedSetListTracks, onEdit, onIsLoading, onError) {
     fetch(`/setlist_tracks`, {
       method: "PATCH",
@@ -98,10 +110,6 @@ function App() {
       });
   };
 
-  function handleNewTrack() {
-
-  }
-
   function handleDelete(id, onIsLoading, onErrors) {
     handleDeleteUser(id, setlists, onIsLoading, onErrors, setSetlists);
     navigate('/');
@@ -160,9 +168,11 @@ function App() {
               user={user}
               users={users}
               setlists={setlists}
+              onNewTrack={handleNewTrack}
               onEditSetlists={handleEditSetlists}
               onEditSetlistTracks={handleEditSetlistTracks}
-              onDeleteSetlists={handleDeleteSetlists} />}
+              onDeleteSetlists={handleDeleteSetlists}
+            />}
           />
           <Route path='/profile/:id' element={<Profile setlists={setlists} user={user} users={users} onDelete={handleDelete} />} />
           <Route path='/new' element={<NewSetForm user={user} onNewSetlist={handleNewSetlists} />} />

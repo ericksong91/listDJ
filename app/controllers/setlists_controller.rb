@@ -14,39 +14,34 @@ class SetlistsController < ApplicationController
             user = current_user
             setlist = find_setlist
 
-            if user.id == setlist.user_id.to_i
+            if user.id == setlist.user_id
                 setlist.update!(setlist_info_params)
                 render json: setlist, serializer: SetlistWithTracksSerializer
             else
-                # user = current_user
-                # setlist = find_setlist
-                # arr = [current_user, find_setlist, "in second", user.id == setlist.user_id]
-                # render json: arr
                 render_not_authorized_response
             end
         else
-            # user = current_user
-            # setlist = find_setlist
-            # arr = [current_user, find_setlist, "In First", user.id == setlist.user_id]
-            # render json: user
             render_not_authorized_response
         end
     end
 
     def create
         if check_session
-            setlist = Setlist.create!(setlist_params[:set])
-            tracks = setlist.tracks.create!(setlist_params[:tracks])
-    
-            i = 1
-    
-            setlist.setlist_tracks.each do |t|
-                t.update!(track_order: i)
-                i+=1
+            ActiveRecord::Base.transaction do
+                @setlist = Setlist.create!(setlist_params[:set])
+                tracks = setlist_params[:tracks]
+                tracks.each{|t| where_duplicate(t).first_or_create(t)}
+        
+                i = 1
+
+                tracks.each do |t| 
+                    @setlist.setlist_tracks.create!(track_id: check_duplicate(t).id, track_order: i)
+                    i+=1
+                end
+
+                @setlist.update!(avg_bpm: @setlist.tracks.average(:bpm), length: @setlist.setlist_tracks.map {|t| t.track}.sum(&:length)/60)
             end
-    
-            setlist.update!(avg_bpm: setlist.tracks.average(:bpm), length: setlist.tracks.sum(&:length)/60)
-            render json: setlist, serializer: SetlistWithTracksSerializer, status: :created
+            render json: @setlist, serializer: SetlistWithTracksSerializer, status: :created
         else
             render_not_authorized_response
         end
@@ -70,6 +65,14 @@ class SetlistsController < ApplicationController
     end
 
     private
+
+    def check_duplicate(t)
+        Track.find_by(name: t[:name], artist: t[:artist], genre: t[:genre], bpm: t[:bpm], length: t[:length])
+    end
+
+    def where_duplicate(t)
+        Track.where(name: t[:name], artist: t[:artist], genre: t[:genre], bpm: t[:bpm], length: t[:length])
+    end
 
     def setlist_params
         params.permit(:set => [:name, :user_id, :description, :length, :genre, :avg_bpm], :tracks => [:name, :genre, :length, :bpm, :artist])
