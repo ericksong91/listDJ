@@ -24,14 +24,7 @@ function Profile({ setlists }) {
         return <div>Loading...</div>
     };
 
-    function handleDelete() {
-        console.log("delete")
-    }
-
     function handleEdit(biography, id, setIsEditing, setIsLoading) {
-        console.log("Saving", biography);
-
-
         fetch(`/users/${id}`, {
             method: 'PATCH',
             headers: {
@@ -87,6 +80,10 @@ function Profile({ setlists }) {
                 }
             });
     };
+
+    function handleDelete() {
+        console.log("delete")
+    }
 
     const filteredList = setlists.filter((set) => parseInt(set.user_id) === parseInt(index));
 

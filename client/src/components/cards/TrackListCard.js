@@ -77,6 +77,8 @@ function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onE
             onDelete={handleDelete}
         />);
 
+        console.log(user.id === owner)
+
     return (
         <div className="SetlistTracks">
             <Container>

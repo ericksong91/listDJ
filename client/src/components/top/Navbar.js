@@ -10,7 +10,7 @@ function Navbar({ user }) {
 
   return (
     <Box className="Navbar">
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" sx={{ paddingBottom: 2 }}>
         {!user ?
           <Typography variant="h6" sx={{ paddingTop: 1.5, paddingLeft: 1, color: "orange" }}>Welcome, Guest!</Typography>
           :
