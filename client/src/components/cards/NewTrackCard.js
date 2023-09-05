@@ -153,7 +153,7 @@ function NewTrackCard({ genres, onSetlist }) {
                 </FormControl>
                 <Typography variant="h7" sx={{ color: 'red' }}>{error ? `*${error}` : null}</Typography>
             </Card>
-            <Button variant="contained" fullWidth onClick={() => handleClick()}>Add Track</Button>
+            <Button variant="contained" sx={{ '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }} fullWidth onClick={() => handleClick()}>Add Track</Button>
         </Grid>
     );
 }

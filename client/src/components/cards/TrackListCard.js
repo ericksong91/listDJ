@@ -54,7 +54,7 @@ function TrackListCard({ user, owner, genres, index, tracks, isEditing, onIsEdit
                     ?
                     isEditing ?
                         <Box>
-                            <Button sx={{ width: 1 / 3 }} variant="contained" onClick={() => {
+                            <Button sx={{ width: "49%", margin: 0.5, '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }} variant="contained" onClick={() => {
                                 onIsEditing(!isEditing);
                                 setTrackList([...tracks]);
                             }}>
@@ -63,21 +63,30 @@ function TrackListCard({ user, owner, genres, index, tracks, isEditing, onIsEdit
                             {isLoading ?
                                 <Button
                                     variant="contained"
-                                    sx={{ width: 1 / 3 }}
+                                    sx={{ width: "49%", margin: 0.5, '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }}
                                 >Loading...</Button>
                                 :
-                                <Button sx={{ width: 1 / 3 }} variant="contained"
+                                <Button sx={{ width: "49%", margin: 0.5, '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }} variant="contained"
                                     onClick={() => onEditSetlistTracks(trackList, index, onIsEditing, setIsLoading, onError)}>
                                     Save Changes
                                 </Button>
                             }
+                        </Box>
+                        :
+                        <Box>
+                            <Button sx={{ '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }}
+                                fullWidth variant="contained" onClick={() => onIsEditing(!isEditing)}>
+                                Edit
+                            </Button>
                             {isLoading ?
                                 <Button
                                     variant="contained"
-                                    sx={{ width: 1 / 3 }}
+                                    color='error'
+                                    fullWidth
+                                    sx={{ marginTop: 5 }}
                                 >Loading...</Button>
                                 :
-                                <Button sx={{ width: 1 / 3 }} variant="contained"
+                                <Button color="error" variant="contained" fullWidth sx={{ marginTop: 3 }}
                                     onClick={() => {
                                         setIsLoading(true);
                                         if (window.confirm("Are you sure you want to delete your set?")) {
@@ -86,25 +95,20 @@ function TrackListCard({ user, owner, genres, index, tracks, isEditing, onIsEdit
                                             setIsLoading(false);
                                         };
                                     }}>
-                                    Delete
+                                    Delete Set
                                 </Button>
                             }
-                        </Box>
-                        :
-                        <Box>
-                            <Button fullWidth variant="contained" onClick={() => onIsEditing(!isEditing)}>Edit</Button>
                         </Box>
                     :
                     null
                 }
             </Container>
-            {
-                isEditing ?
-                    <Grid item sx={{ width: "1/2" }}>
-                        <NewTrackCard genres={genres} onSetlist={handleSetlists} />
-                    </Grid>
-                    :
-                    <Box></Box>
+            {isEditing ?
+                <Grid item sx={{ width: "1/2" }}>
+                    <NewTrackCard genres={genres} onSetlist={handleSetlists} />
+                </Grid>
+                :
+                <Box></Box>
             }
         </div >
     );

@@ -73,14 +73,14 @@ function DescriptionCard({ user, users, set, onEditSetlists }) {
                     <CardContent>
                         {isEditing ?
                             isLoading ?
-                                <Button variant="contained">Loading...</Button>
+                                <Button variant="contained" sx={{ '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }}>Loading...</Button>
                                 :
-                                <Button variant="contained" onClick={() => {
+                                <Button variant="contained" sx={{ '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }} onClick={() => {
                                     setIsLoading(true);
                                     onEditSetlists(set, name, description, setIsLoading, setIsEditing, setErrors);
                                 }}>Save</Button>
                             :
-                            <Button variant="contained" onClick={() => setIsEditing(true)}>Edit</Button>
+                            <Button variant="contained" sx={{ '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }} onClick={() => setIsEditing(true)}>Edit</Button>
                         }
                     </CardContent>
                     :

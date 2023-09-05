@@ -45,32 +45,31 @@ function BiographyCard({ profileUser, user, errors, onDelete, onEdit, onErrors }
                 <CardContent>
                     {user.id === profileUser.id ?
                         isEditing ?
-                            <Button variant="contained" onClick={() => onEdit(biography, user.id, setIsEditing, setIsLoading)}>Save</Button>
+                            <Button variant="contained" sx={{ '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }} onClick={() => onEdit(biography, user.id, setIsEditing, setIsLoading)}>Save</Button>
                             :
-                            <Button variant="contained" onClick={() => setIsEditing(!isEditing)}>Edit</Button>
+                            <Button variant="contained" sx={{ '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }} onClick={() => setIsEditing(!isEditing)}>Edit</Button>
                         :
                         <div></div>}
                 </CardContent>
-                <CardContent>
-                    {isEditing ?
-                        isLoading ?
-                            <Button
-                                variant="contained"
-                                sx={{ mt: 3, mb: 2 }}
-                            >Loading...</Button>
-                            :
-                            <Button
-                                variant="contained"
-                                color="error"
-                                sx={{ mt: 3, mb: 2 }}
-                                onClick={() => onDelete(user.id, setIsLoading, onErrors)}
-                            >Delete Account</Button>
-                        :
-                        <div></div>
-                    }
-                </CardContent>
                 <Typography variant="h7" sx={{ color: 'red' }}>{errors.map((error, ind) => <li key={ind + 1}>{error}</li>)}</Typography>
             </Card>
+            {isEditing ?
+                isLoading ?
+                    <Button
+                        variant="contained"
+                        color="error"
+                        sx={{ mt: 3, mb: 2 }}
+                    >Loading...</Button>
+                    :
+                    <Button
+                        variant="contained"
+                        color="error"
+                        sx={{ mt: 3, mb: 2 }}
+                        onClick={() => onDelete(user.id, setIsLoading, onErrors)}
+                    >Delete Account</Button>
+                :
+                <div></div>
+            }
         </Box>
     );
 }

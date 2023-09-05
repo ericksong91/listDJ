@@ -55,10 +55,10 @@ function TrackCard({ track, order, isEditing, onOrder, onDelete }) {
                                 {isEditing ?
                                     <div>
                                         <Grid item xs={1} sx={{ alignContent: 'center' }}>
-                                            <Button onClick={() => onOrder(order - 1, order - 2)}>Up</Button>
+                                            <Button sx={{ color: 'orange' }} onClick={() => onOrder(order - 1, order - 2)}>Up</Button>
                                         </Grid>
                                         <Grid item xs={1}>
-                                            <Button onClick={() => onOrder(order - 1, order)}>Down</Button>
+                                            <Button sx={{ color: 'orange' }} onClick={() => onOrder(order - 1, order)}>Down</Button>
                                         </Grid>
                                     </div>
                                     :
@@ -71,24 +71,26 @@ function TrackCard({ track, order, isEditing, onOrder, onDelete }) {
                     :
                     <div></div>
                 }
-                {isEditing ?
-                    <Grid item xs={1}>
-                        <Card sx={{ padding: 0.5, margin: 0.5, height: 80, display: 'flex', bgcolor: 'rgb(50, 50, 50)', color: 'white' }}>
-                            <Grid container
-                                direction="row"
+                {
+                    isEditing ?
+                        <Grid item xs={1}>
+                            <Card sx={{ padding: 0.5, margin: 0.5, height: 80, display: 'flex', bgcolor: 'rgb(50, 50, 50)', color: 'white' }}>
+                                <Grid container
+                                    direction="row"
 
-                                alignItems="center"
-                            >
-                                <Grid item xs={1}>
-                                    <Button onClick={() => onDelete(order)}>X</Button>
+                                    alignItems="center"
+                                >
+                                    <Grid item xs={1}>
+                                        <Button sx={{ color: 'orange' }} onClick={() => onDelete(order)}>X</Button>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </Card>
-                    </Grid>
-                    :
-                    <div></div>}
-            </Grid>
-        </Box>
+                            </Card>
+                        </Grid>
+                        :
+                        <div></div>
+                }
+            </Grid >
+        </Box >
     );
 }
 

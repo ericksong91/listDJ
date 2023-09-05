@@ -38,7 +38,7 @@ function AvatarCard({ avatar, profileUser, user, onSubmitAvatar }) {
                                     <Button
                                         variant="contained"
                                         component="label"
-                                        sx={{ width: "50%" }}
+                                        sx={{ width: "50%", '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }}
                                     >
                                         Upload Avatar
                                         <input
@@ -63,9 +63,13 @@ function AvatarCard({ avatar, profileUser, user, onSubmitAvatar }) {
                                         </Box>
                                     )}
                                 </Grid>
-                                <Grid item xs={12} >
-                                    <Button onClick={(e) => onSubmitAvatar(e, file, setIsSelected)}>Submit</Button>
-                                </Grid>
+                                {isSelected ?
+                                    <Grid item xs={12} >
+                                        <Button sx={{ color: 'orange' }} onClick={(e) => onSubmitAvatar(e, file, setIsSelected)}>Submit</Button>
+                                    </Grid>
+                                    :
+                                    <div></div>
+                                }
                             </Grid>
                             :
                             <Box></Box>
