@@ -5,7 +5,7 @@ import AvatarCard from "../cards/AvatarCard";
 import BiographyCard from "../cards/BiographyCard";
 import { useParams } from "react-router-dom";
 import { Typography } from "@mui/material";
-import { Box, Grid, Container } from "@mui/material";
+import { Box, Grid, Container, Button } from "@mui/material";
 
 function Profile({ setlists, user, users, onDelete }) {
     const index = parseInt(useParams().id);
@@ -13,6 +13,7 @@ function Profile({ setlists, user, users, onDelete }) {
     const profileUser = users.find((user) => user.id === index);
     const [userAvatar, setUserAvatar] = useState('');
     const [errors, setErrors] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         if (!!profileUser) {
@@ -24,7 +25,7 @@ function Profile({ setlists, user, users, onDelete }) {
         return <div></div>
     };
 
-    function handleEdit(biography, id, setIsEditing, setIsLoading) {
+    function handleEdit(biography, id, setIsEditing) {
         fetch(`/users/${id}`, {
             method: 'PATCH',
             headers: {
@@ -37,7 +38,6 @@ function Profile({ setlists, user, users, onDelete }) {
             })
         })
             .then((r) => {
-                setIsLoading(false);
                 if (r.ok) {
                     r.json().then((data) => {
                         const filteredUsers = users.map((user) => {
@@ -114,9 +114,7 @@ function Profile({ setlists, user, users, onDelete }) {
                         {!profileUser ?
                             <div></div>
                             :
-                            <BiographyCard user={user} profileUser={profileUser}
-                                index={index} errors={errors} onDelete={onDelete}
-                                onEdit={handleEdit} onErrors={setErrors} />}
+                            <BiographyCard user={user} profileUser={profileUser} errors={errors} onEdit={handleEdit} />}
                     </Grid>
                 </Grid>
             </Grid>
@@ -125,6 +123,22 @@ function Profile({ setlists, user, users, onDelete }) {
                     {filteredSets}
                 </Grid>
             </Container>
+            {isLoading ?
+                <Button
+                    variant="contained"
+                    color="error"
+                    fullWidth
+                    sx={{ mt: 3, mb: 2 }}
+                >Loading...</Button>
+                :
+                <Button
+                    variant="contained"
+                    color="error"
+                    fullWidth
+                    sx={{ mt: 3, mb: 2 }}
+                    onClick={() => onDelete(user.id, setIsLoading, setErrors)}
+                >Delete Account</Button>
+            }
         </Box>
     );
 };
