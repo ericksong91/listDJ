@@ -2,77 +2,87 @@ import { useState, useEffect } from "react";
 import TrackCard from "./TrackCard";
 import { Container, Button, Box } from "@mui/material";
 
-function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onEditSetlistTracks, onDeleteSetlists }) {
-    const [filteredTrackList, setFilteredTrackList] = useState([]);
-    const [filteredSetlistTrackList, setFilteredSetlistTrackList] = useState([]);
-    const [isEditing, setIsEditing] = useState(false);
+function TrackListCard({ user, owner, index, tracks, isEditing, onIsEditing,
+    setlistTracks, onError, onEditSetlistTracks, onDeleteSetlists, onDelete }) {
+    const [trackList, setTrackList] = useState([]);
+    // const [filteredSetlistTrackList, setFilteredSetlistTrackList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
+    // useEffect(() => {
+    //     if (!tracks || !setlistTracks) {
+    //         return <div>Loading...</div>
+    //     } else {
+    //         const arr = [];
+    //         setlistTracks.forEach((slTrack) => {
+    //             arr.push(tracks.find((track) => track.id === slTrack.track_id));
+    //         });
+    //         setFilteredTrackList([...arr]);
+    //         setFilteredSetlistTrackList([...setlistTracks]);
+    //     };
+    // }, [tracks, setlistTracks]);
+
     useEffect(() => {
-        if (!tracks || !setlistTracks) {
-            return <div>Loading...</div>
-        } else {
-            const arr = [];
-            setlistTracks.forEach((slTrack) => {
-                arr.push(tracks.find((track) => track.id === slTrack.track_id));
-            });
-            setFilteredTrackList([...arr]);
-            setFilteredSetlistTrackList([...setlistTracks]);
-        };
-    }, [tracks, setlistTracks]);
+        setTrackList([...tracks])
+    }, [tracks])
 
-    function handleOrder(from, to) {
-        if (to < 0 || to > filteredTrackList.length) {
-            return
-        } else {
-            const arr = [...filteredTrackList];
-            arr.splice(to, 0, arr.splice(from, 1)[0]);
-            setFilteredTrackList([...arr]);
-
-            const arr2 = [];
-            let h = 1;
-
-            while (h <= arr.length) {
-                arr2.push({
-                    id: filteredSetlistTrackList[h - 1].id,
-                    setlist_id: setlistTracks[0].setlist_id,
-                    track_id: arr[h - 1].id,
-                    track_order: h
-                });
-                h++
-            };
-            setFilteredSetlistTrackList([...arr2]);
-        };
+    if (!tracks || !setlistTracks) {
+        return <Box></Box>
     };
 
-    function handleDelete(pos) {
-        const arr = [...filteredTrackList];
-        arr.splice(pos - 1, 1);
-        setFilteredTrackList([...arr]);
 
-        const arr2 = [];
-        let h = 1;
 
-        while (h <= arr.length) {
-            arr2.push({
-                id: filteredSetlistTrackList[h - 1].id,
-                setlist_id: setlistTracks[0].setlist_id,
-                track_id: arr[h - 1].id,
-                track_order: h
-            });
-            h++
-        };
-        setFilteredSetlistTrackList([...arr2]);
-    };
+    // function handleOrder(from, to) {
+    //     if (to < 0 || to > filteredTrackList.length) {
+    //         return
+    //     } else {
+    //         const arr = [...filteredTrackList];
+    //         arr.splice(to, 0, arr.splice(from, 1)[0]);
+    //         setFilteredTrackList([...arr]);
 
-    const tracksList = filteredTrackList.map((track, ind) =>
+    //         const arr2 = [];
+    //         let h = 1;
+
+    //         while (h <= arr.length) {
+    //             arr2.push({
+    //                 id: filteredSetlistTrackList[h - 1].id,
+    //                 setlist_id: setlistTracks[0].setlist_id,
+    //                 track_id: arr[h - 1].id,
+    //                 track_order: h
+    //             });
+    //             h++
+    //         };
+    //         setFilteredSetlistTrackList([...arr2]);
+    //     };
+    // };
+
+    // function handleDelete(pos) {
+    //     const arr = [...filteredTrackList];
+    //     arr.splice(pos - 1, 1);
+    //     setFilteredTrackList([...arr]);
+
+    //     const arr2 = [];
+    //     let h = 1;
+
+    //     while (h <= arr.length) {
+    //         arr2.push({
+    //             id: filteredSetlistTrackList[h - 1].id,
+    //             setlist_id: setlistTracks[0].setlist_id,
+    //             track_id: arr[h - 1].id,
+    //             track_order: h
+    //         });
+    //         h++
+    //     };
+    //     setFilteredSetlistTrackList([...arr2]);
+    // };
+
+    const tracksList = trackList.map((track, ind) =>
         <TrackCard
             key={ind}
             track={track}
             order={ind + 1}
             onOrder={handleOrder}
             isEditing={isEditing}
-            onDelete={handleDelete}
+            onDelete={onDelete}
         />);
 
     return (
@@ -84,12 +94,12 @@ function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onE
                     isEditing ?
                         <Box>
                             <Button sx={{ width: 1 / 3 }} variant="contained" onClick={() => {
-                                setIsEditing(!isEditing);
+                                onIsEditing(!isEditing);
                                 const arr = [];
                                 setlistTracks.forEach((slTrack) => {
                                     arr.push(tracks.find((track) => track.id === slTrack.track_id));
                                 });
-                                setFilteredTrackList([...arr]);
+                                setTrackList([...arr]);
                             }}>
                                 Cancel
                             </Button>
@@ -100,7 +110,7 @@ function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onE
                                 >Loading...</Button>
                                 :
                                 <Button sx={{ width: 1 / 3 }} variant="contained"
-                                    onClick={() => onEditSetlistTracks(filteredSetlistTrackList, filteredTrackList, index, setIsEditing, setIsLoading, onError)}>
+                                    onClick={() => onEditSetlistTracks(filteredSetlistTrackList, trackList, index, onIsEditing, setIsLoading, onError)}>
                                     Save Changes
                                 </Button>
                             }
@@ -125,7 +135,7 @@ function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onE
                         </Box>
                         :
                         <Box>
-                            <Button fullWidth variant="contained" onClick={() => setIsEditing(!isEditing)}>Edit</Button>
+                            <Button fullWidth variant="contained" onClick={() => onIsEditing(!isEditing)}>Edit</Button>
                         </Box>
                     :
                     null

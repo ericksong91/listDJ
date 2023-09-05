@@ -42,7 +42,6 @@ function NewTrackCard({ genres, onSetlist }) {
             setTrackGenre("");
             setTrackLength({ min: 0, sec: 0 });
             setError("");
-
         };
     };
 

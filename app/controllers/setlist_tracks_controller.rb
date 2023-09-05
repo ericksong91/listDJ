@@ -1,41 +1,30 @@
 class SetlistTracksController < ApplicationController
     def update
         if check_session
-            
-            params.permit!
             user = find_user
-            setlist = Setlist.find(params[:setlist_tracks][0][:setlist_id])
-            tracks = params[:tracks]
-            tracks2 = tracks.map{|t| Track.where(name: t[:name], artist: t[:artist], genre: t[:genre], bpm: t[:bpm], length: t[:length]).first_or_create(t)}
-            
-            # byebug 
+            @setlist = Setlist.find(setlist_track_params[:setlist_tracks][0][:setlist_id])
 
-            h = 1
-
-            tracks2.each do |t|
-                m = setlist.setlist_tracks.where(track_order: h).first_or_initialize
-                m.track_id = t.id
-                m.save
-                h+=1
-            end
-
-            byebug
-           
-            # for each track, check track_order
-            # for each setlist_track, find(track_order: h, setlist_id: setlist.id), update track_id
-            # for everything else, create setlist.setlist_track.create!(track_id: tracks[i], track_order: i)
-            # if lengths dont match
-            # OR just destroy all setlist_tracks, remake?
-
-            if setlist.user_id === user.id
+            if @setlist.user_id === user.id
                 ActiveRecord::Base.transaction do
-                    grouped_tracks = tracklist_params[:_json].index_by{ |tr| tr[:id]}
-                    @updated = SetlistTrack.update(grouped_tracks.keys, grouped_tracks.values)
-                    ids = @updated.map{|i| i['id'].to_i}
-                    setlist_delete = setlist.setlist_tracks.where.not(id: ids).destroy_all
-                end
+                    tracks = track_params[:tracks]
+                    tracks2 = tracks.map{|t| Track.where(name: t[:name], artist: t[:artist], genre: t[:genre], bpm: t[:bpm], length: t[:length]).first_or_create(t)}
 
-                render json: @updated, status: :accepted
+                    h = 1
+                    tracks2.each do |t|
+                        m = @setlist.setlist_tracks.where(track_order: h).first_or_initialize
+                        m.track_id = t.id
+                        m.save
+                        h+=1
+                    end
+
+                # ActiveRecord::Base.transaction do
+                #     grouped_tracks = tracklist_params[:_json].index_by{ |tr| tr[:id]}
+                #     @updated = SetlistTrack.update(grouped_tracks.keys, grouped_tracks.values)
+                #     ids = @updated.map{|i| i['id'].to_i}
+                #     setlist_delete = setlist.setlist_tracks.where.not(id: ids).destroy_all
+                # end
+                end
+                render json: @setlist, status: :accepted, serializer: SetlistWithTracksSerializer
             else
                 render_not_authorized_response
             end
@@ -56,6 +45,14 @@ class SetlistTracksController < ApplicationController
 
     def tracklist_params
         params.permit(:_json => [:id, :setlist_id, :track_id, :track_order])
+    end
+
+    def setlist_track_params
+        params.permit(:setlist_tracks => [:id, :setlist_id, :track_id, :track_order])
+    end
+
+    def track_params
+        params.permit(:tracks => [:name, :genre, :length, :bpm, :artist])
     end
 
 

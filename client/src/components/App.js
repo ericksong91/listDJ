@@ -13,7 +13,7 @@ import '../css/App.css'
 
 function App() {
   const [setlists, setSetlists] = useState([]);
-  const { user, users, handleDeleteUser } = useContext(UserContext);
+  const { user, users, genresList, handleDeleteUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,25 +27,9 @@ function App() {
       });
   }, []);
 
-  function handleNewTrack(track) {
-    console.log("new track", track)
-
-    //Two fetch requests. one fetch request to save new tracks
-    //After new tracks are saved using Setlist.tracks.create! (?)
-    // Create with first_or_initialize
-    // Once list of tracks are created, try to use list order to make setlist_tracks in order?
-
-  };
-
   function handleEditSetlistTracks(updatedSetListTracks, updatedTracks, index, onEdit, onIsLoading, onError) {
 
     console.log(updatedSetListTracks, updatedTracks);
-
-    // How to preserve order of tracks with no ids?
-    // Add tracks first with check
-    // Once tracks have been added, iterate through every track in the setlist making
-    // a new setlist_tracks {check track_id, set_id, track_order: <---Sort by this? }
-    // Test by adding a track to the end of updatedTracks, maybe don't need updated SetlistTracks
 
     const arr1 = [...updatedSetListTracks, { setlist_id: index, track_order: updatedSetListTracks.length }]
     const arr2 = [...updatedTracks, { name: "SampleTest", artist: "Malfoy", length: 30, bpm: 220, genre: "Happy Hardcore" }]
@@ -64,7 +48,7 @@ function App() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({setlist_tracks: arr1, tracks: arr2})
+        body: JSON.stringify({ setlist_tracks: arr1, tracks: arr2 })
       })
         .then((r) => {
           onEdit(false);
@@ -72,18 +56,8 @@ function App() {
           if (r.ok) {
             r.json().then((data) => {
               const filteredSetlists = setlists.map((set) => {
-                if (set.id === data[0].setlist_id) {
-                  return {
-                    id: set.id,
-                    genre: set.genre,
-                    description: set.description,
-                    avg_bpm: set.avg_bpm,
-                    length: set.length,
-                    name: set.name,
-                    user_id: set.user_id,
-                    setlist_track_org: data,
-                    tracks: set.tracks
-                  };
+                if (set.id === data.id) {
+                  return data
                 } else {
                   return set
                 }
@@ -92,7 +66,7 @@ function App() {
             });
           } else {
             r.json().then((error) => onError(error.errors));
-          }
+          };
         });
     };
   };
@@ -188,7 +162,7 @@ function App() {
               user={user}
               users={users}
               setlists={setlists}
-              onNewTrack={handleNewTrack}
+              genres={genresList}
               onEditSetlists={handleEditSetlists}
               onEditSetlistTracks={handleEditSetlistTracks}
               onDeleteSetlists={handleDeleteSetlists}
