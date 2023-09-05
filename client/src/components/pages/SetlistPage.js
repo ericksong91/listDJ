@@ -13,21 +13,31 @@ function SetlistPage({ user, users, setlists, genres, onEditSetlists, onEditSetl
 
     console.log(setFiltered)
 
+    // FIX GLITCH WHERE ORder isn't getting preserved
+
     const sortedTracks = [];
 
-    setFiltered.tracks.forEach((track) => {
-        setFiltered.setlist_track_org.forEach((st) => {
-            if(st.track_id === track.id) {
-                sortedTracks.push(track);
+    // setFiltered.tracks.forEach((track) => {
+    //     setFiltered.setlist_track_org.forEach((st) => {
+    //         if(st.track_id === track.id) {
+    //             sortedTracks.push(track);
+    //         };
+    //     });
+    // });
+
+    if (setlists.length === 0 || !setFiltered || !user || !users) {
+        return <div></div>
+    };
+
+    setFiltered.setlist_track_org.forEach((st) => {
+        setFiltered.tracks.forEach((t) => {
+            if (st.track_id === t.id) {
+                sortedTracks.push(t);
             };
         });
     });
 
     console.log(sortedTracks)
-
-    if (setlists.length === 0 || !setFiltered || !user || !users) {
-        return <div></div>
-    };
 
     // function handleSetlists(newTrack) {
     //     console.log("yay", newTrack, setFiltered);
@@ -76,7 +86,6 @@ function SetlistPage({ user, users, setlists, genres, onEditSetlists, onEditSetl
     //     setSetFiltered({ ...filteredSetWithTracks });
     // };
 
-    console.log(setFiltered.user_id)
     return (
         <Box className="SetlistPage">
             <Grid container>

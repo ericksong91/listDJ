@@ -30,6 +30,8 @@ function TrackListCard({ user, owner, genres, index, tracks, isEditing, onIsEdit
         return <Box></Box>
     };
 
+    console.log(trackList)
+
     function handleOrder(from, to) {
         if (to < 0 || to > trackList.length) {
             return
