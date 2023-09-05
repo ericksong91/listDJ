@@ -27,16 +27,17 @@ function App() {
       });
   }, []);
 
-  function handleEditSetlistTracks(updatedSetListTracks, updatedTracks, index, onEdit, onIsLoading, onError) {
+  function handleEditSetlistTracks(updatedTracks, index, onEdit, onIsLoading, onError) {
 
-    console.log(updatedSetListTracks, updatedTracks);
+    // console.log(updatedSetListTracks, updatedTracks);
 
-    const arr1 = [...updatedSetListTracks, { setlist_id: index, track_order: updatedSetListTracks.length }]
+    // const arr1 = [...updatedSetListTracks, { setlist_id: index, track_order: updatedSetListTracks.length }]
+    const arr1 = []
     const arr2 = [...updatedTracks, { name: "SampleTest", artist: "Malfoy", length: 30, bpm: 220, genre: "Happy Hardcore" }]
 
     console.log(arr1, arr2)
 
-    if (updatedSetListTracks === 0 || updatedTracks.length === 0) {
+    if (updatedTracks.length === 0) {
       if (window.confirm("There are no tracks, set will be deleted.")) {
         handleDeleteSetlists(index, onError, onIsLoading);
       } else {
