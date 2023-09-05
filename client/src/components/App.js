@@ -37,6 +37,8 @@ function App() {
 
     // console.log(arr1, arr2)
 
+    //REFACTOR BACKEND AND REMOVE IT FROM SETLIST_TRACKS
+
     console.log(updatedTracks, index)
 
     if (updatedTracks.length === 0) {

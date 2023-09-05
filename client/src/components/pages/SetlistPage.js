@@ -11,6 +11,20 @@ function SetlistPage({ user, users, setlists, genres, onEditSetlists, onEditSetl
     // const [setFiltered, setSetFiltered] = useState(setlists ? setlists.find((set) => set.id === index) : {});
     const setFiltered = setlists.find((set) => set.id === index);
 
+    console.log(setFiltered)
+
+    const sortedTracks = [];
+
+    setFiltered.tracks.forEach((track) => {
+        setFiltered.setlist_track_org.forEach((st) => {
+            if(st.track_id === track.id) {
+                sortedTracks.push(track);
+            };
+        });
+    });
+
+    console.log(sortedTracks)
+
     if (setlists.length === 0 || !setFiltered || !user || !users) {
         return <div></div>
     };
@@ -74,7 +88,7 @@ function SetlistPage({ user, users, setlists, genres, onEditSetlists, onEditSetl
                         user={user}
                         owner={setFiltered.user_id}
                         index={index}
-                        tracks={setFiltered.tracks}
+                        tracks={sortedTracks}
                         genres={genres}
                         setlistTracks={setFiltered.setlist_track_org}
                         isEditing={isEditing}
