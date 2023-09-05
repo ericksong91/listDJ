@@ -9,14 +9,48 @@ class SetlistsController < ApplicationController
         render json: setlist, serializer: SetlistWithTracksSerializer
     end
 
+    # def update
+    #     if check_session
+    #         user = current_user
+    #         setlist = find_setlist
+
+    #         if user.id == setlist.user_id
+    #             setlist.update!(setlist_info_params)
+    #             render json: setlist, serializer: SetlistWithTracksSerializer
+    #         else
+    #             render_not_authorized_response
+    #         end
+    #     else
+    #         render_not_authorized_response
+    #     end
+    # end
+
     def update
         if check_session
             user = current_user
-            setlist = find_setlist
+            @setlist = find_setlist
 
-            if user.id == setlist.user_id
-                setlist.update!(setlist_info_params)
-                render json: setlist, serializer: SetlistWithTracksSerializer
+
+            if @setlist.user_id === user.id
+                ActiveRecord::Base.transaction do
+                    tracks = track_params[:tracks]
+                    tracks2 = tracks.map{|t| Track.where(name: t[:name], artist: t[:artist], genre: t[:genre], bpm: t[:bpm], length: t[:length]).first_or_create(t)}
+
+                    h = 1
+
+                    @updated = []
+                    tracks2.each do |t|
+                        m = @setlist.setlist_tracks.where(track_order: h).first_or_initialize
+                        m.track_id = t.id
+                        m.save
+                        h+=1
+                        @updated << m
+                    end
+
+                    ids = @updated.map{|i| i['id'].to_i}
+                    setlist_delete = @setlist.setlist_tracks.where.not(id: ids).destroy_all
+                end
+                render json: @setlist, status: :accepted, serializer: SetlistWithTracksSerializer
             else
                 render_not_authorized_response
             end
@@ -54,7 +88,7 @@ class SetlistsController < ApplicationController
             user = current_user
             setlist = find_setlist
 
-            if setlist.user_id.to_i == user.id
+            if setlist.user_id == user.id
                 setlist.destroy
                 head :no_content
             else
@@ -86,4 +120,9 @@ class SetlistsController < ApplicationController
     def find_setlist
         Setlist.find(params[:id])
     end
+
+    def track_params
+        params.permit(:tracks => [:name, :genre, :length, :bpm, :artist])
+    end
+
 end

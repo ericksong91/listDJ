@@ -108,7 +108,7 @@ function TrackListCard({ user, owner, genres, index, tracks, isEditing, onIsEdit
         <div className="SetlistTracks">
             <Container>
                 {tracksList}
-                {user.id === owner.user_id
+                {user.id === owner
                     ?
                     isEditing ?
                         <Box>

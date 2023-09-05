@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import TrackListCard from "../cards/TrackListCard";
 import DescriptionCard from "../cards/DescriptionCard";
-import NewTrackCard from "../cards/NewTrackCard";
 import { Grid, Box } from "@mui/material";
 
 function SetlistPage({ user, users, setlists, genres, onEditSetlists, onEditSetlistTracks, onDeleteSetlists }) {
@@ -63,6 +62,7 @@ function SetlistPage({ user, users, setlists, genres, onEditSetlists, onEditSetl
     //     setSetFiltered({ ...filteredSetWithTracks });
     // };
 
+    console.log(setFiltered.user_id)
     return (
         <Box className="SetlistPage">
             <Grid container>
@@ -72,7 +72,7 @@ function SetlistPage({ user, users, setlists, genres, onEditSetlists, onEditSetl
                 <Grid item xs={10}>
                     <TrackListCard
                         user={user}
-                        owner={setFiltered}
+                        owner={setFiltered.user_id}
                         index={index}
                         tracks={setFiltered.tracks}
                         genres={genres}

@@ -46,14 +46,4 @@ class SetlistTracksController < ApplicationController
     def tracklist_params
         params.permit(:_json => [:id, :setlist_id, :track_id, :track_order])
     end
-
-    def setlist_track_params
-        params.permit(:setlist_tracks => [:id, :setlist_id, :track_id, :track_order])
-    end
-
-    def track_params
-        params.permit(:tracks => [:name, :genre, :length, :bpm, :artist])
-    end
-
-
 end

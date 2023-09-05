@@ -29,13 +29,15 @@ function App() {
 
   function handleEditSetlistTracks(updatedTracks, index, onEdit, onIsLoading, onError) {
 
-    // console.log(updatedSetListTracks, updatedTracks);
+    // // console.log(updatedSetListTracks, updatedTracks);
 
-    // const arr1 = [...updatedSetListTracks, { setlist_id: index, track_order: updatedSetListTracks.length }]
-    const arr1 = []
-    const arr2 = [...updatedTracks, { name: "SampleTest", artist: "Malfoy", length: 30, bpm: 220, genre: "Happy Hardcore" }]
+    // // const arr1 = [...updatedSetListTracks, { setlist_id: index, track_order: updatedSetListTracks.length }]
+    // const arr1 = []
+    // const arr2 = [...updatedTracks, { name: "SampleTest", artist: "Malfoy", length: 30, bpm: 220, genre: "Happy Hardcore" }]
 
-    console.log(arr1, arr2)
+    // console.log(arr1, arr2)
+
+    console.log(updatedTracks, index)
 
     if (updatedTracks.length === 0) {
       if (window.confirm("There are no tracks, set will be deleted.")) {
@@ -44,12 +46,12 @@ function App() {
         onIsLoading(false);
       };
     } else {
-      fetch(`/setlist_tracks`, {
+      fetch(`/setlists/${index}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ setlist_tracks: arr1, tracks: arr2 })
+        body: JSON.stringify({tracks: updatedTracks})
       })
         .then((r) => {
           onEdit(false);
@@ -64,6 +66,7 @@ function App() {
                 }
               });
               setSetlists([...filteredSetlists]);
+              console.log(data)
             });
           } else {
             r.json().then((error) => onError(error.errors));
