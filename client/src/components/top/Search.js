@@ -13,9 +13,9 @@ function Search({ search, filter, onFilter, onSearch }) {
     return (
         <Card sx={{ bgcolor: 'rgb(60, 60, 60)', margin: 2 }}>
             <Grid container sx={{ marginTop: 5, marginBottom: 5 }}>
-                <Grid item xs={8} sx={{marginRight: 1, marginLeft: 10}}>
+                <Grid item xs={8} sx={{ marginRight: 1, marginLeft: 10 }}>
                     <TextField
-                        sx={{ marginLeft: 5, color: 'white', input: { color: 'white' }, label: {color: 'white'} }}
+                        sx={{ marginLeft: 5, color: 'white', input: { color: 'white' }, label: { color: 'white' } }}
                         fullWidth
                         onChange={(e) => onSearch(e.target.value)}
                         value={search}

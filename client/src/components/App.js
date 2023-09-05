@@ -28,19 +28,6 @@ function App() {
   }, []);
 
   function handleEditSetlistTracks(updatedTracks, index, onEdit, onIsLoading, onError) {
-
-    // // console.log(updatedSetListTracks, updatedTracks);
-
-    // // const arr1 = [...updatedSetListTracks, { setlist_id: index, track_order: updatedSetListTracks.length }]
-    // const arr1 = []
-    // const arr2 = [...updatedTracks, { name: "SampleTest", artist: "Malfoy", length: 30, bpm: 220, genre: "Happy Hardcore" }]
-
-    // console.log(arr1, arr2)
-
-    //REFACTOR BACKEND AND REMOVE IT FROM SETLIST_TRACKS
-
-    console.log(updatedTracks, index)
-
     if (updatedTracks.length === 0) {
       if (window.confirm("There are no tracks, set will be deleted.")) {
         handleDeleteSetlists(index, onError, onIsLoading);
@@ -53,7 +40,7 @@ function App() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({tracks: updatedTracks})
+        body: JSON.stringify({ tracks: updatedTracks })
       })
         .then((r) => {
           onEdit(false);
@@ -68,7 +55,6 @@ function App() {
                 }
               });
               setSetlists([...filteredSetlists]);
-              console.log(data)
             });
           } else {
             r.json().then((error) => onError(error.errors));
