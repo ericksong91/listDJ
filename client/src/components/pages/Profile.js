@@ -123,21 +123,24 @@ function Profile({ setlists, user, users, onDelete }) {
                     {filteredSets}
                 </Grid>
             </Container>
-            {isLoading ?
-                <Button
-                    variant="contained"
-                    color="error"
-                    fullWidth
-                    sx={{ mt: 3, mb: 2 }}
-                >Loading...</Button>
+            {profileUser.id === user.id ?
+                isLoading ?
+                    <Button
+                        variant="contained"
+                        color="error"
+                        fullWidth
+                        sx={{ mt: 3, mb: 2 }}
+                    >Loading...</Button>
+                    :
+                    <Button
+                        variant="contained"
+                        color="error"
+                        fullWidth
+                        sx={{ mt: 3, mb: 2 }}
+                        onClick={() => onDelete(user.id, setIsLoading, setErrors)}
+                    >Delete Account</Button>
                 :
-                <Button
-                    variant="contained"
-                    color="error"
-                    fullWidth
-                    sx={{ mt: 3, mb: 2 }}
-                    onClick={() => onDelete(user.id, setIsLoading, setErrors)}
-                >Delete Account</Button>
+                <Box></Box>
             }
         </Box>
     );

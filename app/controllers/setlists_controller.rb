@@ -14,7 +14,7 @@ class SetlistsController < ApplicationController
             user = current_user
             @setlist = find_setlist
 
-            if @setlist.user_id === user.id
+            if @setlist.user_id == user.id
                 ActiveRecord::Base.transaction do
                     if check_update_params
                         @setlist.update!(setlist_info_params)
