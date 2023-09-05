@@ -22,6 +22,8 @@ as well as the tracklist of songs used to make the set.
 
 6. The Profile page will display their biography as well as their user avatar. 
 
+7. The user may delete their entire account by scrolling to the bottom. This will also delete all asociated setlists made by the user.
+
 ## Creating Your Own Set
 
 1. Users can create their own set by clicking on "CREATE NEW SET" on the navigation bar.
