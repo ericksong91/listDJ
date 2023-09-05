@@ -61,7 +61,7 @@ function Login() {
                                 autoComplete="user"
                                 autoFocus
                                 value={username}
-                                onChange={(e) => setUsername(e.target.value)}
+                                onChange={(e) => setUsername(e.target.value.trim())}
                             />
                             <TextField
                                 margin="normal"
@@ -72,22 +72,22 @@ function Login() {
                                 label="Password"
                                 type="password"
                                 value={password}
-                                onChange={(e) => { setPassword(e.target.value) }}
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                             {isLoading ?
                                 <Button
                                     fullWidth
                                     variant="contained"
-                                    sx={{ mt: 3, mb: 2 }}
+                                    sx={{ mt: 3, mb: 2, '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }}
                                 >Loading...</Button>
                                 :
                                 <Button
                                     type="submit"
                                     fullWidth
                                     variant="contained"
-                                    sx={{ mt: 3, mb: 2 }}
+                                    sx={{ mt: 3, mb: 2, '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }}
                                 >Login</Button>}
-                             <Typography variant="h7" sx={{ color: 'red' }}>{errors.map((error, ind) => <li key={ind + 1}>{error}</li>)}</Typography>
+                            <Typography variant="h7" sx={{ color: 'red' }}>{errors}</Typography>
                         </Box>
                     </Box>
                     <Link to="/signup">
@@ -95,7 +95,7 @@ function Login() {
                             fullWidth
                             type="submit"
                             variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
+                            sx={{ mt: 3, mb: 2, '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }}
                         >
                             Don't have an account? Signup!
                         </Button>

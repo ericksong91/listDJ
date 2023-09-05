@@ -21,7 +21,7 @@ function Profile({ setlists, user, users, onDelete }) {
     }, [userAvatar, profileUser])
 
     if (!user || !users || !setlists || !profileUser) {
-        return <div>Loading...</div>
+        return <div></div>
     };
 
     function handleEdit(biography, id, setIsEditing, setIsLoading) {

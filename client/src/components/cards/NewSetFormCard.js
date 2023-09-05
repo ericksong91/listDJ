@@ -5,7 +5,7 @@ function NewSetFormCard({ onName, onGenre, onDescription, name, description, gen
     return (
         <Grid className="newSetFormCard" item xs={6}>
             <Card sx={{
-                color: 'white', input: { color: 'white' }, label: { color: 'white' }, subheader: { color: 'white' },
+                color: 'white', input: { color: 'white' }, label: { color: 'grey' }, subheader: { color: 'white' },
                 maxheight: 800, padding: 1, margin: 1, paddingBottom: 3, bgcolor: 'rgb(50,50,50)', boxShadow: 10
             }}>
                 <CardHeader

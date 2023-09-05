@@ -108,7 +108,7 @@ function NewSetForm({ user, onNewSetlist }) {
                             fullWidth
                             type="submit"
                             variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
+                            sx={{ mt: 3, mb: 2, '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }}
                             onClick={(e) => handleSubmit(e)}
                         >
                             {isLoading ? "Loading..." : "Submit"}

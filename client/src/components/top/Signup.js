@@ -46,7 +46,7 @@ function Signup() {
                             autoComplete="user"
                             autoFocus
                             value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            onChange={(e) => setUsername(e.target.value.trim())}
                         />
                         <TextField
                             margin="normal"
@@ -58,7 +58,7 @@ function Signup() {
                             inputProps={{ maxLength: 17, minLength: 9 }}
                             type="password"
                             value={password}
-                            onChange={(e) => { setPassword(e.target.value) }}
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                         <TextField
                             margin="normal"
@@ -70,7 +70,7 @@ function Signup() {
                             inputProps={{ maxLength: 17, minLength: 9 }}
                             type="password"
                             value={passwordConfirmation}
-                            onChange={(e) => { setPasswordConfirmation(e.target.value) }}
+                            onChange={(e) => setPasswordConfirmation(e.target.value)}
                         />
                         <TextField
                             margin="normal"
@@ -88,14 +88,14 @@ function Signup() {
                             <Button
                                 fullWidth
                                 variant="contained"
-                                sx={{ mt: 3, mb: 2 }}
+                                sx={{ mt: 3, mb: 2, '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }}
                             >Loading...</Button>
                             :
                             <Button
                                 type="submit"
                                 fullWidth
                                 variant="contained"
-                                sx={{ mt: 3, mb: 2 }}
+                                sx={{ mt: 3, mb: 2, '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }}
                             >Signup</Button>}
                         <Typography variant="h7" sx={{ color: 'red' }}>{errors.map((error, ind) => <li key={ind + 1}>{error}</li>)}</Typography>
                     </Box>
@@ -105,7 +105,7 @@ function Signup() {
                         fullWidth
                         type="submit"
                         variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
+                        sx={{ mt: 3, mb: 2, '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }}
                     >
                         Already have an account? Login!
                     </Button>

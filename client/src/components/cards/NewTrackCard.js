@@ -48,7 +48,7 @@ function NewTrackCard({ genres, onSetlist }) {
     return (
         <Grid item xs={6}>
             <Card sx={{
-                color: 'white', input: { color: 'white' }, label: { color: 'white' }, subheader: { color: 'white' },
+                color: 'white', input: { color: 'white' }, label: { color: 'grey' }, subheader: { color: 'white' },
                 maxheight: 800, padding: 1, margin: 1, paddingBottom: 3, bgcolor: 'rgb(50,50,50)', boxShadow: 10,
             }}>
                 <CardHeader
@@ -66,7 +66,7 @@ function NewTrackCard({ genres, onSetlist }) {
                     inputProps={{ maxLength: 100 }}
                     label={`Track Name (${100 - track.length} chars left)`}
                     value={track}
-                    onChange={(e) => setTrack(e.target.value)}
+                    onChange={(e) => setTrack(e.target.value.trim())}
                 />
                 <TextField
                     margin="normal"
@@ -78,7 +78,7 @@ function NewTrackCard({ genres, onSetlist }) {
                     inputProps={{ maxLength: 50 }}
                     label={`Artist Name (${50 - trackArtist.length} chars left)`}
                     value={trackArtist}
-                    onChange={(e) => setTrackArtist(e.target.value)}
+                    onChange={(e) => setTrackArtist(e.target.value.trim())}
                 />
                 <Grid container>
                     <Grid item xs={4}>
@@ -93,7 +93,7 @@ function NewTrackCard({ genres, onSetlist }) {
                             label={`Length (min)`}
                             value={trackLength.min}
                             onChange={(e) => {
-                                if (60 <= e.target.value || e.target.value < 0) {
+                                if (60 <= e.target.value || e.target.value < 0 || e.target.value === " " || e.target.value === "") {
                                     return
                                 } else {
                                     if (e.target.value.toString().length <= 2) {
@@ -114,7 +114,7 @@ function NewTrackCard({ genres, onSetlist }) {
                             label={`Length (sec)`}
                             value={trackLength.sec}
                             onChange={(e) => {
-                                if (60 <= e.target.value || e.target.value < 0) {
+                                if (60 <= e.target.value || e.target.value < 0 || e.target.value === " " || e.target.value === "") {
                                     return
                                 } else {
                                     if (e.target.value.toString().length <= 2) {

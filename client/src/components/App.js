@@ -98,7 +98,7 @@ function App() {
 
   function handleDelete(id, onIsLoading, onErrors) {
     handleDeleteUser(id, setlists, onIsLoading, onErrors, setSetlists);
-    navigate('/');
+    navigate('/login')
   };
 
   function handleNewSetlists(newSetlist, newSet, onErrors, onIsLoading) {

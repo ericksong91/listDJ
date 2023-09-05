@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import TrackListCard from "../cards/TrackListCard";
 import DescriptionCard from "../cards/DescriptionCard";
 import { Grid, Box } from "@mui/material";
+import { redirect } from "react-router-dom";
 
 function SetlistPage({ user, users, setlists, genres, onEditSetlists, onEditSetlistTracks, onDeleteSetlists }) {
     const index = parseInt(useParams().id);
@@ -12,7 +13,7 @@ function SetlistPage({ user, users, setlists, genres, onEditSetlists, onEditSetl
     const sortedTracks = [];
 
     if (setlists.length === 0 || !setFiltered || !user || !users) {
-        return <div></div>
+        return redirect("/notfound/");
     };
 
     setFiltered.setlist_track_org.forEach((st) => {
