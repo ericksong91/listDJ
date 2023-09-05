@@ -1,20 +1,12 @@
 import record from '../images/record.png'
 import { useNavigate } from 'react-router-dom';
-import { Box, Grid, Card, Typography, CircularProgress } from '@mui/material';
+import { Grid, Card, Typography } from '@mui/material';
 
-function SetlistCard({ set, user, checked }) {
+function SetlistCard({ set, user }) {
     const navigate = useNavigate()
 
     if (!user) {
         return <div>Loading...</div>
-    };
-
-    if (!checked) {
-        return (
-            <Box sx={{ display: "flex", justifyContent: "center" }}>
-                <CircularProgress sx={{ padding: 3 }} />
-            </Box>
-        );
     };
 
     return (

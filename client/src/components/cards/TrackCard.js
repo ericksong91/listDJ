@@ -1,17 +1,8 @@
 import { Card, CardContent, Typography } from '@mui/material';
 import { Grid, Box } from '@mui/material';
-import { Button, CircularProgress } from '@mui/material';
+import { Button } from '@mui/material';
 
-function TrackCard({ track, order, checked, isEditing, onOrder, onDelete }) {
-
-    if (!checked) {
-        return (
-            <Box sx={{ display: "flex", justifyContent: "center" }}>
-                <CircularProgress sx={{ padding: 3 }} />
-            </Box>
-        );
-    };
-
+function TrackCard({ track, order, isEditing, onOrder, onDelete }) {
     return (
         <Box className="trackCard">
             <Grid container>

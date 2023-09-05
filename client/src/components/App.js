@@ -13,7 +13,6 @@ import '../css/App.css'
 
 function App() {
   const [setlists, setSetlists] = useState([]);
-  const [checked, setChecked] = useState(false);
   const { user, users, genresList, handleDeleteUser } = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -21,10 +20,7 @@ function App() {
     fetch('/setlists')
       .then(r => {
         if (r.ok) {
-          r.json().then((data) => {
-            setSetlists(data);
-            setChecked(!checked);
-          });
+          r.json().then((data) => setSetlists(data));
         } else {
           r.json().then(error => alert(error.errors));
         };
@@ -152,15 +148,13 @@ function App() {
       <Navbar user={user} />
       <Routes>
         <Route element={<AuthLayout authenticated={!!user} />}>
-          <Route path='/' element={<Homepage setlists={setlists} users={users} checked={checked} />} />
+          <Route path='/' element={<Homepage setlists={setlists} users={users} />} />
           <Route path='/sets/:id' element={
             <SetlistPage
               user={user}
               users={users}
               setlists={setlists}
               genres={genresList}
-              onChecked={setChecked}
-              checked={checked}
               onEditSetlists={handleEditSetlists}
               onEditSetlistTracks={handleEditSetlistTracks}
               onDeleteSetlists={handleDeleteSetlists}

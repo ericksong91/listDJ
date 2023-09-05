@@ -3,7 +3,7 @@ import TrackCard from "./TrackCard";
 import NewTrackCard from "./NewTrackCard";
 import { Container, Button, Box, Grid } from "@mui/material";
 
-function TrackListCard({ user, owner, genres, checked, index, tracks, isEditing, onIsEditing,
+function TrackListCard({ user, owner, genres, index, tracks, isEditing, onIsEditing,
     setlistTracks, onError, onEditSetlistTracks, onDeleteSetlists }) {
     const [trackList, setTrackList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -41,7 +41,6 @@ function TrackListCard({ user, owner, genres, checked, index, tracks, isEditing,
             key={ind}
             track={track}
             order={ind + 1}
-            checked={checked}
             onOrder={handleOrder}
             isEditing={isEditing}
             onDelete={handleDelete}
