@@ -86,7 +86,7 @@ i = Setlist.first.id
 
 while i <= Setlist.last.id do
     h = 1
-    while h <= 20 do
+    while h <= 5 do
         Setlist.find_by(id: i).setlist_tracks.create!(track_id: rand(Track.first.id..Track.last.id), track_order: h)
         h+=1
     end

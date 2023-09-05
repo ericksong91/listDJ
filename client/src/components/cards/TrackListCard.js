@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import TrackCard from "./TrackCard";
-import { useNavigate } from "react-router-dom";
 import { Container, Button, Box } from "@mui/material";
 
 function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onEditSetlistTracks, onDeleteSetlists }) {
@@ -8,7 +7,6 @@ function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onE
     const [filteredSetlistTrackList, setFilteredSetlistTrackList] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const navigate = useNavigate();
 
     useEffect(() => {
         if (!tracks || !setlistTracks) {
@@ -102,7 +100,7 @@ function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onE
                                 >Loading...</Button>
                                 :
                                 <Button sx={{ width: 1 / 3 }} variant="contained"
-                                    onClick={() => onEditSetlistTracks(filteredSetlistTrackList, setIsEditing, setIsLoading, onError)}>
+                                    onClick={() => onEditSetlistTracks(filteredSetlistTrackList, filteredTrackList, index, setIsEditing, setIsLoading, onError)}>
                                     Save Changes
                                 </Button>
                             }
@@ -116,7 +114,7 @@ function TrackListCard({ user, owner, index, tracks, setlistTracks, onError, onE
                                     onClick={() => {
                                         setIsLoading(true);
                                         if (window.confirm("Are you sure you want to delete your set?")) {
-                                            onDeleteSetlists(index, onError, setIsLoading, navigate);
+                                            onDeleteSetlists(index, onError, setIsLoading);
                                         } else {
                                             setIsLoading(false);
                                         };

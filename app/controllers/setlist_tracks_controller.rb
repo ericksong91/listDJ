@@ -1,8 +1,31 @@
 class SetlistTracksController < ApplicationController
     def update
         if check_session
+            
+            params.permit!
             user = find_user
-            setlist = find_setlist
+            setlist = Setlist.find(params[:setlist_tracks][0][:setlist_id])
+            tracks = params[:tracks]
+            tracks2 = tracks.map{|t| Track.where(name: t[:name], artist: t[:artist], genre: t[:genre], bpm: t[:bpm], length: t[:length]).first_or_create(t)}
+            
+            # byebug 
+
+            h = 1
+
+            tracks2.each do |t|
+                m = setlist.setlist_tracks.where(track_order: h).first_or_initialize
+                m.track_id = t.id
+                m.save
+                h+=1
+            end
+
+            byebug
+           
+            # for each track, check track_order
+            # for each setlist_track, find(track_order: h, setlist_id: setlist.id), update track_id
+            # for everything else, create setlist.setlist_track.create!(track_id: tracks[i], track_order: i)
+            # if lengths dont match
+            # OR just destroy all setlist_tracks, remake?
 
             if setlist.user_id === user.id
                 ActiveRecord::Base.transaction do
