@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Box, Button, Card, CardContent, CardHeader } from '@mui/material';
-import { Typography, TextField } from '@mui/material';
+import { Typography, TextField, CardMedia } from '@mui/material';
 
 function BiographyCard({ profileUser, user, errors, onEdit }) {
     const [biography, setBiography] = useState(profileUser.bio);
@@ -8,11 +8,21 @@ function BiographyCard({ profileUser, user, errors, onEdit }) {
 
     return (
         <Box className='bio'>
-            <Card sx={{ bgcolor: 'rgb(50, 50, 50)', color: 'white', padding: 1, margin: 1, marginTop: 16.5 }}>
+            <Card sx={{ bgcolor: 'rgb(50, 50, 50)', color: 'white', marginTop: 5 }}>
                 <CardHeader
                     title="Biography"
                 />
                 <CardContent>
+                    {profileUser.id === user.id ?
+                        null
+                        :
+                        <Card sx={{ bgcolor: 'rgb(50, 50, 50)', color: 'white', margin: 1, width: 100 }}>
+                            <CardMedia
+                                component="img"
+                                sx={{ width: 100, height: 100 }}
+                                image={!!profileUser.avatar ? profileUser.avatar : null}
+                            />
+                        </Card>}
                     {isEditing ?
                         <Box>
                             <TextField

@@ -22,15 +22,22 @@ function AvatarCard({ avatar, profileUser, user, onSubmitAvatar }) {
 
     return (
         <Box className='AvatarCard' >
-            <Card sx={{ bgcolor: 'rgb(50, 50, 50)', color: 'white', margin: 1, width: 100, marginTop: 3 }}>
+            {/* <Card sx={{ bgcolor: 'rgb(50, 50, 50)', color: 'white', margin: 1, width: 100, marginTop: 3 }}>
                 <CardMedia
                     component="img"
                     sx={{ width: 100, height: 100 }}
                     image={!!avatar ? avatar : null}
                 />
-            </Card>
+            </Card> */}
             {profileUser.id === user.id ?
                 <Card sx={{ bgcolor: 'rgb(50, 50, 50)', color: 'white', margin: 1, width: 300, padding: 0.5 }}>
+                    <Card sx={{ bgcolor: 'rgb(50, 50, 50)', color: 'white', margin: 1, width: 100, marginTop: 3 }}>
+                        <CardMedia
+                            component="img"
+                            sx={{ width: 100, height: 100 }}
+                            image={!!avatar ? avatar : null}
+                        />
+                    </Card>
                     {
                         profileUser.id === user.id ?
                             <Grid container justifyContent={"center"}>

@@ -97,8 +97,13 @@ function App() {
   };
 
   function handleDelete(id, onIsLoading, onErrors) {
-    handleDeleteUser(id, setlists, onIsLoading, onErrors, setSetlists);
-    navigate('/login')
+    onIsLoading(true);
+    if (window.confirm("Are you sure you want to delete your account?")) {
+      handleDeleteUser(id, setlists, onIsLoading, onErrors, setSetlists);
+      navigate('/login')
+    } else {
+      onIsLoading(false);
+    };
   };
 
   function handleNewSetlists(newSetlist, newSet, onErrors, onIsLoading) {
