@@ -4,7 +4,7 @@ import TrackListCard from "../cards/TrackListCard";
 import DescriptionCard from "../cards/DescriptionCard";
 import { Grid, Box } from "@mui/material";
 
-function SetlistPage({ user, users, setlists, genres, onEditSetlists, onEditSetlistTracks, onDeleteSetlists }) {
+function SetlistPage({ user, users, setlists, checked, genres, onEditSetlists, onEditSetlistTracks, onDeleteSetlists }) {
     const index = parseInt(useParams().id);
     const [error, setError] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
@@ -35,6 +35,7 @@ function SetlistPage({ user, users, setlists, genres, onEditSetlists, onEditSetl
                         owner={setFiltered.user_id}
                         index={index}
                         tracks={sortedTracks}
+                        checked={checked}
                         genres={genres}
                         setlistTracks={setFiltered.setlist_track_org}
                         isEditing={isEditing}

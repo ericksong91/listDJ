@@ -11,7 +11,7 @@ function Search({ search, filter, onFilter, onSearch }) {
     const selectionList = list.map((li, ind) => <MenuItem key={ind} value={li}>{li}</MenuItem>);
 
     return (
-        <Card sx={{ bgcolor: 'rgb(60, 60, 60)', margin: 2 }}>
+        <Card sx={{ bgcolor: 'rgb(60, 60, 60)', margin: 2, boxShadow: 5 }}>
             <Grid container sx={{ marginTop: 5, marginBottom: 5 }}>
                 <Grid item xs={8} sx={{ marginRight: 1, marginLeft: 10 }}>
                     <TextField

@@ -3,7 +3,7 @@ import SetlistCard from "./cards/SetlistCard";
 import Search from "./top/Search";
 import { Box, Grid, Container, Typography } from "@mui/material";
 
-function Homepage({ setlists, users }) {
+function Homepage({ setlists, users, checked }) {
     const [search, setSearch] = useState("");
     const [filter, setFilter] = useState("Set Name");
     const filteredSetUsers = [];
@@ -40,16 +40,16 @@ function Homepage({ setlists, users }) {
     if (filter === "DJ Name") {
         if (search === "") {
             setlistList = setlists.map((set) => <SetlistCard key={set.id}
-                set={set}
+                set={set} checked={checked}
                 user={users.find((user) => user.id === set.user_id)} />);
         } else {
             setlistList = filteredSetUsers.map((set) => <SetlistCard key={set.id}
-                set={set}
+                set={set} checked={checked}
                 user={users.find((user) => user.id === set.user_id)} />)
         };
     } else {
         setlistList = filteredSetList.map((set) => <SetlistCard key={set.id}
-            set={set}
+            set={set} checked={checked}
             user={users.find((user) => user.id === set.user_id)} />);
     };
 
