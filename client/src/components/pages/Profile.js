@@ -26,37 +26,41 @@ function Profile({ setlists, user, users, onDelete }) {
     };
 
     function handleEdit(biography, id, setIsEditing) {
-        fetch(`/users/${id}`, {
-            method: 'PATCH',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                id: user.id,
-                bio: biography,
-                username: user.username
+        if (biography.trim() === "") {
+            setErrors(["Biography can't be blank!"]);
+        } else {
+            fetch(`/users/${id}`, {
+                method: 'PATCH',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    id: user.id,
+                    bio: biography,
+                    username: user.username
+                })
             })
-        })
-            .then((r) => {
-                if (r.ok) {
-                    r.json().then((data) => {
-                        const filteredUsers = users.map((user) => {
-                            if (user.id === data.id) {
-                                return data
-                            } else {
-                                return user
-                            }
-                        });
+                .then((r) => {
+                    if (r.ok) {
+                        r.json().then((data) => {
+                            const filteredUsers = users.map((user) => {
+                                if (user.id === data.id) {
+                                    return data
+                                } else {
+                                    return user
+                                };
+                            });
 
-                        setUser(data);
-                        setUsers([...filteredUsers]);
-                        setIsEditing(false);
-                        setErrors([]);
-                    })
-                } else {
-                    r.json().then((error) => setErrors(error.errors))
-                }
-            })
+                            setUser(data);
+                            setUsers([...filteredUsers]);
+                            setIsEditing(false);
+                            setErrors([]);
+                        });
+                    } else {
+                        r.json().then((error) => setErrors(error.errors))
+                    };
+                });
+        };
     };
 
     function handleSubmitAvatar(e, avatar, setIsSelected) {

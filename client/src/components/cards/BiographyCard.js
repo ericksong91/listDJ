@@ -41,7 +41,7 @@ function BiographyCard({ profileUser, user, errors, onEdit }) {
                                 autoFocus
                                 value={biography}
                                 sx={{ label: { color: 'white' } }}
-                                onChange={(e) => setBiography(e.target.value)}
+                                onChange={(e) => setBiography(e.target.value.trimStart())}
                             />
                         </Box>
                         :
@@ -60,7 +60,7 @@ function BiographyCard({ profileUser, user, errors, onEdit }) {
                         :
                         <div></div>}
                 </CardContent>
-                <Typography variant="h7" sx={{ color: 'red' }}>{errors.map((error, ind) => <li key={ind + 1}>{error}</li>)}</Typography>
+                <Typography variant="h7" sx={{ color: 'red' }}>{errors.map((error, ind) => <Box sx={{ padding: 1 }}><li key={ind + 1}>{error}</li></Box>)}</Typography>
             </Card>
         </Box>
     );
