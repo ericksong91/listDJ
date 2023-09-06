@@ -66,7 +66,7 @@ function NewTrackCard({ genres, onSetlist }) {
                     inputProps={{ maxLength: 100 }}
                     label={`Track Name (${100 - track.length} chars left)`}
                     value={track}
-                    onChange={(e) => setTrack(e.target.value.trim())}
+                    onChange={(e) => setTrack(e.target.value.trimLeft())}
                 />
                 <TextField
                     margin="normal"
