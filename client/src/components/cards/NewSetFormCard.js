@@ -24,7 +24,7 @@ function NewSetFormCard({ onName, onGenre, onDescription, name, description, gen
                     inputProps={{ maxLength: 30 }}
                     autoFocus
                     value={name}
-                    onChange={(e) => onName(e.target.value)}
+                    onChange={(e) => onName(e.target.value.trimStart())}
                 />
                 <TextField
                     margin="normal"
@@ -38,7 +38,7 @@ function NewSetFormCard({ onName, onGenre, onDescription, name, description, gen
                     inputProps={{ style: { color: 'white' }, maxLength: 150 }}
                     label={`Description (${150 - description.length} chars left)`}
                     value={description}
-                    onChange={(e) => onDescription(e.target.value)}
+                    onChange={(e) => onDescription(e.target.value.trimStart())}
                 />
                 <TextField
                     margin="normal"
@@ -50,7 +50,7 @@ function NewSetFormCard({ onName, onGenre, onDescription, name, description, gen
                     inputProps={{ maxLength: 50 }}
                     label={`Genre (${50 - genre.length} chars left)`}
                     value={genre}
-                    onChange={(e) => onGenre(e.target.value)}
+                    onChange={(e) => onGenre(e.target.value.trimStart())}
                 />
             </Card>
         </Grid>
