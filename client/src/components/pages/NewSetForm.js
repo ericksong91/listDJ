@@ -41,6 +41,10 @@ function NewSetForm({ user, onNewSetlist }) {
         setNewSetlist([...newSetlist, track]);
     };
 
+    function handleEditTrackDescription(editedInfo) {
+        console.log(editedInfo)
+    };
+
     function handleSubmit(e) {
         e.preventDefault();
         setIsLoading(true);
@@ -71,7 +75,7 @@ function NewSetForm({ user, onNewSetlist }) {
             key={order}
             track={track}
             order={order + 1}
-            editing={true}
+            isEditing={true}
             onOrder={handleOrder}
             onDelete={handleDelete}
         />);

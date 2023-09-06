@@ -11,6 +11,10 @@
   padding: 1
 }
 
+input[type="text" i] {
+  width:50%;
+}
+
 /* .logo {
   width: 25%;
   height: 25%;
