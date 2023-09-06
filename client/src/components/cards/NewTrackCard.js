@@ -66,7 +66,7 @@ function NewTrackCard({ genres, onSetlist }) {
                     inputProps={{ maxLength: 100 }}
                     label={`Track Name (${100 - track.length} chars left)`}
                     value={track}
-                    onChange={(e) => setTrack(e.target.value.trimLeft())}
+                    onChange={(e) => setTrack(e.target.value.trimStart())}
                 />
                 <TextField
                     margin="normal"
@@ -78,7 +78,7 @@ function NewTrackCard({ genres, onSetlist }) {
                     inputProps={{ maxLength: 50 }}
                     label={`Artist Name (${50 - trackArtist.length} chars left)`}
                     value={trackArtist}
-                    onChange={(e) => setTrackArtist(e.target.value.trim())}
+                    onChange={(e) => setTrackArtist(e.target.value.trimStart())}
                 />
                 <Grid container>
                     <Grid item xs={4}>
