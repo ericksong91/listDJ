@@ -1,7 +1,6 @@
 import { TextField, Card, CardHeader, Grid } from '@mui/material';
 
-function NewSetFormCard({ onName, onGenre, onDescription, name, description, genre }) {
-
+function NewSetFormCard({ onName, onGenre, onDescription, onTrackLength, name, description, genre, trackLength }) {
     return (
         <Grid className="newSetFormCard" item xs={6}>
             <Card sx={{
@@ -51,6 +50,22 @@ function NewSetFormCard({ onName, onGenre, onDescription, name, description, gen
                     label={`Genre (${50 - genre.length} chars left)`}
                     value={genre}
                     onChange={(e) => onGenre(e.target.value.trimStart())}
+                />
+                <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="length"
+                    name="length"
+                    type="number"
+                    inputProps={{ maxLength: 3 }}
+                    label={`Approx. Length (min)`}
+                    value={trackLength}
+                    onChange={(e) => {
+                        if (e.target.value.toString().length <= 3 && e.target.value >= 0 && /^[0-9\b]+$/.test(e.target.value)) {
+                            onTrackLength(e.target.value.trimStart());
+                        };
+                    }}
                 />
             </Card>
         </Grid>

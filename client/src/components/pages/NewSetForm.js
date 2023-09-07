@@ -13,6 +13,7 @@ function NewSetForm({ user, onNewSetlist }) {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [genre, setGenre] = useState("");
+    const [trackLength, setTrackLength] = useState(0);
     const [hideButtons, setHideButtons] = useState(false);
     const [editInfo, setEditInfo] = useState(false);
     const { genresList } = useContext(UserContext);
@@ -65,7 +66,7 @@ function NewSetForm({ user, onNewSetlist }) {
             name: name,
             description: description,
             genre: genre,
-            length: 0,
+            length: trackLength,
             avg_bpm: 0
         };
 
@@ -109,9 +110,11 @@ function NewSetForm({ user, onNewSetlist }) {
                             onName={setName}
                             onGenre={setGenre}
                             onDescription={setDescription}
+                            onTrackLength={setTrackLength}
                             name={name}
                             genre={genre}
                             description={description}
+                            trackLength={trackLength}
                         />
                         <NewTrackCard
                             genres={genresListSelect}

@@ -5,7 +5,7 @@ import { FormControl, InputLabel, Select } from '@mui/material';
 function NewTrackCard({ genres, onSetlist, editInfo, hideButtons }) {
     const [track, setTrack] = useState("");
     const [trackArtist, setTrackArtist] = useState("");
-    const [trackBPM, setTrackBPM] = useState("");
+    const [trackBPM, setTrackBPM] = useState(1);
     const [trackGenre, setTrackGenre] = useState("");
     const [trackLength, setTrackLength] = useState({ min: 0, sec: 0 });
     const [error, setError] = useState("");
@@ -99,7 +99,7 @@ function NewTrackCard({ genres, onSetlist, editInfo, hideButtons }) {
                                 if (60 <= e.target.value || e.target.value < 0 || e.target.value === " " || e.target.value === "") {
                                     return
                                 } else {
-                                    if (e.target.value.toString().length <= 2) {
+                                    if (e.target.value.toString().length <= 2 && /^[0-9\b]+$/.test(e.target.value)) {
                                         setTrackLength({ min: e.target.value, sec: trackLength.sec });
                                     };
                                 };
@@ -120,7 +120,7 @@ function NewTrackCard({ genres, onSetlist, editInfo, hideButtons }) {
                                 if (60 <= e.target.value || e.target.value < 0 || e.target.value === " " || e.target.value === "") {
                                     return
                                 } else {
-                                    if (e.target.value.toString().length <= 2) {
+                                    if (e.target.value.toString().length <= 2 && /^[0-9\b]+$/.test(e.target.value)) {
                                         setTrackLength({ min: trackLength.min, sec: e.target.value });
                                     };
                                 };
@@ -138,7 +138,7 @@ function NewTrackCard({ genres, onSetlist, editInfo, hideButtons }) {
                     label={`Set BPM (Beats Per Minute)`}
                     value={trackBPM}
                     onChange={(e) => {
-                        if (e.target.value.toString().length <= 3 && e.target.value > 0) {
+                        if (e.target.value.toString().length <= 3 && e.target.value > 0 && /^[0-9\b]+$/.test(e.target.value)) {
                             setTrackBPM(e.target.value);
                         };
                     }} />
