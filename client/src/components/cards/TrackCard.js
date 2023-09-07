@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Card, CardContent, Typography } from '@mui/material';
+import { Card, CardContent, Typography, rgbToHex } from '@mui/material';
 import { Grid, Box } from '@mui/material';
 import { Button, TextField, FormControl, InputLabel, Select } from '@mui/material';
 import { CircularProgress } from "@mui/material";
@@ -12,15 +12,23 @@ import EditIcon from '@mui/icons-material/Edit';
 
 function TrackCard({ track, genres, order, editInfo, hideButtons, isEditing,
     onOrder, onDelete, onEditTrackDescription, onEditInfo, onHideButtons }) {
+    const [hideSaveButton, setHideSaveButton] = useState(true);
     const [error, setError] = useState('');
     const [trackName, setTrackName] = useState(track.name);
     const [trackArtist, setTrackArtist] = useState(track.artist);
     const [trackBPM, setTrackBPM] = useState(track.bpm);
     const [trackGenre, setTrackGenre] = useState(track.genre);
     const [trackLength, setTrackLength] = useState({ min: Math.floor(track.length / 60), sec: Math.floor(track.length % 60) });
+    const cardThemeOpacity = {
+        opacity: 0.1, padding: 0.5, margin: 0.5, height: 80, display: 'flex', bgcolor: 'rgb(50,50,50)', color: 'white',
+        input: { color: 'white' }, label: { color: 'orange' }, subheader: { color: 'white' }
+    };
+    const cardTheme = {
+        padding: 0.5, margin: 0.5, height: 80, display: 'flex', bgcolor: 'rgb(50,50,50)', color: 'white',
+        input: { color: 'white' }, label: { color: 'orange' }, subheader: { color: 'white' }
+    };
 
-
-    if(track.length === 0) {
+    if (track.length === 0) {
         return <CircularProgress />
     };
 
@@ -39,7 +47,7 @@ function TrackCard({ track, genres, order, editInfo, hideButtons, isEditing,
             || newTrack.length === 0) {
             setError("Must fill out every field")
         } else {
-            onEditTrackDescription(newTrack, order);
+            onEditTrackDescription(newTrack, order, setHideSaveButton);
         };
     };
 
@@ -47,22 +55,20 @@ function TrackCard({ track, genres, order, editInfo, hideButtons, isEditing,
         <Box className="trackCard">
             <Grid container>
                 <Grid item xs={isEditing ? 10 : 12}>
-                    <Card sx={{
-                        padding: 0.5, margin: 0.5, height: 80, display: 'flex', bgcolor: 'rgb(50, 50, 50)', color: 'white',
-                        input: { color: 'white' }, label: { color: 'grey' }, subheader: { color: 'white' }
-                    }}>
+                    <Card
+                        sx={isEditing && editInfo && hideSaveButton ? cardThemeOpacity : cardTheme}>
                         <Grid container
                             direction="row"
                             justifyContent="space-evenly"
                             alignItems="center"
                         >
-                            <Grid item xs={1} sx={{ paddingLeft: 2, paddingBottom: 1 }}>
+                            <Grid item xs={1} sx={isEditing && editInfo && !hideSaveButton ? { paddingLeft: 2, paddingBottom: 7 } : { paddingLeft: 2, paddingBottom: 1 }}>
                                 <Typography variant="h8">
                                     {order}
                                 </Typography>
                             </Grid>
                             <Grid item xs={isEditing ? 2 : 3}>
-                                {isEditing && editInfo ?
+                                {isEditing && editInfo && !hideSaveButton ?
                                     <TextField
                                         required
                                         fullWidth
@@ -71,7 +77,7 @@ function TrackCard({ track, genres, order, editInfo, hideButtons, isEditing,
                                         type="text"
                                         inputProps={{ maxLength: 100 }}
                                         label={`Track Name`}
-                                        sx={{ input: { color: 'white' }, label: { color: 'white' }, paddingBottom: 5 }}
+                                        sx={{ input: { color: 'white' }, label: { color: 'orange' }, paddingBottom: 5 }}
                                         value={trackName}
                                         onChange={(e) => setTrackName(e.target.value.trimStart())} />
                                     :
@@ -80,7 +86,7 @@ function TrackCard({ track, genres, order, editInfo, hideButtons, isEditing,
                             </Grid>
                             <Grid item xs={2}>
                                 <CardContent sx={{ display: 'flex', alignContent: 'center' }}>
-                                    {isEditing && editInfo ?
+                                    {isEditing && editInfo && !hideSaveButton ?
                                         <TextField
                                             type="text"
                                             fullWidth
@@ -89,7 +95,7 @@ function TrackCard({ track, genres, order, editInfo, hideButtons, isEditing,
                                             name="artist"
                                             inputProps={{ maxLength: 50 }}
                                             label={`Track Artist`}
-                                            sx={{ input: { color: 'white' }, label: { color: 'white' }, paddingBottom: 4 }}
+                                            sx={{ input: { color: 'white' }, label: { color: 'orange' }, paddingBottom: 4 }}
                                             value={trackArtist}
                                             onChange={(e) => setTrackArtist(e.target.value.trimStart())} />
                                         :
@@ -98,7 +104,7 @@ function TrackCard({ track, genres, order, editInfo, hideButtons, isEditing,
                                 </CardContent>
                             </Grid>
                             <Grid item xs={2}>
-                                {isEditing && editInfo ?
+                                {isEditing && editInfo && !hideSaveButton ?
                                     <Grid container>
                                         <Grid item xs={6}>
                                             <TextField
@@ -111,7 +117,7 @@ function TrackCard({ track, genres, order, editInfo, hideButtons, isEditing,
                                                 inputProps={{ maxLength: 2 }}
                                                 label={`m`}
                                                 value={trackLength.min}
-                                                sx={{ input: { color: 'white' }, label: { color: 'white' }, paddingBottom: 6 }}
+                                                sx={{ input: { color: 'white' }, label: { color: 'orange' }, paddingBottom: 6 }}
                                                 onChange={(e) => {
                                                     if (60 <= e.target.value || e.target.value < 0 || e.target.value === " " || e.target.value === "") {
                                                         return
@@ -133,7 +139,7 @@ function TrackCard({ track, genres, order, editInfo, hideButtons, isEditing,
                                                 inputProps={{ maxLength: 2 }}
                                                 label={`s`}
                                                 value={trackLength.sec}
-                                                sx={{ input: { color: 'white' }, label: { color: 'white' } }}
+                                                sx={{ input: { color: 'white' }, label: { color: 'orange' } }}
                                                 onChange={(e) => {
                                                     if (60 <= e.target.value || e.target.value < 0 || e.target.value === " " || e.target.value === "") {
                                                         return
@@ -152,19 +158,22 @@ function TrackCard({ track, genres, order, editInfo, hideButtons, isEditing,
                                 }
                             </Grid>
                             <Grid item xs={2}>
-                                {isEditing && editInfo ?
+                                {isEditing && editInfo && !hideSaveButton ?
                                     <FormControl required margin="normal">
                                         <InputLabel>Genre</InputLabel>
                                         <Select
                                             label="trackgenre"
                                             value={trackGenre}
                                             id="trackgenre"
-                                            inputProps={{ label: { color: "white" } }}
+                                            inputProps={{ label: { color: "orange" } }}
                                             sx={{
-                                                input: { color: 'white' }, label: { color: 'white' },
+                                                input: { color: 'white' }, label: { color: 'orange' },
                                                 color: 'white', marginBottom: 6, marginLeft: 1, width: 100
                                             }}
-                                            onChange={(e) => setTrackGenre(e.target.value)}
+                                            onChange={(e) => {
+                                                console.log(e.target.value)
+                                                setTrackGenre(e.target.value)
+                                            }}
                                         >
                                             {genres}
                                         </Select>
@@ -175,7 +184,7 @@ function TrackCard({ track, genres, order, editInfo, hideButtons, isEditing,
                             </Grid>
                             <Grid item xs={2}>
                                 <CardContent sx={{ display: 'flex', alignContent: 'center' }}>
-                                    {isEditing && editInfo ?
+                                    {isEditing && editInfo && !hideSaveButton ?
                                         <TextField
                                             required
                                             fullWidth
@@ -199,14 +208,20 @@ function TrackCard({ track, genres, order, editInfo, hideButtons, isEditing,
 
                             {isEditing ?
                                 editInfo ?
-                                    <Grid item xs={1} sx={{ paddingBottom: 5 }}>
-                                        <Button sx={{ color: 'orange' }} onClick={() => handleClick()}><SaveIcon /></Button>
-                                    </Grid>
+                                    hideSaveButton ?
+                                        <Grid item xs={1}>
+                                            <Button sx={{ color: 'grey' }}><SaveIcon /></Button>
+                                        </Grid>
+                                        :
+                                        <Grid item xs={1} sx={{ paddingBottom: 5 }}>
+                                            <Button sx={{ color: 'orange' }} onClick={() => handleClick()}><SaveIcon /></Button>
+                                        </Grid>
                                     :
                                     <Grid item xs={1}   >
                                         <Button sx={{ color: 'orange' }} onClick={() => {
                                             onEditInfo(true);
                                             onHideButtons(true);
+                                            setHideSaveButton(false);
                                         }} ><EditIcon /></Button>
                                     </Grid>
                                 :
@@ -220,7 +235,11 @@ function TrackCard({ track, genres, order, editInfo, hideButtons, isEditing,
 
                 {isEditing ?
                     <Grid item xs={1}>
-                        <Card sx={{ padding: 0.5, margin: 0.5, height: 80, display: 'flex', bgcolor: 'rgb(50, 50, 50)', color: 'white' }}>
+                        <Card sx={isEditing && editInfo && hideSaveButton ?
+                            { opacity: 0.1, padding: 0.5, margin: 0.5, height: 80, display: 'flex', bgcolor: 'rgb(50, 50, 50)', color: 'white' }
+                            :
+                            { padding: 0.5, margin: 0.5, height: 80, display: 'flex', bgcolor: 'rgb(50, 50, 50)', color: 'white' }}
+                        >
                             <Grid container
                                 direction="row"
                                 justifyContent="space-evenly"
@@ -260,7 +279,11 @@ function TrackCard({ track, genres, order, editInfo, hideButtons, isEditing,
                         </Grid>
                         :
                         <Grid item xs={1}>
-                            <Card sx={{ padding: 0.5, margin: 0.5, height: 80, display: 'flex', bgcolor: 'rgb(50, 50, 50)', color: 'white' }}>
+                            <Card sx={isEditing && editInfo && hideSaveButton ?
+                                { opacity: 0.1, padding: 0.5, margin: 0.5, height: 80, display: 'flex', bgcolor: 'rgb(50, 50, 50)', color: 'white' }
+                                :
+                                { padding: 0.5, margin: 0.5, height: 80, display: 'flex', bgcolor: 'rgb(50, 50, 50)', color: 'white' }}
+                            >
                                 <Button sx={{ color: 'grey' }}><DeleteForeverIcon /></Button>
                             </Card>
                         </Grid>

@@ -15,22 +15,22 @@ function TrackListCard({ user, owner, genres, index, tracks, isEditing, onIsEdit
     }, [tracks])
 
     if (!tracks) {
-        const arr = [1,2,3,4]
+        const arr = [1, 2, 3, 4]
         const tracksList = arr.map((track, ind) =>
-        <TrackCard
-            key={ind}
-            track={[]}
-            order={ind + 1}
-            onOrder={handleOrder}
-            genres={[]}
-            hideButtons={hideButtons}
-            isEditing={isEditing}
-            editInfo={editInfo}
-            onDelete={handleDelete}
-            onEditTrackDescription={handleEditTrackDescription}
-            onHideButtons={setHideButtons}
-            onEditInfo={setEditInfo}
-        />);
+            <TrackCard
+                key={ind}
+                track={[]}
+                order={ind + 1}
+                onOrder={handleOrder}
+                genres={[]}
+                hideButtons={hideButtons}
+                isEditing={isEditing}
+                editInfo={editInfo}
+                onDelete={handleDelete}
+                onEditTrackDescription={handleEditTrackDescription}
+                onHideButtons={setHideButtons}
+                onEditInfo={setEditInfo}
+            />);
 
         return tracksList
     };
@@ -55,7 +55,7 @@ function TrackListCard({ user, owner, genres, index, tracks, isEditing, onIsEdit
         setTrackList([...arr]);
     };
 
-    function handleEditTrackDescription(editedInfo, order) {
+    function handleEditTrackDescription(editedInfo, order, onHideSaveButton) {
         const editedTrackList = trackList.map((track, ind) => {
             if (ind === order - 1) {
                 return editedInfo
@@ -66,6 +66,7 @@ function TrackListCard({ user, owner, genres, index, tracks, isEditing, onIsEdit
 
         setEditInfo(false);
         setHideButtons(false);
+        onHideSaveButton(true);
         setTrackList([...editedTrackList]);
     };
 
@@ -93,24 +94,34 @@ function TrackListCard({ user, owner, genres, index, tracks, isEditing, onIsEdit
                     ?
                     isEditing ?
                         <Box>
-                            <Button sx={{ width: "49%", margin: 0.5, '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }} variant="contained" onClick={() => {
-                                onIsEditing(!isEditing);
-                                setHideButtons(false);
-                                setEditInfo(false);
-                                setTrackList([...tracks]);
-                            }}>
+                            {editInfo ?
+                             <Button sx={{ width: "49%", margin: 0.5, '&:hover': { bgcolor: 'rgb(50,50,50)' }, bgcolor: 'grey' }} variant="contained">
                                 Cancel
                             </Button>
-                            {isLoading ?
-                                <Button
-                                    variant="contained"
-                                    sx={{ width: "49%", margin: 0.5, '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }}
-                                >Loading...</Button>
                                 :
-                                <Button sx={{ width: "49%", margin: 0.5, '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }} variant="contained"
-                                    onClick={() => onEditSetlistTracks(trackList, index, onIsEditing, setIsLoading, onError)}>
+                                <Button sx={{ width: "49%", margin: 0.5, '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }} variant="contained" onClick={() => {
+                                    onIsEditing(!isEditing);
+                                    setHideButtons(false);
+                                    setEditInfo(false);
+                                    setTrackList([...tracks]);
+                                }}>
+                                    Cancel
+                                </Button>}
+                            {editInfo ?
+                                <Button sx={{ width: "49%", margin: 0.5, '&:hover': { bgcolor: 'rgb(50,50,50)' }, bgcolor: 'grey' }} variant="contained">
                                     Save Changes
                                 </Button>
+                                :
+                                isLoading ?
+                                    <Button
+                                        variant="contained"
+                                        sx={{ width: "49%", margin: 0.5, '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }}
+                                    >Loading...</Button>
+                                    :
+                                    <Button sx={{ width: "49%", margin: 0.5, '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }} variant="contained"
+                                        onClick={() => onEditSetlistTracks(trackList, index, onIsEditing, setIsLoading, onError)}>
+                                        Save Changes
+                                    </Button>
                             }
                         </Box>
                         :

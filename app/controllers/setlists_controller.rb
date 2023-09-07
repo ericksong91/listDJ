@@ -24,7 +24,7 @@ class SetlistsController < ApplicationController
     
                         h = 1
                         @updated = []
-    
+
                         tracks2.each do |t|
                             m = @setlist.setlist_tracks.where(track_order: h).first_or_initialize
                             m.track_id = t.id
@@ -32,7 +32,7 @@ class SetlistsController < ApplicationController
                             h+=1
                             @updated << m
                         end
-    
+
                         ids = @updated.map{|i| i['id'].to_i}
                         setlist_delete = @setlist.setlist_tracks.where.not(id: ids).destroy_all
                         @setlist.update!(avg_bpm: @setlist.tracks.average(:bpm), length: @setlist.setlist_tracks.map {|t| t.track}.sum(&:length)/60)

@@ -41,7 +41,7 @@ function NewSetForm({ user, onNewSetlist }) {
         setNewSetlist([...newSetlist, track]);
     };
 
-    function handleEditTrackDescription(editedInfo, order) {
+    function handleEditTrackDescription(editedInfo, order, onHideSaveButton) {
         const editedNewSetList = newSetlist.map((track, ind) => {
             if (ind === order - 1) {
                 return editedInfo
@@ -52,6 +52,7 @@ function NewSetForm({ user, onNewSetlist }) {
 
         setEditInfo(false);
         setHideButtons(false);
+        onHideSaveButton(true);
         setNewSetlist([...editedNewSetList]);
     };
 
