@@ -23,6 +23,7 @@ genres = [
     "Acid House",
     "Hard Trance",
     "Acid Techno",
+    "Minimal/Deep Tech",
     "Speed Garage",
     "Breakbeat Hardcore",
     "Drum and Bass",

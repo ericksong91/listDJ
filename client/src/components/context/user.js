@@ -7,7 +7,7 @@ function UserProvider({ children }) {
     const [users, setUsers] = useState([]);
     const [isFetching, setIsFetching] = useState(true);
     const genresList = [
-        "Electro-funk",
+        "Electro-Funk",
         "Deep House",
         "Dubstep",
         "Happy Hardcore",
@@ -18,6 +18,7 @@ function UserProvider({ children }) {
         "Acid House",
         "Hard Trance",
         "Acid Techno",
+        "Minimal/Deep Tech",
         "Speed Garage",
         "Breakbeat Hardcore",
         "Drum and Bass",
