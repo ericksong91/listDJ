@@ -40,7 +40,7 @@ function NewSetForm({ user, onNewSetlist }) {
         setNewSetlist([...newSetlist, track]);
     };
 
-    function handleEditTrackDescription(editedInfo) {
+    function handleEditTrackDescription(editedInfo, onEditInfo) {
         console.log(editedInfo);
     };
 

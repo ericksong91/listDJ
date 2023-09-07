@@ -11,7 +11,13 @@ function SetlistPage({ user, users, setlists, genres, onEditSetlists, onEditSetl
     const setFiltered = setlists.find((set) => set.id === index);
     const sortedTracks = [];
 
-    setFiltered.setlist_track_org.forEach((st) => {
+    console.log(setFiltered)
+
+    if(!setFiltered || !user || !users || !genres) {
+        return <div></div>
+    }
+
+    setFiltered.setlist_track_org?.forEach((st) => {
         setFiltered.tracks.forEach((t) => {
             if (st.track_id === t.id) {
                 sortedTracks.push(t);
@@ -34,7 +40,6 @@ function SetlistPage({ user, users, setlists, genres, onEditSetlists, onEditSetl
                         index={index}
                         tracks={sortedTracks}
                         genres={genresListSelect}
-                        setlistTracks={setFiltered.setlist_track_org}
                         isEditing={isEditing}
                         onIsEditing={setIsEditing}
                         onError={setError}

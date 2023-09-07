@@ -4,17 +4,35 @@ import NewTrackCard from "./NewTrackCard";
 import { Container, Button, Box, Grid } from "@mui/material";
 
 function TrackListCard({ user, owner, genres, index, tracks, isEditing, onIsEditing,
-    setlistTracks, onError, onEditSetlistTracks, onDeleteSetlists }) {
+    onError, onEditSetlistTracks, onDeleteSetlists }) {
     const [trackList, setTrackList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [hideButtons, setHideButtons] = useState(false);
+    const [editInfo, setEditInfo] = useState(false);
 
     useEffect(() => {
         setTrackList([...tracks])
     }, [tracks])
 
-    if (!tracks || !setlistTracks) {
-        return <Box></Box>
+    if (!tracks) {
+        const arr = [1,2,3,4]
+        const tracksList = arr.map((track, ind) =>
+        <TrackCard
+            key={ind}
+            track={[]}
+            order={ind + 1}
+            onOrder={handleOrder}
+            genres={[]}
+            hideButtons={hideButtons}
+            isEditing={isEditing}
+            editInfo={editInfo}
+            onDelete={handleDelete}
+            onEditTrackDescription={handleEditTrackDescription}
+            onHideButtons={setHideButtons}
+            onEditInfo={setEditInfo}
+        />);
+
+        return tracksList
     };
 
     function handleOrder(from, to) {
@@ -37,22 +55,34 @@ function TrackListCard({ user, owner, genres, index, tracks, isEditing, onIsEdit
         setTrackList([...arr]);
     };
 
-    function handleEditTrackDescription(editedInfo) {
-        console.log(editedInfo);
+    function handleEditTrackDescription(editedInfo, order) {
+        const editedTrackList = trackList.map((track, ind) => {
+            if (ind === order - 1) {
+                return editedInfo
+            } else {
+                return track
+            };
+        });
+
+        setEditInfo(false);
+        setHideButtons(false);
+        setTrackList([...editedTrackList]);
     };
 
     const tracksList = trackList.map((track, ind) =>
         <TrackCard
-            key={ind}
+            key={`${ind} and ${track.name} and ${ind + 1}`}
             track={track}
             order={ind + 1}
             onOrder={handleOrder}
             genres={genres}
             hideButtons={hideButtons}
             isEditing={isEditing}
+            editInfo={editInfo}
             onDelete={handleDelete}
             onEditTrackDescription={handleEditTrackDescription}
             onHideButtons={setHideButtons}
+            onEditInfo={setEditInfo}
         />);
 
     return (
@@ -65,6 +95,8 @@ function TrackListCard({ user, owner, genres, index, tracks, isEditing, onIsEdit
                         <Box>
                             <Button sx={{ width: "49%", margin: 0.5, '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }} variant="contained" onClick={() => {
                                 onIsEditing(!isEditing);
+                                setHideButtons(false);
+                                setEditInfo(false);
                                 setTrackList([...tracks]);
                             }}>
                                 Cancel
