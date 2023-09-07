@@ -16,7 +16,7 @@ function NewSetForm({ user, onNewSetlist }) {
     const [hideButtons, setHideButtons] = useState(false);
     const [editInfo, setEditInfo] = useState(false);
     const { genresList } = useContext(UserContext);
-    
+
     if (!user || !genresList) {
         return <div>Loading...</div>
     };
@@ -116,6 +116,8 @@ function NewSetForm({ user, onNewSetlist }) {
                         <NewTrackCard
                             genres={genresListSelect}
                             onSetlist={handleSetlist}
+                            hideButtons={hideButtons}
+                            editInfo={editInfo}
                         />
                     </Grid>
                 </Box>
@@ -127,15 +129,26 @@ function NewSetForm({ user, onNewSetlist }) {
                         {filteredSetlists}
                     </Grid>
                     <Grid item xs={12}>
-                        <Button
-                            fullWidth
-                            type="submit"
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2, '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }}
-                            onClick={(e) => handleSubmit(e)}
-                        >
-                            {isLoading ? "Loading..." : "Submit"}
-                        </Button>
+                        {editInfo && hideButtons ?
+                            <Button
+                                fullWidth
+                                type="submit"
+                                variant="contained"
+                                sx={{ mt: 3, mb: 2, '&:hover': { bgcolor: 'grey' }, bgcolor: 'grey' }}
+                            >
+                                {"Submit"}
+                            </Button>
+                            :
+                            <Button
+                                fullWidth
+                                type="submit"
+                                variant="contained"
+                                sx={{ mt: 3, mb: 2, '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }}
+                                onClick={(e) => handleSubmit(e)}
+                            >
+                                {isLoading ? "Loading..." : "Submit"}
+                            </Button>
+                        }
                     </Grid>
                 </Grid>
             </Container>

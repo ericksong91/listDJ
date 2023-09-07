@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Card, CardContent, Typography, rgbToHex } from '@mui/material';
+import { Card, CardContent, Typography } from '@mui/material';
 import { Grid, Box } from '@mui/material';
 import { Button, TextField, FormControl, InputLabel, Select } from '@mui/material';
 import { CircularProgress } from "@mui/material";
@@ -20,7 +20,7 @@ function TrackCard({ track, genres, order, editInfo, hideButtons, isEditing,
     const [trackGenre, setTrackGenre] = useState(track.genre);
     const [trackLength, setTrackLength] = useState({ min: Math.floor(track.length / 60), sec: Math.floor(track.length % 60) });
     const cardThemeOpacity = {
-        opacity: 0.1, padding: 0.5, margin: 0.5, height: 80, display: 'flex', bgcolor: 'rgb(50,50,50)', color: 'white',
+        opacity: 0.3, padding: 0.5, margin: 0.5, height: 80, display: 'flex', bgcolor: 'rgb(50,50,50)', color: 'white',
         input: { color: 'white' }, label: { color: 'orange' }, subheader: { color: 'white' }
     };
     const cardTheme = {
@@ -236,7 +236,7 @@ function TrackCard({ track, genres, order, editInfo, hideButtons, isEditing,
                 {isEditing ?
                     <Grid item xs={1}>
                         <Card sx={isEditing && editInfo && hideSaveButton ?
-                            { opacity: 0.1, padding: 0.5, margin: 0.5, height: 80, display: 'flex', bgcolor: 'rgb(50, 50, 50)', color: 'white' }
+                            { opacity: 0.3, padding: 0.5, margin: 0.5, height: 80, display: 'flex', bgcolor: 'rgb(50, 50, 50)', color: 'white' }
                             :
                             { padding: 0.5, margin: 0.5, height: 80, display: 'flex', bgcolor: 'rgb(50, 50, 50)', color: 'white' }}
                         >
@@ -280,7 +280,7 @@ function TrackCard({ track, genres, order, editInfo, hideButtons, isEditing,
                         :
                         <Grid item xs={1}>
                             <Card sx={isEditing && editInfo && hideSaveButton ?
-                                { opacity: 0.1, padding: 0.5, margin: 0.5, height: 80, display: 'flex', bgcolor: 'rgb(50, 50, 50)', color: 'white' }
+                                { opacity: 0.3, padding: 0.5, margin: 0.5, height: 80, display: 'flex', bgcolor: 'rgb(50, 50, 50)', color: 'white' }
                                 :
                                 { padding: 0.5, margin: 0.5, height: 80, display: 'flex', bgcolor: 'rgb(50, 50, 50)', color: 'white' }}
                             >

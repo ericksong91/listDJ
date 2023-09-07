@@ -95,7 +95,7 @@ function TrackListCard({ user, owner, genres, index, tracks, isEditing, onIsEdit
                     isEditing ?
                         <Box>
                             {editInfo ?
-                             <Button sx={{ width: "49%", margin: 0.5, '&:hover': { bgcolor: 'rgb(50,50,50)' }, bgcolor: 'grey' }} variant="contained">
+                             <Button sx={{ width: "49%", margin: 0.5, '&:hover': { bgcolor: 'grey' }, bgcolor: 'grey' }} variant="contained">
                                 Cancel
                             </Button>
                                 :
@@ -108,7 +108,7 @@ function TrackListCard({ user, owner, genres, index, tracks, isEditing, onIsEdit
                                     Cancel
                                 </Button>}
                             {editInfo ?
-                                <Button sx={{ width: "49%", margin: 0.5, '&:hover': { bgcolor: 'rgb(50,50,50)' }, bgcolor: 'grey' }} variant="contained">
+                                <Button sx={{ width: "49%", margin: 0.5, '&:hover': { bgcolor: 'grey' }, bgcolor: 'grey' }} variant="contained">
                                     Save Changes
                                 </Button>
                                 :
@@ -156,8 +156,8 @@ function TrackListCard({ user, owner, genres, index, tracks, isEditing, onIsEdit
                 }
             </Container>
             {isEditing ?
-                <Grid item sx={{ width: "1/2" }}>
-                    <NewTrackCard genres={genres} onSetlist={handleSetlists} />
+                <Grid item sx={{ width: "1/2", paddingLeft: 5 }}>
+                    <NewTrackCard genres={genres} onSetlist={handleSetlists} editInfo={editInfo} hideButtons={hideButtons} />
                 </Grid>
                 :
                 <Box></Box>

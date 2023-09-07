@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button, TextField, Card, CardHeader, Grid, Typography } from '@mui/material';
 import { FormControl, InputLabel, Select } from '@mui/material';
 
-function NewTrackCard({ genres, onSetlist }) {
+function NewTrackCard({ genres, onSetlist, editInfo, hideButtons }) {
     const [track, setTrack] = useState("");
     const [trackArtist, setTrackArtist] = useState("");
     const [trackBPM, setTrackBPM] = useState("");
@@ -10,6 +10,14 @@ function NewTrackCard({ genres, onSetlist }) {
     const [trackLength, setTrackLength] = useState({ min: 0, sec: 0 });
     const [error, setError] = useState("");
     const [order, setOrder] = useState(1);
+    const cardTheme = {
+        color: 'white', input: { color: 'white' }, label: { color: 'grey' }, subheader: { color: 'white' },
+        maxheight: 800, padding: 1, margin: 1, paddingBottom: 3, bgcolor: 'rgb(50,50,50)', boxShadow: 10,
+    };
+    const cardThemeOpacity = {
+        opacity: 0.3, color: 'white', input: { color: 'white' }, label: { color: 'grey' }, subheader: { color: 'white' },
+        maxheight: 800, padding: 1, margin: 1, paddingBottom: 3, bgcolor: 'rgb(50,50,50)', boxShadow: 10,
+    }
 
     if (!genres) {
         return <div></div>
@@ -45,10 +53,7 @@ function NewTrackCard({ genres, onSetlist }) {
 
     return (
         <Grid item xs={6}>
-            <Card sx={{
-                color: 'white', input: { color: 'white' }, label: { color: 'grey' }, subheader: { color: 'white' },
-                maxheight: 800, padding: 1, margin: 1, paddingBottom: 3, bgcolor: 'rgb(50,50,50)', boxShadow: 10,
-            }}>
+            <Card sx={editInfo && hideButtons ? cardThemeOpacity : cardTheme}>
                 <CardHeader
                     title={"Add Track"}
                     subheader={`${track} by ${trackArtist}`}
@@ -151,7 +156,17 @@ function NewTrackCard({ genres, onSetlist }) {
                 </FormControl>
                 <Typography variant="h7" sx={{ color: 'red' }}>{error ? `*${error}` : null}</Typography>
             </Card>
-            <Button variant="contained" sx={{ '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }} fullWidth onClick={() => handleClick()}>Add Track</Button>
+            {editInfo && hideButtons ?
+                <Button variant="contained"
+                    sx={{ '&:hover': { bgcolor: 'grey' }, bgcolor: 'grey' }}
+                    fullWidth>Add Track
+                </Button>
+                :
+                <Button variant="contained"
+                    sx={{ '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }}
+                    fullWidth onClick={() => handleClick()}>Add Track
+                </Button>}
+
         </Grid>
     );
 }
