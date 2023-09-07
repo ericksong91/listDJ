@@ -7,6 +7,7 @@ function UserProvider({ children }) {
     const [users, setUsers] = useState([]);
     const [isFetching, setIsFetching] = useState(true);
     const genresList = [
+        "Electro-funk",
         "Deep House",
         "Dubstep",
         "Happy Hardcore",

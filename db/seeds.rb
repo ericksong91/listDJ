@@ -12,6 +12,7 @@ SetlistTrack.destroy_all
 require 'faker'
 
 genres = [
+    "Electro-funk",
     "Deep House",
     "Dubstep",
     "Happy Hardcore",

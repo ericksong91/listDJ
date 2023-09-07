@@ -14,6 +14,7 @@ function NewSetForm({ user, onNewSetlist }) {
     const [description, setDescription] = useState("");
     const [genre, setGenre] = useState("");
     const [hideButtons, setHideButtons] = useState(false);
+    const [editInfo, setEditInfo] = useState(false);
     const { genresList } = useContext(UserContext);
     
     if (!user || !genresList) {
@@ -40,8 +41,18 @@ function NewSetForm({ user, onNewSetlist }) {
         setNewSetlist([...newSetlist, track]);
     };
 
-    function handleEditTrackDescription(editedInfo, onEditInfo) {
-        console.log(editedInfo);
+    function handleEditTrackDescription(editedInfo, order) {
+        const editedNewSetList = newSetlist.map((track, ind) => {
+            if (ind === order - 1) {
+                return editedInfo
+            } else {
+                return track
+            };
+        });
+
+        setEditInfo(false);
+        setHideButtons(false);
+        setNewSetlist([...editedNewSetList]);
     };
 
     function handleSubmit(e) {
@@ -71,18 +82,20 @@ function NewSetForm({ user, onNewSetlist }) {
 
     const genresListSelect = genresList.map((gen, ind) => <MenuItem key={ind} value={gen}>{gen}</MenuItem>);
 
-    const filteredSetlists = newSetlist.map((track, order) =>
+    const filteredSetlists = newSetlist.map((track, ind) =>
         <TrackCard
-            key={order}
+            key={`${ind} and ${track.name} and ${ind + 1}`}
             track={track}
-            order={order + 1}
+            order={ind + 1}
             isEditing={true}
+            editInfo={editInfo}
             hideButtons={hideButtons}
             genres={genresListSelect}
             onOrder={handleOrder}
             onDelete={handleDelete}
             onEditTrackDescription={handleEditTrackDescription}
             onHideButtons={setHideButtons}
+            onEditInfo={setEditInfo}
         />);
 
     return (
