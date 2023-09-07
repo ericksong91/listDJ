@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button, TextField, Card, CardHeader, Grid, Typography } from '@mui/material';
-import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { FormControl, InputLabel, Select } from '@mui/material';
 
 function NewTrackCard({ genres, onSetlist }) {
     const [track, setTrack] = useState("");
@@ -14,8 +14,6 @@ function NewTrackCard({ genres, onSetlist }) {
     if (!genres) {
         return <div></div>
     };
-
-    const genresListSelect = genres.map((gen, ind) => <MenuItem key={ind} value={gen}>{gen}</MenuItem>);
 
     function handleClick() {
         const length = parseInt(trackLength.min * 60) + parseInt(trackLength.sec);
@@ -148,7 +146,7 @@ function NewTrackCard({ genres, onSetlist }) {
                         sx={{ color: 'white' }}
                         onChange={(e) => setTrackGenre(e.target.value)}
                     >
-                        {genresListSelect}
+                        {genres}
                     </Select>
                 </FormControl>
                 <Typography variant="h7" sx={{ color: 'red' }}>{error ? `*${error}` : null}</Typography>

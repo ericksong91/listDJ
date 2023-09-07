@@ -2,8 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import TrackListCard from "../cards/TrackListCard";
 import DescriptionCard from "../cards/DescriptionCard";
-import { Grid, Box } from "@mui/material";
-import { redirect } from "react-router-dom";
+import { Grid, Box, MenuItem } from "@mui/material";
 
 function SetlistPage({ user, users, setlists, genres, onEditSetlists, onEditSetlistTracks, onDeleteSetlists }) {
     const index = parseInt(useParams().id);
@@ -12,10 +11,6 @@ function SetlistPage({ user, users, setlists, genres, onEditSetlists, onEditSetl
     const setFiltered = setlists.find((set) => set.id === index);
     const sortedTracks = [];
 
-    if (setlists.length === 0 || !setFiltered || !user || !users) {
-        return redirect("/notfound/");
-    };
-
     setFiltered.setlist_track_org.forEach((st) => {
         setFiltered.tracks.forEach((t) => {
             if (st.track_id === t.id) {
@@ -23,6 +18,8 @@ function SetlistPage({ user, users, setlists, genres, onEditSetlists, onEditSetl
             };
         });
     });
+
+    const genresListSelect = genres.map((gen, ind) => <MenuItem key={ind} value={gen}>{gen}</MenuItem>);
 
     return (
         <Box className="SetlistPage">
@@ -36,7 +33,7 @@ function SetlistPage({ user, users, setlists, genres, onEditSetlists, onEditSetl
                         owner={setFiltered.user_id}
                         index={index}
                         tracks={sortedTracks}
-                        genres={genres}
+                        genres={genresListSelect}
                         setlistTracks={setFiltered.setlist_track_org}
                         isEditing={isEditing}
                         onIsEditing={setIsEditing}

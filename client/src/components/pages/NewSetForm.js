@@ -3,9 +3,7 @@ import SetFormCard from '../cards/NewSetFormCard';
 import NewTrackCard from '../cards/NewTrackCard';
 import TrackCard from '../cards/TrackCard';
 import { UserContext } from '../context/user';
-import {
-    Button, Container, Box, Grid
-} from '@mui/material';
+import { Button, Container, Box, Grid, MenuItem } from '@mui/material';
 import { Typography } from '@mui/material';
 
 function NewSetForm({ user, onNewSetlist }) {
@@ -15,8 +13,9 @@ function NewSetForm({ user, onNewSetlist }) {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [genre, setGenre] = useState("");
+    const [hideButtons, setHideButtons] = useState(false);
     const { genresList } = useContext(UserContext);
-
+    
     if (!user || !genresList) {
         return <div>Loading...</div>
     };
@@ -42,7 +41,7 @@ function NewSetForm({ user, onNewSetlist }) {
     };
 
     function handleEditTrackDescription(editedInfo) {
-        console.log(editedInfo)
+        console.log(editedInfo);
     };
 
     function handleSubmit(e) {
@@ -70,14 +69,20 @@ function NewSetForm({ user, onNewSetlist }) {
         };
     };
 
+    const genresListSelect = genresList.map((gen, ind) => <MenuItem key={ind} value={gen}>{gen}</MenuItem>);
+
     const filteredSetlists = newSetlist.map((track, order) =>
         <TrackCard
             key={order}
             track={track}
             order={order + 1}
             isEditing={true}
+            hideButtons={hideButtons}
+            genres={genresListSelect}
             onOrder={handleOrder}
             onDelete={handleDelete}
+            onEditTrackDescription={handleEditTrackDescription}
+            onHideButtons={setHideButtons}
         />);
 
     return (
@@ -95,7 +100,7 @@ function NewSetForm({ user, onNewSetlist }) {
                             description={description}
                         />
                         <NewTrackCard
-                            genres={genresList}
+                            genres={genresListSelect}
                             onSetlist={handleSetlist}
                         />
                     </Grid>

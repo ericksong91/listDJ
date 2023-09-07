@@ -7,6 +7,7 @@ function TrackListCard({ user, owner, genres, index, tracks, isEditing, onIsEdit
     setlistTracks, onError, onEditSetlistTracks, onDeleteSetlists }) {
     const [trackList, setTrackList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [hideButtons, setHideButtons] = useState(false);
 
     useEffect(() => {
         setTrackList([...tracks])
@@ -36,14 +37,22 @@ function TrackListCard({ user, owner, genres, index, tracks, isEditing, onIsEdit
         setTrackList([...arr]);
     };
 
+    function handleEditTrackDescription(editedInfo) {
+        console.log(editedInfo);
+    };
+
     const tracksList = trackList.map((track, ind) =>
         <TrackCard
             key={ind}
             track={track}
             order={ind + 1}
             onOrder={handleOrder}
+            genres={genres}
+            hideButtons={hideButtons}
             isEditing={isEditing}
             onDelete={handleDelete}
+            onEditTrackDescription={handleEditTrackDescription}
+            onHideButtons={setHideButtons}
         />);
 
     return (
