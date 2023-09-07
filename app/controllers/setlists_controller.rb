@@ -35,7 +35,8 @@ class SetlistsController < ApplicationController
 
                         ids = @updated.map{|i| i['id'].to_i}
                         setlist_delete = @setlist.setlist_tracks.where.not(id: ids).destroy_all
-                        @setlist.update!(avg_bpm: @setlist.tracks.average(:bpm), length: @setlist.setlist_tracks.map {|t| t.track}.sum(&:length)/60)
+                        # @setlist.update!(avg_bpm: @setlist.tracks.average(:bpm), length: @setlist.setlist_tracks.map {|t| t.track}.sum(&:length)/60)
+                        @setlist.update!(avg_bpm: @setlist.tracks.average(:bpm))
                     end
                 end
                 render json: @setlist, status: :accepted, serializer: SetlistWithTracksSerializer
@@ -61,7 +62,8 @@ class SetlistsController < ApplicationController
                     i+=1
                 end
 
-                @setlist.update!(avg_bpm: @setlist.tracks.average(:bpm), length: @setlist.setlist_tracks.map {|t| t.track}.sum(&:length)/60)
+                # @setlist.update!(avg_bpm: @setlist.tracks.average(:bpm), length: @setlist.setlist_tracks.map {|t| t.track}.sum(&:length)/60)
+                @setlist.update!(avg_bpm: @setlist.tracks.average(:bpm))
             end
             
             render json: @setlist, serializer: SetlistWithTracksSerializer, status: :created
@@ -106,7 +108,7 @@ class SetlistsController < ApplicationController
     end
 
     def setlist_info_params
-        params.permit(:name, :description)
+        params.permit(:name, :description, :length)
     end
 
     def find_setlist

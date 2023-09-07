@@ -11,11 +11,9 @@ function SetlistPage({ user, users, setlists, genres, onEditSetlists, onEditSetl
     const setFiltered = setlists.find((set) => set.id === index);
     const sortedTracks = [];
 
-    console.log(setFiltered)
-
     if(!setFiltered || !user || !users || !genres) {
         return <div></div>
-    }
+    };
 
     setFiltered.setlist_track_org?.forEach((st) => {
         setFiltered.tracks.forEach((t) => {

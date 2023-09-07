@@ -63,10 +63,11 @@ function App() {
     };
   };
 
-  function handleEditSetlists(set, name, description, onIsLoading, onIsEditing, onErrors) {
+  function handleEditSetlists(set, name, description, setlistLength, onIsLoading, onIsEditing, onErrors) {
     const editedSet = {
       name: name,
-      description: description
+      description: description,
+      length: setlistLength
     };
 
     fetch(`/setlists/${set.id}`, {

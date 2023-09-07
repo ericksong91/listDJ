@@ -6,6 +6,7 @@ import { TextField } from '@mui/material'
 function DescriptionCard({ user, users, set, onEditSetlists }) {
     const [description, setDescription] = useState(set ? set.description : null);
     const [name, setName] = useState(set ? set.name : null);
+    const [setlistLength, setSetlistLength] = useState(set ? set.length : null);
     const [isEditing, setIsEditing] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState([]);
@@ -65,6 +66,27 @@ function DescriptionCard({ user, users, set, onEditSetlists }) {
                     />
                     :
                     <Typography variant="h7">{description}</Typography>}
+                { isEditing ? 
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="length"
+                        name="length"
+                        type="number"
+                        inputProps={{ maxLength: 3 }}
+                        sx={{label: {color: 'white'}, input: {color: 'white'}}}
+                        label={`Approx. Length (min)`}
+                        value={setlistLength}
+                        onChange={(e) => {
+                            if (e.target.value.toString().length <= 3 && e.target.value >= 0 && /^[0-9\b]+$/.test(e.target.value)) {
+                                setSetlistLength(e.target.value.trimStart());
+                            };
+                        }}
+                    />
+                    :
+                <CardContent>{`${set.length} min`}</CardContent>
+                }
                 <CardContent>{`BPM: ${set.avg_bpm}`}</CardContent>
                 <CardContent>{`Genre: ${set.genre}`}</CardContent>
                 <Link to={`/profile/${set.user_id}`}><Button fullWidth sx={{ color: 'orange' }}>View DJ Profile</Button></Link>
@@ -77,7 +99,7 @@ function DescriptionCard({ user, users, set, onEditSetlists }) {
                                 :
                                 <Button variant="contained" sx={{ '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }} onClick={() => {
                                     setIsLoading(true);
-                                    onEditSetlists(set, name, description, setIsLoading, setIsEditing, setErrors);
+                                    onEditSetlists(set, name, description, setlistLength, setIsLoading, setIsEditing, setErrors);
                                 }}>Save</Button>
                             :
                             <Button variant="contained" sx={{ '&:hover': { bgcolor: 'rgb(194,98,0)' }, bgcolor: 'rgb(245,150,0)' }} onClick={() => setIsEditing(true)}>Edit</Button>
