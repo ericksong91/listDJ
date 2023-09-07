@@ -28,30 +28,41 @@ as well as the tracklist of songs used to make the set.
 
 1. Users can create their own set by clicking on "CREATE NEW SET" on the navigation bar.
 
-2. For the setlist, users must fill out the name, description and genre using the leftmost card. 
+2. For the setlist, users must fill out the name, description, approximate length (in minutes), and genre using the leftmost card. 
 
 3. For the tracks, the user must fill out the name, artist, length, BPM (beats per minute) and genre using the rightmost card. Once
 complete, the user can click on "ADD TRACK" to add the track to the setlist. Repeat this step for every track in the setlist.
 
-4. Once everything has been added, the user can click on "SUBMIT" to create the new setlist. 
+4. Track information can be edited once it has been added using the '✏️' icon. Once track information has been edited, you can 
+save the changes with the '💾' icon. Note that you will not be allowed to edit anything else until the '💾' icon has been pressed again.
 
-5. The user will be taken to their profile page where they can view the set they have just created.
+5. Using the Up and Down arrow buttons will allow you to change track order.
+
+6. Using the '🗑️' icon will allow you to delete a track.
+
+6. Once everything has been added, the user can click on "SUBMIT" to create the new setlist. 
+
+7. The user will be taken to their profile page where they can view the set they have just created.
 
 ## Editing Your Own Set
 
 1. Once users have made their setlists, users can view their sets by clicking "VIEW PROFILE" in the navigation bar.
 
-2. Once a user clicks on a set, they can change the name and description of the setlist by clicking "EDIT" on the leftmost card.
+2. Once a user clicks on a set, they can change the name, description and approximate length of the setlist by clicking "EDIT" on the leftmost card.
 
 3. Scrolling to the bottom of the page, the user can hit "EDIT" to edit the setlist itself.
 
-4. The "UP" & "DOWN" buttons will shift tracks up and down respectively. Hitting "X" will delete a track.
+4. Track information can be edited using the '✏️' icon. Once track information has been edited, you can save the changes with the '💾' icon. Note that you will not be allowed to edit anything else until the '💾' icon has been pressed again.
 
-5. For adding new tracks, the user must fill out the name, artist, length, BPM (beats per minute) and genre using the bottommost card. Once complete, the user can click on "ADD TRACK" to add the track to the setlist. Repeat this step for every track that needs to be added.
+5. Using the Up and Down arrow buttons will allow you to change track order.
 
-6. Once all the changes have been made, the user can hit "SAVE" to save the edited setlist. If they did not like the changes they made, the user can also hit "CANCEL" to undo all changes.
+6. Using the '🗑️' icon will allow you to delete a track.
 
-7. If the user choose to, they may also use "DELETE SET" to delete the entire setlist.
+7. For adding new tracks, the user must fill out the name, artist, length, BPM (beats per minute) and genre using the bottom most card. Once complete, the user can click on "ADD TRACK" to add the track to the setlist. Repeat this step for every track that needs to be added.
+
+8. Once all the changes have been made, the user can hit "SAVE" to save the edited setlist. If they did not like the changes they made, the user can also hit "CANCEL" to undo all changes.
+
+9. If the user choose to, they may also use "DELETE SET" to delete the entire setlist.
 
 
 ## Examples:
@@ -66,7 +77,11 @@ General Usage 2:
 
 Creating New Setlist:
 
-![New Setlist](images/creatingsetlist.gif)
+![New Setlist](images/creatingsetlist1.gif)
+
+Creating New Setlist 2:
+
+![New Setlist 2](images/creatingsetlist2.gif)
 
 Editing Setlist:
 
