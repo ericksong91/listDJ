@@ -5,8 +5,8 @@ User.destroy_all
 Track.destroy_all
 Setlist.destroy_all
 SetlistTrack.destroy_all
-# Tag.destroy_all
-# TagSetlist.destroy_all
+Tag.destroy_all
+TagSetlist.destroy_all
 
 #Requirements
 require 'faker'
